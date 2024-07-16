@@ -32,7 +32,7 @@ body{
   }
   .container{
     max-width:85rem; 
-    padding-inline: 3rem;
+    padding-inline: 8rem;
   }
  
 }
@@ -97,8 +97,8 @@ svg.profile-icon{
   --orange: #FB7C06;
   --c-primary:#117cc4;
   --light-primary:#F2F9FC;
-  --c-secondary:#cc0177;
-  --light-secondary:#cc01777a;
+  --c-secondary:#F58314;
+  --light-secondary:#F58314;;
   --c-l-primary:#117cc4;
   --c-grey:#FFF;
   --border-color:#CCCDDE;

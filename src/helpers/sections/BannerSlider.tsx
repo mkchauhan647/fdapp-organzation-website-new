@@ -30,7 +30,7 @@ import "swiper/css/pagination";
 import Controller from "../ui/Controller";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SkeletonBanner from "../components/Skeleton/SkeletonBanner";
-
+import banner from "../../utils/image/banner.jpg";
 const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
   const { x_api_key } = useAppSelector((state: RootState) => state.Auth); // Access state.Auth
   const [xApiKeyFetched, setXApiKeyFetched] = useState(false);
@@ -131,14 +131,23 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
                 : Array.from({ length: 3 }).map((_, index: number) => {
                     return (
                       <SwiperSlide key={index}>
-                        <SkeletonBanner
+                        {/* <SkeletonBanner
                           isloading={
                             isPending ||
                             isRejected ||
                             BannerData?.length == 0 ||
                             !BannerData
                           }
-                        />
+                        /> */}
+                        <Link href={`/campaign`} key={index}>
+                          <Image
+                            src={banner}
+                            height={1800}
+                            width={1800}
+                            alt="Banner"
+                            className="h-full w-full object-cover"
+                          />
+                        </Link>
                       </SwiperSlide>
                     );
                   })}
