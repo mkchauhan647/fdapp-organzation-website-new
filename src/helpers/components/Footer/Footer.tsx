@@ -21,14 +21,14 @@ const Footer: React.FC = () => {
             <div className="flex flex-col itece md:items-start w-full md:w-[30%] text-center md:text-left gap-[10px] self-center md:self-start">
               <Link
                 href="/"
-                className="flex flex-col item-center gap-4 title-font font-medium items-center md:justify-start justify-center text-white bg-white p-1"
+                className="flex flex-col item-center gap-4 title-font font-medium items-center md:justify-start justify-center text-white bg-white p-1 rounded-lg"
               >
                 <Image
                   src={image}
                   height={500}
                   width={900}
                   alt="brand-logo"
-                  className=" h-[50px] w-[120px]"
+                  className=" h-[50px] w-[120px] "
                 />
               </Link>
               <div className="text-white">
