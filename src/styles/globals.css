@@ -84,23 +84,23 @@ svg.profile-icon{
 
 
 :root {
-  --blue:#0b005a;
-  --btncolor: #0b005a;
-  --black: #0b005a;
+  --blue:#117cc4;
+  --btncolor: #117cc4;
+  --black: #117cc4;
   --lightblack: #5A5C5B;
-  --light: #0b005a;
+  --light: #117cc4;
   --pagebg: #f6f6f6;
   --pagebg1: #F2F9FC;
   --c-d-light:rgba(204, 1, 119,0.1);
   --c-rose-pink:rgba(204, 1, 119,0.1);
-  --gray:#0b005a;
+  --gray:#117cc4;
   --orange: #FB7C06;
-  --c-primary:#0b005a;
+  --c-primary:#117cc4;
   --light-primary:#F2F9FC;
   --c-secondary:#cc0177;
   --light-secondary:#cc01777a;
-  --c-l-primary:#19206f;
-  --c-grey:#8e98a7;
+  --c-l-primary:#117cc4;
+  --c-grey:#FFF;
   --border-color:#CCCDDE;
   --light-text-color2:#CCCDDE;
   --light-text-color:#433E65;
