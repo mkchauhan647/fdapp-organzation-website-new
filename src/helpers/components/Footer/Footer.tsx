@@ -1,18 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
+import React, { useEffect, useRef } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import image from "@/utils/image/logo-white.png";
-import { BsFillPersonFill } from "react-icons/bs";
 import CampaignList from "@/helpers/ui/CampaignLists";
 import {
   RiFacebookFill,
   RiInstagramLine,
   RiLinkedinFill,
 } from "react-icons/ri";
+import { GetAllOrgSetting } from "@/helpers/redux/organization-setting/_thunk";
+import {RootState, useAppDispatch, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 
 const Footer: React.FC = () => {
+  const didMount = useRef<boolean>(false);
+  const dispatch: any = useAppDispatch()
+
+  useEffect(() => {
+    if (!didMount.current) {
+        didMount.current = true;
+    }
+    dispatch(GetAllOrgSetting());
+}, [dispatch])
+const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+const {  fulfilledResponse } = all_org_setting_data;
+
+let orgSettingData: any = null;
+
+if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
+  [orgSettingData] = fulfilledResponse.data;
+}
+
   return (
     <footer className="text-[var(--light-text-color2)] bg-[var(--c-l-primary)]">
       <div className="footer-cta -has-footer-links -is-cta  pb-[32px]">
@@ -33,11 +52,7 @@ const Footer: React.FC = () => {
               </Link>
               <div className="text-white">
                 <p>
-                  Engage your audience with our seamless online contestant
-                  voting application. Easy to use and secure, our platform
-                  ensures transparent and real-time results. Amplify excitement
-                  and participation with custom voting features. Elevate your
-                  contest experience today!
+               {orgSettingData?.signUpLeftText}
                 </p>
               </div>
 
@@ -54,7 +69,7 @@ const Footer: React.FC = () => {
                     <span style={{ alignSelf: "baseline" }}>
                       <FaLocationDot className="w-[1.3rem] h-[1.3rem]" />
                     </span>
-                    <span className="">Budhhanagar-10, Kathmandu, Nepal</span>
+                    <span className="">{orgSettingData?.location}</span>
                   </Link>
 
                   {/* <Link href='mailto:contact@fdapp.co.uk' className='flex  items-center gap-[.5rem] md:gap-[0.3em]'>
@@ -69,27 +84,27 @@ const Footer: React.FC = () => {
                     <span>
                       <IoMdMail className="w-[1.3rem] h-[1.3rem]" />
                     </span>
-                    <span className="">info@easyservice.com.np</span>
+                    <span className="">{orgSettingData?.orgEmail}</span>
                   </Link>
                 </div>
                 <div className="flex gap-[0.6em] text-base text-[white]">
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={"/"}
+                    href={orgSettingData?.facebookURL??"#"}
                     target="_blank"
                   >
                     <RiFacebookFill className="text-[1.5rem]" />
                   </Link>
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={"/"}
+                    href={orgSettingData?.instagramURL??'#'}
                     target="_blank"
                   >
                     <RiInstagramLine className="text-[1.5rem]" />
                   </Link>
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={"/"}
+                    href={orgSettingData?.linkedinURL??"#"}
                     target="_blank"
                   >
                     <RiLinkedinFill className="text-[1.5rem]" />
@@ -221,7 +236,7 @@ const Footer: React.FC = () => {
         <div className="container mx-auto flex justify-between py-[10px]  border-t-2 border-[#413595]">
           <div>
             <p className="text-[var(--c-grey)] paragraph">
-              Copyright @2024 | All Rights Reserved
+              {orgSettingData?.copyright}
             </p>
           </div>
           <div>
