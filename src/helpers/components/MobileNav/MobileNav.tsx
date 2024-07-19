@@ -1,20 +1,40 @@
 "use client";
+import { RootState, useAppDispatch, useAppSelector } from "@/helpers/hooks/useStoreHooks";
+import { GetAllOrgSetting } from "@/helpers/redux/organization-setting/_thunk";
 import Link from "next/link";
-import React from "react";
-import { FaFacebook, FaGoogle, FaInstagram } from "react-icons/fa";
+import React, { useEffect, useRef } from 'react';
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
+import { RiLinkedinFill } from "react-icons/ri";
 
 const Topbar: React.FC = () => {
+  const didMount = useRef<boolean>(false);
+  const dispatch: any = useAppDispatch()
+
+  useEffect(() => {
+    if (!didMount.current) {
+        didMount.current = true;
+    }
+    dispatch(GetAllOrgSetting());
+}, [dispatch])
+const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+const {  fulfilledResponse } = all_org_setting_data;
+
+let orgSettingData: any = null;
+
+if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
+  [orgSettingData] = fulfilledResponse.data;
+}
   return (
     <>
       <div>
         <div className="py-2 bg-[var(--c-primary)] text-[var(--c-grey)]">
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex gap-[0.5rem] md:items-center items-start">
-              <FaFacebook className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" />
-              <FaGoogle className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" />
-              <FaInstagram className="w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" />
+              <Link href={orgSettingData?.facebookURL??"#"}><FaFacebook className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" /></Link>
+              <Link href={orgSettingData?.linkedinURL??"#"}></Link><RiLinkedinFill className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" />
+              <Link href={orgSettingData?.instagramURL??"#"}></Link><FaInstagram className="w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] hover:opacity-[0.8] transition-ease duration-300 cursor-pointer fill-[var(--c-grey)]" />
             </div>
             <div className="flex flex-col md:flex-row gap-2 md:gap-[30px] items-end">
               <Link
@@ -29,7 +49,7 @@ const Topbar: React.FC = () => {
                   <FaLocationDot className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] fill-[var(--c-grey)]" />
                 </span>
                 <span className="text-[10px] sm:text-[12px] line-clamp-1 md:prose text-[var(--c-grey)]">
-                  Budhhanagar-10, Kathmandu, Nepal{" "}
+                  {orgSettingData?.location}
                 </span>
               </Link>
               <a
@@ -40,7 +60,7 @@ const Topbar: React.FC = () => {
                   <IoMdMail className="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] fill-[var(--c-grey)]" />
                 </span>
                 <span className="text-[10px] sm:text-[12px] text-[var(--c-grey)]">
-                  info@easyservice.com.np{" "}
+                  {orgSettingData?.orgEmail}
                 </span>
               </a>
             </div>

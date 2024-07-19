@@ -20,6 +20,7 @@ import { VotingCampaignStagesSlice } from './voting-campaign-stages.ts/Voting-ca
 import { ProductsSlice } from './try/TrySlice';
 import { FAQSlice } from './faqs/FAQSlice';
 import { NewsSlice } from './news/NewsSlice';
+import { OrgSettingSlice } from './organization-setting/OrgSettingSlice';
 
 // Define RootState inline
 export type RootState = {
@@ -32,6 +33,7 @@ export type RootState = {
   Products: ReturnType<typeof ProductsSlice.reducer>;
   FAQ : ReturnType<typeof FAQSlice.reducer>
   News : ReturnType<typeof NewsSlice.reducer>
+  OrgSetting: ReturnType<typeof OrgSettingSlice.reducer>
 };
 
 const persistConfig = {
@@ -51,6 +53,7 @@ const rootReducer: Reducer<RootState> = combineReducers<RootState>({
   Products: ProductsSlice.reducer,
   FAQ  : FAQSlice.reducer,
   News : NewsSlice.reducer,
+  OrgSetting: OrgSettingSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

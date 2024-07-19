@@ -33,6 +33,7 @@ import { orgID } from "@/utils/constants/constants";
 import { dataService } from "@/utils/data/api/dataServices";
 import { GetAllNews } from "@/helpers/redux/news/_thunks";
 import SearchBar from "../searchbar/searchbar";
+import { GetAllOrgSetting } from "@/helpers/redux/organization-setting/_thunk";
 
 export type AuthState = {
   token: string | null;
@@ -77,6 +78,8 @@ const Navbar = () => {
     dispatch(GetUpcommingCampaignStages());
     dispatch(GetAllNews());
     dispatch(GetAllFAQ());
+    dispatch(GetAllOrgSetting());
+
     // }
   }
 
