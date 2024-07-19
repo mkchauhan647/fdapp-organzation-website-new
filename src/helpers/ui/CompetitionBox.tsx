@@ -28,8 +28,8 @@ const CompetitionBox = ({ link, ...campaign }: Partial<VotingCampaign> & { link:
                         </div>
 
                         <div className='flex gap-[.5rem]'>
-                            <TitleBtn title='Miss Universe ' type='color' />
-                            <TitleBtn title='150 Contestants' type='light' />
+                            <TitleBtn title={campaign?.description??''} type='color' />
+                            <TitleBtn title={`${campaign?.candidateCount} Contestants`??''} type='light' />
                         </div>
                     </div>
 

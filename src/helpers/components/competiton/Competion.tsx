@@ -75,9 +75,12 @@ const CompetionSlide: React.FC = () => {
                                 return (
                                     <SwiperSlide key={index}>
                                         <CompetitionBox
-                                            link={`/campaign/${competition.id}`} title={competition.title} logo={competition.logo}
-                                            startDateTime={competition.startDateTime}
-                                            endDateTime={competition.endDateTime} />
+                                            link={`/campaign/${competition.id}`} title={competition?.title} logo={competition?.logo}
+                                            startDateTime={competition?.startDateTime}
+                                            endDateTime={competition?.endDateTime}
+                                            description={competition?.description}
+                                            candidateCount={competition?.candidateCount}
+                                            />
                                     </SwiperSlide>
                                 )
                             })

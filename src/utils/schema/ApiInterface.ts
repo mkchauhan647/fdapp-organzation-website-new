@@ -55,6 +55,7 @@ export interface VotingCampaign {
   id: string;
   inserted: string;
   logo: string;
+  candidateCount:string;
   organizationID: string;
   startDateTime: string;
   timeZone: string;
