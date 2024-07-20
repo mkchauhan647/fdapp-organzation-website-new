@@ -1,6 +1,5 @@
 "use client";
-import { RootState, useAppDispatch, useAppSelector } from "@/helpers/hooks/useStoreHooks";
-import { GetAllOrgSetting } from "@/helpers/redux/organization-setting/_thunk";
+import { RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 import Link from "next/link";
 import React, { useEffect, useRef } from 'react';
 import { FaFacebook, FaInstagram } from "react-icons/fa";
@@ -9,15 +8,6 @@ import { IoMdMail } from "react-icons/io";
 import { RiLinkedinFill } from "react-icons/ri";
 
 const Topbar: React.FC = () => {
-  const didMount = useRef<boolean>(false);
-  const dispatch: any = useAppDispatch()
-
-  useEffect(() => {
-    if (!didMount.current) {
-        didMount.current = true;
-    }
-    dispatch(GetAllOrgSetting());
-}, [dispatch])
 const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
 const {  fulfilledResponse } = all_org_setting_data;
 

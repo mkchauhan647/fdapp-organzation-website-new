@@ -10,19 +10,10 @@ import {
   RiInstagramLine,
   RiLinkedinFill,
 } from "react-icons/ri";
-import { GetAllOrgSetting } from "@/helpers/redux/organization-setting/_thunk";
-import {RootState, useAppDispatch, useAppSelector } from "@/helpers/hooks/useStoreHooks";
+import {RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 
 const Footer: React.FC = () => {
-  const didMount = useRef<boolean>(false);
-  const dispatch: any = useAppDispatch()
-
-  useEffect(() => {
-    if (!didMount.current) {
-        didMount.current = true;
-    }
-    dispatch(GetAllOrgSetting());
-}, [dispatch])
+ 
 const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
 const {  fulfilledResponse } = all_org_setting_data;
 
@@ -52,7 +43,7 @@ if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
               </Link>
               <div className="text-white">
                 <p>
-               {orgSettingData?.signUpLeftText}
+               {orgSettingData?.footerLeftText}
                 </p>
               </div>
 

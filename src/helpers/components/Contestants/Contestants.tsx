@@ -41,6 +41,16 @@ const ContestantSlide: React.FC = () => {
         }
     }, [dispatch, isExpired])
 
+
+    const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
+
+    let orgSettingData: any = null;
+
+    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
+    [orgSettingData] = fulfilledResponseOrg.data;
+    }
+
     return (
         <>
             <CommonSection name='Contestants-section -has-slider -has-campaigns bg-[var(--pagebg1)]'>
@@ -48,7 +58,7 @@ const ContestantSlide: React.FC = () => {
                 <header className='w-full flex justify-between items-start md:items-end mb-[20px] sm:mb-[30px] relative'>
                     <div className='flex-col items-start w-[80%] md:w-[50%]'>
                     <h1 className='text-[2rem] font-[600] text-[var(--black)] font-poppins'>Contestants</h1>
-                        <p className='paragraph text-[var(--light-text-color)] text-left w-full md:w-[85%]'>Nulla viverra at senectus commodo. Adipiscing ac habitasse nec quis libero facilisis.</p>
+                        <p className='paragraph text-[var(--light-text-color)] text-left w-full md:w-[85%]'>{orgSettingData?.contestantBody}</p>
                     </div>
                     <div className='md:w-fit w-[20%]'>
                         <Link className='link flex items-center gap-[.5rem]' href={'/contestants'}><span className='paragraph text-[var(--c-secondary)] !font-[500]'>View All</span><span><PiArrowLineRightBold className='text-[var(--c-secondary)] text-[1.5rem]'/></span></Link>

@@ -22,14 +22,21 @@ const NewsUpdate: React.FC = () => {
     const { all_news_data } = useAppSelector((state: RootState) => state.News)
     const { isPending, isRejected, isFulfilled, fulfilledResponse } = all_news_data;
     const News: News[] = fulfilledResponse?.data
+   const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
 
+    let orgSettingData: any = null;
+
+    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
+    [orgSettingData] = fulfilledResponseOrg.data;
+    }
 
     return (
         <>
             <CommonSection name='news'>
                 <header className='w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative'>
                     <h1 className='text-[2rem] font-[600] text-[var(--black)] font-poppins'>Latest News & Updates</h1>
-                    <p className='topic-desc text-center'>Nulla viverra at senectus commodo. Adipiscing ac habitasse nec quis libero facilisis. Vulputate blandit suspendisse id lorem et porta</p>
+                    <p className='topic-desc text-center'>{orgSettingData?.latestNewsUpdates}</p>
                 </header>
 
                 <div className='flex flex-col md:flex-row items-center md:items-start justify-center w-full relative'>
