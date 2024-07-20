@@ -1,9 +1,18 @@
+import { RootState, useAppSelector } from '@/helpers/hooks/useStoreHooks';
 import CommonSection from '@/helpers/ui/CommonSection';
 import { GTKBanner } from '@/utils/image/image';
 import Image from 'next/image';
 import * as React from 'react';
 
 const GetToKnow  : React.FC = () => {
+    const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
+
+    let orgSettingData: any = null;
+
+    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
+    [orgSettingData] = fulfilledResponseOrg.data;
+    }
     return (
         <>
             <section className='gettoknow pb-8 sm:pb-12'>
@@ -28,7 +37,7 @@ const GetToKnow  : React.FC = () => {
                                 </span>
 
                                 <span>
-                                    <p className='paragraph text-[var(--light-text-color)]'>Nunc nisl aliquam libero pellentesque magna amet. Nunc pellentesque sit malesuada at odio sit senectus magna lacus. Nunc morbi dui condimentum condimentum magna non nulla in.</p>
+                                    <p className='paragraph text-[var(--light-text-color)]'>{orgSettingData?.knowUsBody}</p>
                                 </span>
 
                             </div>

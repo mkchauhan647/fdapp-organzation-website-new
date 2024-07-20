@@ -13,13 +13,21 @@ import SectionHeading from '@/helpers/ui/SectionHeading';
 import { CommonSection } from '@/helpers/dynamic-imports/ui';
 import { BsArrowRight } from 'react-icons/bs';
 import Link from 'next/link';
+import { RootState, useAppSelector } from '@/helpers/hooks/useStoreHooks';
 
 
 
 
 const SponserSlide: React.FC = () => {
+    const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
 
-    let sponser = ["/image/sponser/logo.jpg", "/image/sponser/logo1.jpg", "/image/sponser/logo2.jpg", "/image/sponser/logo4.jpg", "/image/sponser/logo5.jpg", "/image/sponser/logo6.jpg", "/image/sponser/logo2.jpg", "/image/sponser/logo.jpg"]
+    let orgSettingData: any = null;
+
+    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
+    [orgSettingData] = fulfilledResponseOrg.data;
+    }
+
     return (
         <>
             <CommonSection name='sponsore bg-[var(--pagebg1)]'>
@@ -29,8 +37,7 @@ const SponserSlide: React.FC = () => {
                             <h1 className='text-[2.5rem] font-[700] text-[var(--blue)] w-full'>Supporting Partners: <span className='text-[2.5rem] font-[700] text-[var(--c-secondary)]'>Empowering</span> Dreams Together!</h1>
                         </span>
                         <span className='flex flex-col gap-[.5rem] text-justify'>
-                            <p className='paragraph text-[var(--light-text-color)]'>Nunc nisl aliquam libero pellentesque magna amet. Nunc pellentesque sit malesuada at odio sit senectus magna lacus. Aenean vitae at adipiscing aenean bibendum sed eu lectus.</p>
-                            <p className='paragraph text-[var(--light-text-color)]'>Nunc morbi dui condimentum condimentum magna non nulla in. Senectus fusce elementum quam vulputate nec sociis. Massa eu consectetur auctor dolor interdum aliquam augue habitant.</p>
+                            <p className='paragraph text-[var(--light-text-color)]'>{orgSettingData?.sponserBody}</p>
                         </span>
 
                         <span>
@@ -42,7 +49,7 @@ const SponserSlide: React.FC = () => {
                         <h1 className='text-[24px] text-[var(--c-secondary)] font-[600]'>Sponsers</h1>
                         <div className='competition-slider px-2 sm:px-0 flex flex-wrap justify-start gap-[.5rem] items-baseline'>
                             {
-                                sponser.slice(0, 7).map((logo, index) => {
+                                orgSettingData?.sponserImages.slice(0, 7).map((logo:any, index:any) => {
                                     return (
                                         <>
                                            

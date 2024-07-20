@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 "use client";
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,10 +12,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import CompetitionBox from '@/helpers/ui/CompetitionBox';
 import Controller from '@/helpers/ui/Controller';
-import { RootState, useAppSelector } from '@/helpers/hooks/useStoreHooks';
+import { RootState, useAppDispatch, useAppSelector } from '@/helpers/hooks/useStoreHooks';
 import { VotingCampaign } from '@/utils/schema/ApiInterface';
 import { CommonSection, Heading } from '@/helpers/dynamic-imports/ui';
 import SkeletonCampaign from '../Skeleton/SkeletonCampaign';
+import { GetAllOrgSetting } from '@/helpers/redux/organization-setting/_thunk';
 
 const CompetionSlide: React.FC = () => {
 
@@ -23,12 +24,22 @@ const CompetionSlide: React.FC = () => {
     const { isPending, isRejected, fulfilledResponse } = all_campaign_data;
     const CampaignData = fulfilledResponse?.data.rows
 
+
+    const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
+    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
+
+    let orgSettingData: any = null;
+
+    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
+    [orgSettingData] = fulfilledResponseOrg.data;
+    }
+
     return (
 
         <CommonSection name='Competition-section -has-slider -has-campaigns'>
             <header className='w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative'>
                 <h1 className='text-[2rem] font-[600] text-[var(--black)] font-poppins'>Competitions</h1>
-                <p className='topic-desc text-center'>Nulla viverra at senectus commodo. Adipiscing ac habitasse nec quis libero facilisis. Vulputate blandit suspendisse id lorem et porta</p>
+                <p className='topic-desc text-center'>{orgSettingData?.competitionBody}</p>
             </header>
 
             <div className='competition-slider flex justify-between items-baseline relative'>
