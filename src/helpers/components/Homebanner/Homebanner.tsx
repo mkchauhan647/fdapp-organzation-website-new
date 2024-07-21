@@ -23,7 +23,6 @@ const StageBanner : React.FC<{ stageID? : string }> = ({ stageID }) => {
                         IndividualCampaignStage && (
                             <div className='banner w-full h-[30vh] sm:h-[40vh] text-[#eeeeee] flex' 
                                     style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_AWS_URI + IndividualCampaignStage[0]?.banner})`}}
-                                    
                                     >
 
                                     <div className='md:max-w-[598px] max-w-[90%] lg:max-w-[598px] w-[100%] mx-auto flex flex-col items-center justify-center banner-content'>

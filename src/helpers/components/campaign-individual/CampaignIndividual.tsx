@@ -97,11 +97,15 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
                     isBlue={true}
                   />
                 </div>
-                <div className="w-full">
+                
+              </div>
+              
+            </div>
+            <div className="w-full">
                   <h3 className="font-[500] text-lg md:text-2xl mb-3">
-                    Contestants
+                   
                   </h3>
-                  <div className="flex flex-col gap-4">
+                  <div className="grid md:grid-cols-5 gap-2 content-center justify-center">
                     {CandidateStageData?.length != 0 &&
                       CandidateStageData?.map((contestant: Candidate) => {
                         return (
@@ -122,8 +126,6 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
                       })}
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
         </section>
       )}
