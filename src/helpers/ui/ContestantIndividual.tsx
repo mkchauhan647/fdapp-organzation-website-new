@@ -144,10 +144,8 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                     alt="profile"
                     className="w-[250px] md:h-[280px] h-[200px] object-cover"
                   />
-                  <Button className="bg-[var(--c-secondary)] mt-4 text-[#fff]">
-                        Vote Now
-                  </Button>
-                  {/* <Dropdown>
+
+                  <Dropdown>
                     <DropdownTrigger>
                       <Button className="bg-[var(--c-secondary)] mt-4 text-[#fff]">
                         Vote Now
@@ -167,7 +165,7 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                         </DropdownItem>
                       )}
                     </DropdownMenu>
-                  </Dropdown> */}
+                  </Dropdown>
                 </div>
               </div>
 
