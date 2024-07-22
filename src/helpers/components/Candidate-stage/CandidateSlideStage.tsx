@@ -24,6 +24,7 @@ import axios from "axios";
 import { AuthSlice } from "@/helpers/redux/Auth/AuthSlice";
 import { dataService } from "@/utils/data/api/dataServices";
 import SkeletonCampaign from "../Skeleton/SkeletonCampaign";
+import SkeletonImage from "../Skeleton/SkeletonImage";
 
 type Params = {
   id: string;
@@ -77,71 +78,23 @@ const ContestantSlideStage: React.FC<{ params: Params }> = ({ params }) => {
     <>
       <CommonSection name="candidate-slide-stage bg-[var(--pagebg)]">
         <Heading title="Contestants" link={`/contestants/`} />
-        <div className="competition-slider px-2 sm:px-0 flex justify-between items-baseline relative">
-          <Swiper
-            className="w-[100%] !pb-16"
-            modules={[Navigation, Pagination, A11y]}
-            spaceBetween={40}
-            slidesPerView={6}
-            loop={true}
-            navigation={{
-              nextEl: ".forward",
-              prevEl: ".back",
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              358: {
-                slidesPerView: 1.5,
-                spaceBetween: 20,
-              },
-              485: {
-                slidesPerView: 2.5,
-                spaceBetween: 20,
-              },
-              735: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              955: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-              },
-              1045: {
-                slidesPerView: 6,
-              },
-            }}
-          >
-            {!isPending &&
-              !isRejected &&
-              isFulfilled &&
-              CandidatesData.length > 0 &&
-              CandidatesData.slice(0, 8).map(
-                (candidate: Contestants, index: number) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      {/* <Skeleton isLoaded={isPending || isRejected}> */}
-                      <ContestantBox contestants={candidate} />
-                      {/* </Skeleton> */}
-                    </SwiperSlide>
-                  );
-                }
-              )}
-            {CandidatesData?.length == 0 &&
-              Array.from({ length: 8 }).map((_, index) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <SkeletonCampaign isloading={false} />
-                  </SwiperSlide>
-                );
-              })}
-          </Swiper>
-          <div className="controller_wrapper">
-            <Controller />
-          </div>
+        <div className="grid md:grid-cols-5 gap-2 content-center justify-center">
+      
+            {isPending && isRejected ? (
+              <>
+                {[1, 2, 3,4].map((key: number) => (
+                  <SkeletonImage isLoading={true}></SkeletonImage>
+                ))}
+              </>
+            ) : (
+              <>
+                {CandidatesData?.map(
+                  (candidates: Contestants, index: number) => (
+                      <ContestantBox key={index} contestants={candidates} />
+                  )
+                )}
+              </>
+            )}
         </div>
       </CommonSection>
     </>

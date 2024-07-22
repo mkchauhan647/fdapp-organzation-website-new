@@ -494,9 +494,9 @@ a:has(.contestant-box){
 
 .time-box {
   padding: 17px 23px;
-  background-color: var(--c-secondary);
+  /* background-color: var(--c-secondary); */
   /* background-color: #fae5f1; */
-  color: #fff;
+  color: #634ed4;
   border-radius: .5rem;
   font-size: 22px;
   display: flex;
@@ -506,7 +506,7 @@ a:has(.contestant-box){
 }
 
 .time {
-  color: #fff;
+  color: #634ed4;
   font-weight: 500;
   font-size: 1.3rem;
 }
@@ -759,6 +759,3 @@ input[type=range]::-webkit-slider-runnable-track  {
   background: rgb(150, 150, 150);
   border-radius: 20px;
 }
-
-
-

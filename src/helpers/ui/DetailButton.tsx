@@ -10,20 +10,16 @@ import CoupanModal from './CoupanModal';
 const DetailButton = ({candidate}:{candidate:Candidate}) => {
     return (
         <>
-            <div id={candidate.id} className='details-btn flex items-center justify-between w-full md:w-[20rem] rounded-xl'>
-                <div className='flex items-center gap-2  w-full'>
-                    <div className='h-[4rem] w-[8rem] rounded-md'>
-                        <Image src={process.env.NEXT_PUBLIC_AWS_URI as string + candidate.candidate.profilePicture }height={200} width={200} alt="img" className='h-full w-full rounded-lg object-cover' />
+            <div id={candidate.id} className='details-btn p-[20px] rounded-2xl overflow-hidden bg-white flex justify-center'>
+                <div className='flex items-center gap-4  w-full flex-col justify-center py-4'>
+                    <div className='h-[120px] w-[120px] overflow-auto rounded-full bg-gray-400'>
+                        <Image src={process.env.NEXT_PUBLIC_AWS_URI as string + candidate.candidate.profilePicture }height={200} width={200} alt="img" className='h-full w-full rounded-full object-cover' />
                     </div>
-                    <div className='flex justify-between px-2 py-3 self-end' style={{width:'-webkit-fill-available'}}>
-                        <div className='flex flex-col justify-center items-start leading-none'>
-                            <h4 className='font-secular font-[400] text-sm text-[var(--blue)] leading-none'>{candidate.candidate.name}</h4>
+                        <div className='flex flex-col justify-center items-center leading-none gap-1'>
+                            <h4 className='font-secular font-[400] text-medium text-[var(--blue)] leading-none'>{candidate.candidate.name}</h4>
                             <p className='text-sm font-[500] text-[var(--light)]'>{candidate.candidate.nationality}</p>
                         </div>
                         <CoupanModal campaignID={candidate.candidate.votingCampaignId}  />
-                    </div>
-                </div>
-                <div>
                 </div>
                 
             </div>

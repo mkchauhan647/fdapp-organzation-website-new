@@ -133,18 +133,21 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
 
             <div className="flex md:flex-row flex-col gap-[1.5rem] py-[2rem] relative">
               <div className="w-[25%] sticky top-[7vh] h-fit">
-                <div className="w-full h-[80vh] rounded-md overflow-hidden">
+                <div className="w-full  rounded-md overflow-hidden flex items-center flex-col">
                   <Image
                     src={
                       process.env.NEXT_PUBLIC_AWS_URI +
                       contestant.profilePicture
                     }
-                    height={900}
-                    width={900}
+                    height={300}
+                    width={300}
                     alt="profile"
-                    className="w-full object-cover object-top"
+                    className="w-[250px] md:h-[280px] h-[200px] object-cover"
                   />
-                  <Dropdown>
+                  <Button className="bg-[var(--c-secondary)] mt-4 text-[#fff]">
+                        Vote Now
+                  </Button>
+                  {/* <Dropdown>
                     <DropdownTrigger>
                       <Button className="bg-[var(--c-secondary)] mt-4 text-[#fff]">
                         Vote Now
@@ -164,7 +167,7 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                         </DropdownItem>
                       )}
                     </DropdownMenu>
-                  </Dropdown>
+                  </Dropdown> */}
                 </div>
               </div>
 
@@ -241,7 +244,7 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                     </div>
                   </section>
 
-                  <section className="grid grid-cols-2 gap-[1rem]">
+                  {/* <section className="grid grid-cols-2 gap-[1rem]">
                     <div className="profile-input-box">
                       <label className="contestant-profile-title">
                         Eye Color
@@ -261,9 +264,9 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                         colorlist={["#220202", "#130101", "#130102", "#13394F"]}
                       />
                     </div>
-                  </section>
+                  </section> */}
 
-                  <section>
+                  {/* <section>
                     <div className="profile-input-box">
                       <label className="contestant-profile-title">Height</label>
                       <div className="bg-[var(--pagebg1)] px-[2rem] py-[2rem] rounded-md">
@@ -405,7 +408,7 @@ const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
                         </p>
                       )}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
