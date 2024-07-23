@@ -296,7 +296,7 @@ export const PayModal: React.FC<Coupon> = ({ ...coupon }) => {
               <ModalFooter className="mt-3">
                 <div className="w-full flex justify-between items-center">
                   <p className="text-3xl font-[500] text-[var(--blue)] font-secular">
-                    ${coupon.pricing}
+                    NPR {coupon.pricing}
                   </p>
                   <Confirm
                     paymentMethod={paymentMethod}
