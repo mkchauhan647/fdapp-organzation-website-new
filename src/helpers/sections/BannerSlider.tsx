@@ -19,7 +19,13 @@ import { AuthSlice } from "../redux/Auth/AuthSlice";
 import axios from "axios";
 import { dataService } from "@/utils/data/api/dataServices";
 
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -68,16 +74,22 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
     fetchData();
   }, [xApiKeyFetched]);
 
-  const { all_upcomming_campaign, campaign_by_id } = useAppSelector(
-    (state: RootState) => state.VotingCampaign
-  ); // Access state.Products.all_products_data directly
-  const { fulfilledResponse, isFulfilled, isPending, isRejected } =
-    all_upcomming_campaign;
-  const BannerData: VotingCampaign[] = fulfilledResponse?.data.rows;
-  const individualCampaign: VotingCampaign =
-    campaign_by_id.fulfilledResponse?.data;
+  // const { all_upcomming_campaign, campaign_by_id } = useAppSelector(
+  //   (state: RootState) => state.VotingCampaign
+  // ); // Access state.Products.all_products_data directly
+  // const { fulfilledResponse, isFulfilled, isPending, isRejected } =
+  //   all_upcomming_campaign;
+  // const BannerData: VotingCampaign[] = fulfilledResponse?.data.rows;
+  // const individualCampaign: VotingCampaign =
+  //   campaign_by_id.fulfilledResponse?.data;
 
-  console.log(fulfilledResponse?.data.rows);
+  // console.log(fulfilledResponse?.data.rows);
+  const { all_campaign_data } = useAppSelector(
+    (state: RootState) => state.VotingCampaign
+  ); // Access state.VotingCampaign
+  const { isPending, isRejected, fulfilledResponse } = all_campaign_data;
+  const CampaignData = fulfilledResponse?.data.rows;
+  console.log(CampaignData);
 
   return (
     <>
@@ -85,48 +97,45 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
         <div className="h-fit">
           <div
             className={`sliderbanner w-full ${
-              campaignID && individualCampaign
+              campaignID
                 ? "h-[30vh] md:h-[40vh]"
                 : "min-h-[40vh] sm:min-h-[60vh]"
             } text-[#eeeeee] flex`}
           >
             <Swiper
-              className="w-full text-white "
-              modules={[Navigation, Pagination, A11y]}
+              className="w-full lg:h-screen text-white"
+              modules={[Navigation, Pagination, A11y, Autoplay]}
               spaceBetween={30}
               slidesPerView={1}
               loop={true}
+              autoplay={{
+                delay: 3000, // 3 seconds delay between slides
+                disableOnInteraction: false,
+              }}
               navigation={{
                 nextEl: ".b-forward",
                 prevEl: ".b-back",
               }}
               pagination={{ clickable: true }}
             >
-              {!isPending && !isRejected && BannerData?.length > 0
-                ? BannerData.map(
-                    (bannerdata: VotingCampaign, index: number) => {
-                      return (
-                        <>
-                          <SwiperSlide key={index}>
-                            <Link
-                              href={`/campaign/${bannerdata.id}`}
-                              key={index}
-                            >
-                              <Image
-                                src={
-                                  process.env.NEXT_PUBLIC_AWS_URI +
-                                  bannerdata.banner
-                                }
-                                height={1800}
-                                width={1800}
-                                alt="Banner"
-                                className="h-full w-full object-cover"
-                              />
-                            </Link>
-                          </SwiperSlide>
-                        </>
-                      );
-                    }
+              {!isPending && !isRejected && CampaignData?.length > 0
+                ? CampaignData.map(
+                    (bannerdata: VotingCampaign, index: number) => (
+                      <SwiperSlide key={bannerdata.id}>
+                        <Link href={`/campaign/${bannerdata.id}`}>
+                          <Image
+                            src={
+                              (process.env.NEXT_PUBLIC_AWS_URI as string) +
+                              bannerdata.logo
+                            }
+                            height={1000}
+                            width={3000}
+                            alt="Banner"
+                            className="h-full w-full  object-cover"
+                          />
+                        </Link>
+                      </SwiperSlide>
+                    )
                   )
                 : Array.from({ length: 3 }).map((_, index: number) => {
                     return (
