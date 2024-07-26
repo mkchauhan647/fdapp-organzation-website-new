@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import image from "@/utils/image/logo-white.png";
@@ -10,18 +10,19 @@ import {
   RiInstagramLine,
   RiLinkedinFill,
 } from "react-icons/ri";
-import {RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
+import { RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 
 const Footer: React.FC = () => {
- 
-const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
-const {  fulfilledResponse } = all_org_setting_data;
+  const { all_org_setting_data } = useAppSelector(
+    (state: RootState) => state.OrgSetting
+  );
+  const { fulfilledResponse } = all_org_setting_data;
 
-let orgSettingData: any = null;
+  let orgSettingData: any = null;
 
-if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
-  [orgSettingData] = fulfilledResponse.data;
-}
+  if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
+    [orgSettingData] = fulfilledResponse.data;
+  }
 
   return (
     <footer className="text-[var(--light-text-color2)] bg-[var(--c-l-primary)]">
@@ -42,9 +43,7 @@ if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
                 />
               </Link>
               <div className="text-white">
-                <p>
-               {orgSettingData?.footerLeftText}
-                </p>
+                <p>{orgSettingData?.footerLeftText}</p>
               </div>
 
               <div className="flex flex-col items-center md:items-start gap-[1rem]">
@@ -60,7 +59,8 @@ if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
                     <span style={{ alignSelf: "baseline" }}>
                       <FaLocationDot className="w-[1.3rem] h-[1.3rem]" />
                     </span>
-                    <span className="">{orgSettingData?.location}</span>
+                    {/* <span className="">{orgSettingData?.location}</span> */}
+                    <span className="">Buddhanagar, Kathmandu, Nepal</span>
                   </Link>
 
                   {/* <Link href='mailto:contact@fdapp.co.uk' className='flex  items-center gap-[.5rem] md:gap-[0.3em]'>
@@ -75,27 +75,28 @@ if (fulfilledResponse?.data && Array.isArray(fulfilledResponse.data)) {
                     <span>
                       <IoMdMail className="w-[1.3rem] h-[1.3rem]" />
                     </span>
-                    <span className="">{orgSettingData?.orgEmail}</span>
+                    {/* <span className="">{orgSettingData?.orgEmail}</span> */}
+                    <span className="">info@easyvotingapp.com</span>
                   </Link>
                 </div>
                 <div className="flex gap-[0.6em] text-base text-[white]">
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={orgSettingData?.facebookURL??"#"}
+                    href={orgSettingData?.facebookURL ?? "#"}
                     target="_blank"
                   >
                     <RiFacebookFill className="text-[1.5rem]" />
                   </Link>
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={orgSettingData?.instagramURL??'#'}
+                    href={orgSettingData?.instagramURL ?? "#"}
                     target="_blank"
                   >
                     <RiInstagramLine className="text-[1.5rem]" />
                   </Link>
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
-                    href={orgSettingData?.linkedinURL??"#"}
+                    href={orgSettingData?.linkedinURL ?? "#"}
                     target="_blank"
                   >
                     <RiLinkedinFill className="text-[1.5rem]" />

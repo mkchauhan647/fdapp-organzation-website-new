@@ -23,9 +23,10 @@ const CompetionSlide: React.FC = () => {
   ); // Access state.VotingCampaign
   const { isPending, isRejected, fulfilledResponse } = all_campaign_data;
   const CampaignData = fulfilledResponse?.data.rows;
+  console.log(CampaignData);
 
   return (
-    <CommonSection name="Competition-section -has-slider -has-campaigns lg:mt-40">
+    <CommonSection name="Competition-section -has-slider -has-campaigns xl:mt-40">
       <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
         <h1 className="text-[2rem] font-[600] text-[var(--black)] font-poppins">
           Competitions
@@ -78,11 +79,14 @@ const CompetionSlide: React.FC = () => {
                   return (
                     <SwiperSlide key={index}>
                       <CompetitionBox
-                        link={`/campaign/${competition.id}`}
+                        link={`campaign/${competition.id}`}
+                        // link={`/campaign/category/details?id=${competition.logo}&campaignId=${competition.id}`}
                         title={competition.title}
                         logo={competition.logo}
                         startDateTime={competition.startDateTime}
                         endDateTime={competition.endDateTime}
+                        candidateCount={competition.candidateCount}
+                        description={competition.description}
                       />
                     </SwiperSlide>
                   );
