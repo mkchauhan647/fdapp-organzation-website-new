@@ -85,23 +85,22 @@ const ContestantSlide: React.FC = () => {
           </div>
         </header>
 
-        <div className="grid md:grid-cols-5 gap-2 content-center justify-center">
-      
-            {isPending && isRejected ? (
-              <>
-                {[1, 2, 3].map((key: number) => (
-                  <SkeletonImage isLoading={true}></SkeletonImage>
-                ))}
-              </>
-            ) : (
-              <>
-                {CandidatesData?.slice(0, 5)?.map(
-                  (candidates: Contestants, index: number) => (
-                      <ContestantBox key={index} contestants={candidates} />
-                  )
-                )}
-              </>
-            )}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 content-center justify-center">
+          {isPending && isRejected ? (
+            <>
+              {[1, 2, 3].map((key: number) => (
+                <SkeletonImage isLoading={true}></SkeletonImage>
+              ))}
+            </>
+          ) : (
+            <>
+              {CandidatesData?.slice(0, 5)?.map(
+                (candidates: Contestants, index: number) => (
+                  <ContestantBox key={index} contestants={candidates} />
+                )
+              )}
+            </>
+          )}
         </div>
       </CommonSection>
     </>

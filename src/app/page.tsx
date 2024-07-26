@@ -1,5 +1,10 @@
-"use client"
-import { GetToKnow, NewsUpdate, RunningCampaignStages, Sponser } from "@/helpers/dynamic-imports/components";
+"use client";
+import {
+  GetToKnow,
+  NewsUpdate,
+  RunningCampaignStages,
+  Sponser,
+} from "@/helpers/dynamic-imports/components";
 import { CampaignSlide } from "@/helpers/dynamic-imports/components";
 import { CandidateSlide } from "@/helpers/dynamic-imports/components";
 import { PublicLayout } from "@/helpers/dynamic-imports/views";
@@ -9,26 +14,27 @@ import UpcommingCampaign from "@/helpers/sections/UpcommingCampaign";
 import UpcommingCompetionStageSlide from "@/helpers/sections/UpcommingCampaignStages";
 import React from "react";
 import BannerSlider from "@/helpers/sections/BannerSlider";
+import JudgeSlide from "@/helpers/components/judges/Judges";
 
-
-const Home : React.FC = () => {
+const Home: React.FC = () => {
   return (
     <>
       <PublicLayout>
-          {/* <CampaignBanner /> */}
-          <BannerSlider />
-          <CampaignSlide />
-          <GetToKnow />
-          {/* <RunningCampaignStages /> */}
-          <CandidateSlide />
-          {/* <UpcommingCampaign />
+        {/* <CampaignBanner /> */}
+        <BannerSlider />
+        <CampaignSlide />
+        <GetToKnow />
+        <JudgeSlide />
+        {/* <RunningCampaignStages /> */}
+        <CandidateSlide />
+        {/* <UpcommingCampaign />
           <UpcommingCompetionStageSlide /> */}
-          <FaqSection />
-          <Sponser />
-          <NewsUpdate />
+        <FaqSection />
+        <Sponser />
+        <NewsUpdate />
       </PublicLayout>
     </>
   );
-}
+};
 
-export default Home
+export default Home;
