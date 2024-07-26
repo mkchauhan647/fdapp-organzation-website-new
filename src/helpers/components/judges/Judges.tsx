@@ -57,18 +57,17 @@ const JudgeSlide: React.FC = () => {
         >
           {judges.map((judge) => (
             <SwiperSlide key={judge.id}>
-              <div className="judge-card relative">
-                <Image
-                  src={judge.image.src}
-                  alt={judge.name}
-                  width={300}
-                  height={300}
-                  className="judge-image w-full h-full"
-                />
-                <h2 className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 px-2 w-[90%] sm:w-[80%] bg-opacity-75 bg-gray-900 text-white text-center py-2 text-sm sm:text-base">
-                  {judge.name}
-                </h2>
-              </div>
+
+              <div className='flex flex-col justify-center gap-[5px] contestant-box mx-auto w-full h-full bg-white items-center'>
+                <div className='h-[200px] w-[200px] overflow-hidden rounded-full'>
+                    <Image src={judge.image.src} height={500} width={900} alt={judge.name}
+                    className='h-full w-full object-contain' />
+                </div>
+                
+                <h2 className='mt-4 md:text-[18px] text-[14px] font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1'> {judge.name}</h2>
+                
+            </div>
+
             </SwiperSlide>
           ))}
         </Swiper>
