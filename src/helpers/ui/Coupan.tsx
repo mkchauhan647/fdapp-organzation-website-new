@@ -2,13 +2,22 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { PayModal } from "./PayModal";
 import { Coupon } from "@/utils/schema/ApiInterface";
+import { usePathname } from "next/navigation";
+import path from "path";
 
-const Coupan: React.FC<Coupon> = ({ ...coupon }) => {
+const Coupan: React.FC<any> = ({ coupon, candidateId }: any) => {
   const [showModal, setShowModal] = useState(false);
+
+  console.log("This is candididate id", candidateId);
 
   const handleNameClick = () => {
     setShowModal(true);
   };
+
+  const pathname = usePathname();
+  console.log("This is pathname", pathname);
+
+  console.log("This is coupon", coupon);
 
   return (
     <>
@@ -44,7 +53,7 @@ const Coupan: React.FC<Coupon> = ({ ...coupon }) => {
         </div> */}
 
         <div></div>
-        {showModal && <PayModal {...coupon} />}
+        {showModal && <PayModal coupon={coupon} candidateId={candidateId} />}
       </div>
     </>
   );

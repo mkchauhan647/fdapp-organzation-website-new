@@ -1,24 +1,29 @@
 "use client";
-import React, { useEffect } from "react";
+import { dataService } from "@/utils/data/api/dataServices";
+import { Coupon } from "@/utils/schema/ApiInterface";
 import {
   Modal,
-  ModalContent,
   ModalBody,
+  ModalContent,
   useDisclosure,
 } from "@nextui-org/react";
-import Coupan from "./Coupan";
-import { Coupon } from "@/utils/schema/ApiInterface";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   RootState,
   useAppDispatch,
   useAppSelector,
 } from "../hooks/useStoreHooks";
-import { useRouter } from "next/navigation";
 import { GetCouponsByVotingCampaignID } from "../redux/coupons/_thunks";
-import { dataService } from "@/utils/data/api/dataServices";
-import { PayModal } from "./PayModal";
+import Coupan from "./Coupan";
 
-export default function CoupanModal({ campaignID }: { campaignID?: string }) {
+export default function CoupanModal({
+  campaignID,
+  candidateId,
+}: {
+  campaignID?: string;
+  candidateId: string;
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { all_coupons_by_campaign_id_data } = useAppSelector(
     (state: RootState) => state.Coupons
@@ -67,7 +72,11 @@ export default function CoupanModal({ campaignID }: { campaignID?: string }) {
                     Coupons.map((coupon: Coupon, index: number) => {
                       return (
                         <>
-                          <Coupan {...coupon} key={index} />
+                          <Coupan
+                            coupon={coupon}
+                            key={index}
+                            candidateId={candidateId}
+                          />
                         </>
                       );
                     })}

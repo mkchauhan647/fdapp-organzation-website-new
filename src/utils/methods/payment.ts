@@ -19,7 +19,7 @@ export class Payment {
     form.submit();
   }
 
-  static async Stripe(){
+  static async Stripe() {
     const stripe = await loadStripe(STRIPE_Pk);
   }
 }

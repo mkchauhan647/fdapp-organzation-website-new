@@ -65,11 +65,11 @@ export default function Confirm({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [params, setParams] = useState<ParamsType>({
-    amt: 100,
+    amt: 10,
     psc: 0,
     pdc: 0,
     txAmt: 0,
-    tAmt: 100,
+    tAmt: 10,
     pid: ESEWA_TEST_PID,
     scd: ESEWA_SCD,
     su: "http://localhost:3000/success",
@@ -113,12 +113,27 @@ export default function Confirm({
               <div className="flex gap-5 text-center justify-center mt-5">
                 {paymentMethod === "STRIPE" ? (
                   <PaymentModal couponTransactionData={CouponTransactionData} />
+                ) : paymentMethod === "NPS" ? (
+                  <NepalPaymentModal
+                    couponTransactionData={CouponTransactionData}
+                  />
                 ) : (
                   <button
                     className="px-4 py-2 bg-[var(--btncolor)] text-white rounded-lg font-[700]"
                     onClick={handleSubmit}
                   >
                     Confirm
+                  </button>
+                )}
+
+                {/* {paymentMethod === "STRIPE" ? (
+                  <PaymentModal couponTransactionData={CouponTransactionData} />
+                ) : (
+                  <button
+                    className="px-4 py-2 bg-[var(--btncolor)] text-white rounded-lg font-[700]"
+                    onClick={handleSubmit}
+                  >
+                    Confirm abc
                   </button>
                 )}
                 {paymentMethod === "NPS" ? (
@@ -132,7 +147,7 @@ export default function Confirm({
                   >
                     Confirm
                   </button>
-                )}
+                )} */}
                 <button
                   className="px-4 py-2 bg-[#DF383033] text-[#DF3830] rounded-lg font-[700]"
                   onClick={onClose}

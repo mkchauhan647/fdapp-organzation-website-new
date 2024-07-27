@@ -12,7 +12,7 @@ import { Candidate, Contestants, Coupon } from "@/utils/schema/ApiInterface";
 import { RootState, useAppSelector } from "../hooks/useStoreHooks";
 import { WeAcceptPng } from "@/utils/image/image";
 
-export const PayModal: React.FC<Coupon> = ({ ...coupon }) => {
+export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [paymentMethod, setPaymentMethod] = useState<
     "ESEWA" | "STRIPE" | "NPS"
@@ -22,6 +22,15 @@ export const PayModal: React.FC<Coupon> = ({ ...coupon }) => {
   );
   const candidates: Candidate[] =
     candidates_by_voting_stages_data.fulfilledResponse?.data.rows;
+
+  console.log("This is candiddates", candidates);
+
+  const filtered_candidates = candidates?.filter((item: any) => {
+    console.log("This is item", item);
+    return item?.id === candidateId;
+  });
+
+  console.log("This is filtered candidates", filtered_candidates);
 
   const selectedCandidates: Candidate[] = candidates.slice(
     0,
@@ -186,7 +195,7 @@ export const PayModal: React.FC<Coupon> = ({ ...coupon }) => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="">
                     <p className="text-lg text-[var(--blue)] font-[500] mb-2">
                       Select Votes:
                       <span className="text-lg text-[var(--light)] font-[500] mb-2">
@@ -195,100 +204,108 @@ export const PayModal: React.FC<Coupon> = ({ ...coupon }) => {
                     </p>
 
                     <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
-                      {candidates.map((candidate: Candidate, index: number) => {
-                        const isSelected = selectedCandidateIds.includes(
-                          candidate.candidateId
-                        );
-                        return (
-                          <div
-                            className="flex justify-around items-center"
-                            key={index}
-                          >
+                      {filtered_candidates?.map(
+                        (candidate: Candidate, index: number) => {
+                          const isSelected = selectedCandidateIds.includes(
+                            candidate.candidateId
+                          );
+                          return (
                             <div
-                              className={`px-2 py-2 flex justify-between items-center ${
-                                isSelected
-                                  ? "bg-[#117CC433]"
-                                  : "bg-[var(--pagebg)]"
-                              } rounded-lg w-[90%]`}
+                              className="flex justify-around items-center"
+                              key={index}
                             >
-                              <div className="flex items-center gap-2">
-                                <Image
-                                  src={
-                                    process.env.NEXT_PUBLIC_AWS_URI +
-                                    candidate.candidate.profilePicture
-                                  }
-                                  height={500}
-                                  width={900}
-                                  alt="img"
-                                  className="h-[4rem] w-[6rem] rounded-md "
-                                />
-                                <div className="flex flex-col justify-center">
-                                  <h4 className="text-base text-[var(--blue)] font-[500] font-secular leading-none">
-                                    {candidate.candidate.name}
-                                  </h4>
-                                  <p className="text-base font-[500] text-[var(--light)]">
-                                    {candidate.candidate.nationality}
-                                  </p>
+                              <div
+                                className={`px-2 py-2 flex justify-between items-center ${
+                                  isSelected
+                                    ? "bg-[#117CC433]"
+                                    : "bg-[var(--pagebg)]"
+                                } rounded-lg w-[90%]`}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <Image
+                                    src={
+                                      process.env.NEXT_PUBLIC_AWS_URI +
+                                      candidate.candidate.profilePicture
+                                    }
+                                    height={500}
+                                    width={900}
+                                    alt="img"
+                                    className="h-[4rem] w-[6rem] rounded-md "
+                                  />
+                                  <div className="flex flex-col justify-center">
+                                    <h4 className="text-base text-[var(--blue)] font-[500] font-secular leading-none">
+                                      {candidate.candidate.name}
+                                    </h4>
+                                    <p className="text-base font-[500] text-[var(--light)]">
+                                      {candidate.candidate.nationality}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-col gap-4">
+                                  {isSelected && (
+                                    <div className="flex items-center gap-1">
+                                      <button
+                                        className={`pay-counter ${
+                                          remainingVotes === coupon.votes
+                                            ? "disable"
+                                            : ""
+                                        }`}
+                                        onClick={() =>
+                                          setVotesPerCandidate((prevState) => ({
+                                            ...prevState,
+                                            [candidate.candidateId]:
+                                              prevState[candidate.candidateId] -
+                                              1,
+                                          }))
+                                        }
+                                        disabled={
+                                          remainingVotes === coupon.votes
+                                        }
+                                      >
+                                        -
+                                      </button>
+                                      <span className="pay-counter-num">
+                                        {
+                                          votesPerCandidate[
+                                            candidate.candidateId
+                                          ]
+                                        }
+                                      </span>
+                                      <button
+                                        className={`pay-counter ${
+                                          remainingVotes <= 0 ? "disable" : ""
+                                        }`}
+                                        onClick={() =>
+                                          setVotesPerCandidate((prevState) => ({
+                                            ...prevState,
+                                            [candidate.candidateId]:
+                                              prevState[candidate.candidateId] +
+                                              1,
+                                          }))
+                                        }
+                                        disabled={remainingVotes <= 0}
+                                      >
+                                        +
+                                      </button>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
-
-                              <div className="flex flex-col gap-4">
-                                {isSelected && (
-                                  <div className="flex items-center gap-1">
-                                    <button
-                                      className={`pay-counter ${
-                                        remainingVotes === coupon.votes
-                                          ? "disable"
-                                          : ""
-                                      }`}
-                                      onClick={() =>
-                                        setVotesPerCandidate((prevState) => ({
-                                          ...prevState,
-                                          [candidate.candidateId]:
-                                            prevState[candidate.candidateId] -
-                                            1,
-                                        }))
-                                      }
-                                      disabled={remainingVotes === coupon.votes}
-                                    >
-                                      -
-                                    </button>
-                                    <span className="pay-counter-num">
-                                      {votesPerCandidate[candidate.candidateId]}
-                                    </span>
-                                    <button
-                                      className={`pay-counter ${
-                                        remainingVotes <= 0 ? "disable" : ""
-                                      }`}
-                                      onClick={() =>
-                                        setVotesPerCandidate((prevState) => ({
-                                          ...prevState,
-                                          [candidate.candidateId]:
-                                            prevState[candidate.candidateId] +
-                                            1,
-                                        }))
-                                      }
-                                      disabled={remainingVotes <= 0}
-                                    >
-                                      +
-                                    </button>
-                                  </div>
+                              <input
+                                type="checkbox"
+                                className="checkbox-select w-4 h-4 rounded  "
+                                checked={selectedCandidateIds.includes(
+                                  candidate.candidateId
                                 )}
-                              </div>
+                                onChange={() =>
+                                  handleCandidateSelect(candidate.candidateId)
+                                }
+                              />
                             </div>
-                            <input
-                              type="checkbox"
-                              className="checkbox-select w-4 h-4 rounded  "
-                              checked={selectedCandidateIds.includes(
-                                candidate.candidateId
-                              )}
-                              onChange={() =>
-                                handleCandidateSelect(candidate.candidateId)
-                              }
-                            />
-                          </div>
-                        );
-                      })}
+                          );
+                        }
+                      )}
                     </div>
                   </div>
                 </div>

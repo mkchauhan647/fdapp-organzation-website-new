@@ -55,7 +55,7 @@ export interface VotingCampaign {
   id: string;
   inserted: string;
   logo: string;
-  candidateCount:string;
+  candidateCount: string;
   organizationID: string;
   startDateTime: string;
   timeZone: string;
@@ -90,6 +90,7 @@ export interface Coupon {
   avaibilityPeriodEnd: string;
   currency: string;
   organizationID: string;
+  candidateId: string;
 }
 
 export interface GetClientSecretInterface {
