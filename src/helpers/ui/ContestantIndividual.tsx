@@ -1,30 +1,24 @@
-import { Contestants, VotingStageCandidate } from "@/utils/schema/ApiInterface";
+import { orgID } from "@/utils/constants/constants";
+import { dataService } from "@/utils/data/api/dataServices";
+import { Contestants } from "@/utils/schema/ApiInterface";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import {
   RootState,
   useAppDispatch,
   useAppSelector,
 } from "../hooks/useStoreHooks";
-import { CandidatesSlice } from "../redux/candidates/CandidatesSlice";
-import {
-  GetCandidatesByID,
-  GetCandidatesByVotingCamapign,
-} from "../redux/candidates/_thunks";
-import Image from "next/image";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
 import { AuthSlice } from "../redux/Auth/AuthSlice";
-import { dataService } from "@/utils/data/api/dataServices";
-import axios from "axios";
-import { orgID } from "@/utils/constants/constants";
-import CompetitionBox from "./CompetitionBox";
-import ColorSelector from "./SelectColor";
-import Link from "next/link";
+import { GetCandidatesByID } from "../redux/candidates/_thunks";
 
 const ContestantProfile: React.FC<{ params: string }> = ({ params }) => {
   const dispatch = useAppDispatch();
