@@ -95,7 +95,7 @@ const NewsUpdate: React.FC = () => {
                           />
                         </div>
 
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-1 px-3  ">
                           {/* <div className="flex items-center">
                             <Image
                               src="/image/home/contest.png"
@@ -122,11 +122,17 @@ const NewsUpdate: React.FC = () => {
                             {news.title}
                           </h3>
                           <h3
-                            className="text-[14px] md:text-[16px] h-16 overflow-hidden font-semibold text-[var(--blue)] pl-2 line-clamp-2"
+                            className="text-[14px] md:text-[14px] h-16 overflow-hidden font-semibold text-slate-800 pl-2 line-clamp-2 py-4"
                             dangerouslySetInnerHTML={{
-                              __html: news.description,
+                              __html:
+                                news.description.length > 70
+                                  ? `${news.description.slice(
+                                      0,
+                                      news.description.lastIndexOf(" ", 70)
+                                    )}...`
+                                  : news.description,
                             }}
-                          />
+                          ></h3>
                         </div>
                       </Link>
                     </div>

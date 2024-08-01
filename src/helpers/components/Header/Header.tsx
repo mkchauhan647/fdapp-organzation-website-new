@@ -4,7 +4,6 @@ import Navbar from "../Navbar/Navbar"
 import ReduxProvider from "@/helpers/redux/ReduxProvider"
 
   const Header : React.FC = () => {
-
   return(
     <>
       <ReduxProvider>

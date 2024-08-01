@@ -1,7 +1,5 @@
 import dynamic from "next/dynamic";
 
-
-
 export const RootFooter = dynamic(
   () => import("@/helpers/components/Footer/Footer"),
   { ssr: false }
@@ -13,167 +11,161 @@ export const RootHeader = dynamic(
 );
 
 export const DynamicCountDown = dynamic(
-  ()=>import('@/helpers/ui/countDown'),
-  {ssr:false},
-)
+  () => import("@/helpers/ui/countDown"),
+  { ssr: false }
+);
 
 export const RootPageTop = dynamic(
-  ()=>import('@/helpers/components/PageTop/PageTop'),
+  () => import("@/helpers/components/PageTop/PageTop"),
   { ssr: false }
+);
 
-)
-
-export const CampPage= dynamic(
-  ()=>import('@/helpers/components/compPage/campaingnPage'),
+export const CampPage = dynamic(
+  () => import("@/helpers/components/compPage/campaingnPage"),
   { ssr: false }
-
-)
+);
 
 export const CampaignIndividual = dynamic(
-  ()=>import('@/helpers/components/campaign-individual/CampaignIndividual'),
+  () => import("@/helpers/components/campaign-individual/CampaignIndividual"),
   { ssr: false }
-
-)
+);
 
 export const HomeBanner = dynamic(
-  ()=>import('@/helpers/components/Homebanner/Homebanner'),
+  () => import("@/helpers/components/Homebanner/Homebanner"),
   { ssr: false }
-
-)
+);
 
 export const Register = dynamic(
-  ()=>import('@/helpers/components/Register/Register'),
+  () => import("@/helpers/components/Register/Register"),
   { ssr: false }
-
-)
+);
 
 export const Login = dynamic(
-  ()=>import('@/helpers/components/LoginBox/Loginbox'),
+  () => import("@/helpers/components/LoginBox/Loginbox"),
   { ssr: false }
-
-)
+);
 
 export const LoginSection = dynamic(
-  ()=>import('@/helpers/components/form/login'),
+  () => import("@/helpers/components/form/login"),
   { ssr: false }
-
-)
+);
 
 export const ErrorModel = dynamic(
-  ()=>import('@/helpers/components/ErrorModel/ErrorModel'),
+  () => import("@/helpers/components/ErrorModel/ErrorModel"),
   { ssr: false }
-
-)
+);
 
 export const CampaignSlide = dynamic(
-  () => import('@/helpers/components/competiton/Competion'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/competiton/Competion"),
+  { ssr: false }
+);
 
 export const CandidateSlide = dynamic(
-  () => import('@/helpers/components/Contestants/Contestants'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/Contestants/Contestants"),
+  { ssr: false }
+);
 
 export const CategoryPage = dynamic(
-  ()=> import ('@/helpers/components/catePage/CatePage'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/catePage/CatePage"),
+  { ssr: false }
+);
 
 export const CategorySlide = dynamic(
-  ()=>import('@/helpers/components/category/Category'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/category/Category"),
+  { ssr: false }
+);
 
 export const CandidateSlideStage = dynamic(
-  ()=>import('@/helpers/components/Candidate-stage/CandidateSlideStage'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/Candidate-stage/CandidateSlideStage"),
+  { ssr: false }
+);
 
 export const RegisterSection = dynamic(
-  ()=>import('@/helpers/components/Register/Register'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/Register/Register"),
+  { ssr: false }
+);
 
 export const OTPVerify = dynamic(
-  () => import('@/helpers/components/OtpVerify/Otpverify'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/OtpVerify/Otpverify"),
+  { ssr: false }
+);
 
 export const sendOTP = dynamic(
-  ()=>import('@/helpers/components/SendOTP/SendOTP'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/SendOTP/SendOTP"),
+  { ssr: false }
+);
 
 export const ContactSection = dynamic(
-  ()=> import('@/helpers/components/contact/contact'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/contact/contact"),
+  { ssr: false }
+);
 
 export const FaqSection = dynamic(
-  () => import('@/helpers/components/FAQ/faq'),
-  {ssr : false}
-)
-
+  () => import("@/helpers/components/FAQ/faq"),
+  { ssr: false }
+);
 
 export const TermsCondition = dynamic(
-  () => import('@/helpers/components/termscondition/TermsCondition'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/termscondition/TermsCondition"),
+  { ssr: false }
+);
 
 export const PrivacyPolicy = dynamic(
-  () => import('@/helpers/components/privacypolicy/Privacy'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/privacypolicy/Privacy"),
+  { ssr: false }
+);
 
 export const AboutUS = dynamic(
-  () => import('@/helpers/components/aboutus/AboutUs'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/aboutus/AboutUs"),
+  { ssr: false }
+);
 export const NewsUpdate = dynamic(
-  () => import('@/helpers/components/news/News'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/news/News"),
+  { ssr: false }
+);
 export const NewsPage = dynamic(
-  () => import('@/helpers/components/newspage/NewsPage'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/newspage/NewsPage"),
+  { ssr: false }
+);
 export const Sponser = dynamic(
-  () => import('@/helpers/components/sponser/Sponser'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/sponser/Sponser"),
+  { ssr: false }
+);
 export const LandingPage = dynamic(
-  () => import('@/helpers/components/landingpage/LandingPage'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/landingpage/LandingPage"),
+  { ssr: false }
+);
 
 export const Pricing = dynamic(
-  () => import('@/helpers/components/pricing/Pricing'),
-  {ssr : false}
-)
-export const Error = dynamic(
-  () => import('@/helpers/components/Error/Error'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/pricing/Pricing"),
+  { ssr: false }
+);
+export const Error = dynamic(() => import("@/helpers/components/Error/Error"), {
+  ssr: false,
+});
 export const Success = dynamic(
-  () => import('@/helpers/components/success/Success'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/success/Success"),
+  { ssr: false }
+);
 
 export const RunningCampaignStages = dynamic(
-  () => import('@/helpers/sections/RunningCampaignStages'),
-  {ssr : false}
-)
+  () => import("@/helpers/sections/RunningCampaignStages"),
+  { ssr: false }
+);
 
 export const CompetitonSkeleton = dynamic(
-  () => import('@/helpers/components/Skeleton/SkeletonCampaign'),
-  {ssr : false}
-)
+  () => import("@/helpers/components/Skeleton/SkeletonCampaign"),
+  { ssr: false }
+);
 
 export const ImageSkeleton = dynamic(
-  () => import('@/helpers/components/Skeleton/SkeletonImage')
-)
+  () => import("@/helpers/components/Skeleton/SkeletonImage")
+);
 export const GetToKnow = dynamic(
-  () => import('@/helpers/components/GetToKnow/GetToKnow')
-)
+  () => import("@/helpers/components/GetToKnow/GetToKnow")
+);
 
+//dynamically import couponPage BY pdt
+export const CouponsPage = dynamic(
+  () => import("@/helpers/components/coupanPage/coupanPage")
+);
