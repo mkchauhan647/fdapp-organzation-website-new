@@ -6,14 +6,17 @@ import {
   CandidateSlideStage,
 } from "@/helpers/dynamic-imports/components";
 import CampaignBanner from "@/helpers/sections/campaignBanner";
+import JudgeSlide from "@/helpers/components/judges/Judges";
 
 const CompetitionTypeListPage: React.FC<{ params: any }> = ({ params }) => {
   return (
     <>
       <PublicLayout>
         <CampaignBanner campaignID={params.id} />
-        <CandidateSlideStage params={params} />
+        {/* <CandidateSlideStage params={params} /> */}
         <CategorySlide id={params.id} />
+        <JudgeSlide />
+
       </PublicLayout>
     </>
   );

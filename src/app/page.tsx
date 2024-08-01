@@ -24,7 +24,7 @@ const Home: React.FC = () => {
         <BannerSlider />
         <CampaignSlide />
         <GetToKnow />
-        <JudgeSlide />
+        {/* <JudgeSlide /> */}
         {/* <RunningCampaignStages /> */}
         <CandidateSlide />
         {/* <UpcommingCampaign />

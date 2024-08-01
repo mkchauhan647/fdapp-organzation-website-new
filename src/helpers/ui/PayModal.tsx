@@ -21,7 +21,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
     (state: RootState) => state.VotingCampaignStages
   );
   const candidates: Candidate[] =
-    candidates_by_voting_stages_data.fulfilledResponse?.data.rows;
+    candidates_by_voting_stages_data.fulfilledResponse?.data.rows || [];
 
   console.log("This is candiddates", candidates);
 
