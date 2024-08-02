@@ -60,7 +60,6 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
     <div className="flex  gap-2 bg-[#F6F4F9] p-10">
       {/* Left side for Candidate Information */}
       <div className="w-1/2 bg-[#FFFFFF] shadow-sm rounded-lg p-8 flex flex-col items-center ">
-        <h1 className="text-3xl font-bold mb-6">Candidate Information</h1>
         {candidate ? (
           <div className="text-center">
             <Image
