@@ -12,7 +12,7 @@ const Page = ({ params }: { params: { campaignID: string; candidateId: string } 
 
   return (
     <PublicLayout>
-      <h1>Coupons for candidateId: {candidateId}</h1>
+      {/* <h1>Coupons for candidateId: {candidateId}</h1> */}
       <CouponsPage
         campaignID={campaignID}
         candidateId={candidateId}

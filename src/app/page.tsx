@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         <GetToKnow />
         {/* <JudgeSlide /> */}
         {/* <RunningCampaignStages /> */}
-        <CandidateSlide />
+        {/* <CandidateSlide /> */}
         {/* <UpcommingCampaign />
           <UpcommingCompetionStageSlide /> */}
         <FaqSection />

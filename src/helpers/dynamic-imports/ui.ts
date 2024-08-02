@@ -36,3 +36,8 @@ export const CampaignLists = dynamic(
   ()=>import('@/helpers/ui/CampaignLists'),
   {ssr : false}
 )
+
+export const CoupanInputs = dynamic(()=>
+  import("@/helpers/ui/CoupanInputs"),
+  { ssr: false }
+)
