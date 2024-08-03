@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import {
   useAppDispatch,
@@ -86,12 +85,9 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
         <div className="flex  gap-3 flex-wrap">
           {Coupons.length > 0 ? (
             <div className=" w-full">
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 {Coupons.map((coupon, index) => (
-                  <div
-                  key={index}
-                  onClick={()=>setSelectedCoupon(coupon)}
-                  >
+                  <div  key={index} onClick={() => setSelectedCoupon(coupon)}>
                     <Coupan
                       coupon={coupon}
                       key={index}
@@ -102,6 +98,7 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                 ))}
               </div>
               <CoupanInputs
+                campaignID={campaignID}
                 coupon={selectedCoupon}
                 candidateId={candidateId}
               />

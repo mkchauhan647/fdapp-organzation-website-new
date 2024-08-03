@@ -12,21 +12,15 @@ const Coupan: React.FC<any> = ({
 }: any) => {
   const [showModal, setShowModal] = useState(false);
 
-  console.log("This is candididate id", candidateId);
-
   const handleNameClick = () => {
     setShowModal(true);
   };
 
-  const pathname = usePathname();
-  console.log("This is pathname", pathname);
-
-  console.log("This is coupon", coupon);
 
   return (
     <>
       <div
-        className="coupon-box flex  items-center justify-center "
+        className="coupon-box flex flex-wrap  items-center justify-center "
         onClick={handleNameClick}
       >
         {/* <div className="flex justify-between items-center gap-4">

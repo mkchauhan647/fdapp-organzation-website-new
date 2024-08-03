@@ -167,5 +167,10 @@ export const GetToKnow = dynamic(
 
 //dynamically import couponPage BY pdt
 export const CouponsPage = dynamic(
-  () => import("@/helpers/components/coupanPage/coupanPage")
+  () => import("@/helpers/components/coupanPage/CoupanPage")
+);
+
+//dynamically import couponPage BY pdt
+export const CouponsVerifyPage = dynamic(
+  () => import("@/helpers/components/coupanVerifyPage/CoupanVerifyPage")
 );
