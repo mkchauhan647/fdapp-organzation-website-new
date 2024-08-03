@@ -48,11 +48,11 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
           <Image
             src={
               (process.env.NEXT_PUBLIC_AWS_URI as string) +
-              (candidate?.profilePicture || "")
+              (candidate?.profilePicture)
             }
             alt="Candidate Profile"
-            width={300}
-            height={300}
+            width={100}
+            height={100}
             className="w-32 h-32 rounded-full object-cover"
           />
           <div className="mt-4 text-center">
@@ -61,6 +61,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
             </div>
           </div>
         </div>
+        
         <div className="sm:w-2/3 p-4">
           <div className="flex flex-col justify-center items-center">
             <h2 className="text-2xl font-bold mb-4">Confirm Voting</h2>
