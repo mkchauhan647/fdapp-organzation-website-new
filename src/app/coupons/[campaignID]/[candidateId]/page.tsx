@@ -2,10 +2,7 @@
 
 import PublicLayout from "@/views/layouts/publicLayout";
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/helpers/hooks/useStoreHooks";
-import { GetCouponsByVotingCampaignID } from "@/helpers/redux/coupons/_thunks";
-import { CouponsPage } from "@/helpers/dynamic-imports/components";
+import CouponsPage from "@/helpers/components/coupanPage/CoupanPage";
 
 const Page = ({ params }: { params: { campaignID: string; candidateId: string } }) => {
   const { campaignID, candidateId } = params;
