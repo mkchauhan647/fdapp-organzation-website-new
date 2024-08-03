@@ -51,8 +51,8 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
               (candidate?.profilePicture)
             }
             alt="Candidate Profile"
-            width={100}
-            height={100}
+            width={150}
+            height={150}
             className="w-32 h-32 rounded-full object-cover"
           />
           <div className="mt-4 text-center">
@@ -61,7 +61,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
             </div>
           </div>
         </div>
-        
+
         <div className="sm:w-2/3 p-4">
           <div className="flex flex-col justify-center items-center">
             <h2 className="text-2xl font-bold mb-4">Confirm Voting</h2>
