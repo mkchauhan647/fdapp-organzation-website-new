@@ -40,7 +40,7 @@ function CountdownDisplay({ targetDate, isBlue }: { targetDate: any; isBlue?: bo
 
   return (
     
-      <div className='flex items-center justify-center gap-3'>
+      <div className='flex items-center justify-center gap-3 '>
           <div className='time-box-wrapper'>
               <div className="time-box">
                   <p className='time text-[12px] sm:text-[18px] font-bold'>{zeroPad(timeLeft.days)}</p>
@@ -60,8 +60,8 @@ function CountdownDisplay({ targetDate, isBlue }: { targetDate: any; isBlue?: bo
               </div>
               <span className={isBlue ? ` text-[12px] sm:text-[16px] text-[var(--c-primary)] font-bold`:` text-[12px] sm:text-[16px] font-bold`}>Min</span>
           </div>
-          <div className='time-box-wrapper'>
-              <div className="time-box">
+          <div className='time-box-wrapper '>
+              <div className="time-box ">
                   <p className='time text-[12px] sm:text-[18px] font-bold'>{zeroPad(timeLeft.seconds)}</p>
 
               </div>

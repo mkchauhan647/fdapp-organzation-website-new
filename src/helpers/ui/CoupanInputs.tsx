@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Coupon } from "@/utils/schema/ApiInterface";
 
-
-
 interface CoupanInputsProps {
   coupon: Coupon;
   candidateId: string;

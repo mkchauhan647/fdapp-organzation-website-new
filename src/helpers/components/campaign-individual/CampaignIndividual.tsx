@@ -76,19 +76,20 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
     <>
       {CampaignStageData && (
         <section className="md:px-28  px-4 bg-[var(--pagebg)] py-10 md:py-20 pb-32">
-          <div className="xl:w-[78rem] mx-auto">
-            <div className="flex md:flex-row flex-col-reverse gap-8 md:gap-16 grow">
-              <div className="flex-3 grow">
-                <h2 className="font-[500] text-lg md:text-2xl mb-1 md:mb-3">
-                  Information
+          <div className="xl:w-[68rem] mx-auto">
+            <div className="flex md:flex-row flex-col-reverse gap-2 md:gap-8  grow ">
+              <div className="flex-3">
+                <h2 className="font-[500] text-lg md:text-2xl mb-3 md:mb-3">
+                  {CampaignStageData?.title}
                 </h2>
-                <p className="text-justify text-[12px] md:text-[16px]">
+
+                <p className="text-justify text-[12px] md:text-[16px] max-w-[40rem]">
                   {CampaignStageData?.description}
                 </p>
               </div>
 
-              <div className="w-fit flex flex-col md:items-center items-start gap-5 flex-1">
-                <div>
+              <div className="flex flex-col md:items-center gap-2 flex-1 ">
+                <div className=" overflow-hidden">
                   <p className="font-[500] text-lg md:text-2xl mb-1 md:mb-5 md:text-center">
                     Ends In
                   </p>
@@ -101,7 +102,7 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
             </div>
             <div className="w-full">
               <h3 className="font-[500] text-lg md:text-2xl mb-3"></h3>
-              <div className="grid md:grid-cols-5 gap-2 content-center justify-center">
+              <div className=" grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2  gap-2 content-center justify-center">
                 {CandidateStageData?.length != 0 &&
                   CandidateStageData?.map((contestant: Candidate) => {
                     return (
