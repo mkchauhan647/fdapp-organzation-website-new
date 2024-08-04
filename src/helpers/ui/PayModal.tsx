@@ -8,8 +8,9 @@ import {
 } from "@nextui-org/react";
 import Confirm from "./ConfirmModal";
 import Image from "next/image";
-import { Candidate} from "@/utils/schema/ApiInterface";
+import { Candidate, Coupon } from "@/utils/schema/ApiInterface";
 import { RootState, useAppSelector } from "../hooks/useStoreHooks";
+import { WeAcceptPng } from "@/utils/image/image";
 
 export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,15 +23,12 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const candidates: Candidate[] =
     candidates_by_voting_stages_data.fulfilledResponse?.data.rows || [];
 
-  // const filtered_candidates = candidates?.filter((item: any) => {
-  //   return item?.id === candidateId;
-  // });
+
 
   const selectedCandidates: Candidate[] = candidates.slice(
     0,
     coupon.eligibleCandidateCounts
   );
-
 
   // State to track the votes for each candidate
   const [votesPerCandidate, setVotesPerCandidate] = useState<{
@@ -38,7 +36,6 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   }>({});
 
   useEffect(() => {
-    setPaymentMethod("NPS")
     // Initialize votesPerCandidate only if it's not already initialized
     if (Object.keys(votesPerCandidate).length === 0) {
       const initialVotes: { [candidateId: string]: number } = {};
@@ -48,7 +45,6 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
       setVotesPerCandidate(initialVotes);
     }
   }, [selectedCandidates, votesPerCandidate]);
-
 
   const handleOpen = () => {
     onOpen();
@@ -60,7 +56,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
         onClick={handleOpen}
         className="bg-blue-500 text-white py-2 px-5  border rounded-full hover:bg-blue-600"
       >
-        Pay With Card
+        Pay Online
       </button>
 
       <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
@@ -69,23 +65,23 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
             <>
               <ModalBody className="">
                 <div className="flex flex-col gap-5">
-                  <div className="flex flex-col">
-                    <h3 className="text-2xl font-[500] text-[var(--blue)] font-secular">
-                     Coupon Name:  <span className=" text-2xl text-black">{coupon.name}</span>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-xl font-[500] text-black font-secular">
+                      Coupan Name:{" "}
+                      <span className=" text-2xl text-[var(--blue)] ">
+                        {coupon.name}{" "}
+                      </span>
                     </h3>
                     <div className="flex gap-3">
                       <span className="px-2 py-1 bg-[var(--c-rose-pink)] text-[--c-secondary] font-[500] rounded-md">
-                        {coupon.votes} votes
+                        Vote Counts: {coupon.votes}
                       </span>
-                      {/* <span className="px-2 py-1 bg-[var(--c-rose-pink)] text-[--c-secondary] font-[500] rounded-md">
-                        {coupon.eligibleCandidateCounts} candidates
-                      </span> */}
                     </div>
                   </div>
 
                   <div className="">
                     <p className="text-lg text-[var(--blue)] font-[500] mb-2">
-                      Selected Payment Method:
+                      Select Payment Method
                     </p>
 
                     <div className="flex gap-5">
@@ -93,7 +89,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                         <input
                           type="radio"
                           name="paymentMethod"
-                          value="NEPALPAYMENT"
+                          value="NPS"
                           onClick={(e: any) => {
                             setPaymentMethod(e.target.value);
                           }}
@@ -115,7 +111,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                                                 }`}
                         />
                       </label>
-{/* 
+
                       <label className="border relative h-fit rounded-lg">
                         <input
                           type="radio"
@@ -164,17 +160,17 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                               : "border-10"
                           }`}
                         />
-                      </label> */}
+                      </label>
                     </div>
                   </div>
 
-                  {/* <div className="">
-                    <p className="text-lg text-[var(--blue)] font-[500] mb-2">
+                  <div className="">
+                    {/* <p className="text-lg text-[var(--blue)] font-[500] mb-2">
                       Select Votes:
                       <span className="text-lg text-[var(--light)] font-[500] mb-2">
                         {remainingVotes} Remaining
                       </span>
-                    </p>
+                    </p> */}
 
                     {/* <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
                       {filtered_candidates?.map(
@@ -331,8 +327,8 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                           );
                         }
                       )}
-                    </div> 
-                  </div> */}
+                    </div> */}
+                  </div>
                 </div>
               </ModalBody>
               <ModalFooter className="mt-3">
