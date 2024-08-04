@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAppDispatch,
   RootState,
@@ -10,10 +10,10 @@ import { dataService } from "@/utils/data/api/dataServices";
 import Image from "next/image";
 import { CouponsVerifyPageProps } from "@/utils/schema/confirmVotingInterface";
 import { useRouter } from "next/navigation";
+import { PayModal } from "@/helpers/ui/PayModal";
 
 const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
-  const { fullName, email, couponName, couponPrice, candidateId, campaignID } =
-    query;
+  const { fullName, email, candidateId, campaignID, coupon } = query;
 
   const { all_candidates_by_campaign_id_data } = useAppSelector(
     (state: RootState) => state.Candidates
@@ -36,10 +36,10 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
     c.votingStageCandidates.some((vsc) => vsc.id === candidateId)
   );
 
-  const router = useRouter()
-  const cancelBtn = ()=>{
-  router.back()
-  }
+  const router = useRouter();
+  const cancelBtn = () => {
+    router.back();
+  };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100 p-6">
@@ -48,7 +48,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
           <Image
             src={
               (process.env.NEXT_PUBLIC_AWS_URI as string) +
-              (candidate?.profilePicture)
+              candidate?.profilePicture
             }
             alt="Candidate Profile"
             width={150}
@@ -66,19 +66,18 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
           <div className="flex flex-col justify-center items-center">
             <h2 className="text-2xl font-bold mb-4">Confirm Voting</h2>
             <div className="text-lg mb-4">
-              <p className="">Number of Votes: <span>{couponName}</span> </p>
-              <p className="">Amount (NPR): <span> {couponPrice} </span> </p>
+              <p className="">
+                Number of Votes: <span>{coupon?.votes}</span>{" "}
+              </p>
+              <p className="">
+                Amount (NPR): <span> {coupon?.pricing} </span>{" "}
+              </p>
               <p className="">
                 Voter: {fullName}, {email}
               </p>
             </div>
             <div className="flex space-x-4 mb-4">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white py-2 px-5  border rounded-full hover:bg-blue-600"
-              >
-                Pay With Card
-              </button>
+            <PayModal coupon={coupon} candidateId={candidateId} />
               <span
                 className="text-orange-500 cursor-pointer py-2 px-4"
                 onClick={() => cancelBtn()}

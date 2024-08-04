@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import Confirm from "./ConfirmModal";
 import Image from "next/image";
-import { Candidate, Contestants, Coupon } from "@/utils/schema/ApiInterface";
+import { Candidate, Coupon } from "@/utils/schema/ApiInterface";
 import { RootState, useAppSelector } from "../hooks/useStoreHooks";
 import { WeAcceptPng } from "@/utils/image/image";
 
@@ -23,14 +23,9 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const candidates: Candidate[] =
     candidates_by_voting_stages_data.fulfilledResponse?.data.rows || [];
 
-  console.log("This is candiddates", candidates);
-
   const filtered_candidates = candidates?.filter((item: any) => {
-    console.log("This is item", item);
     return item?.id === candidateId;
   });
-
-  console.log("This is filtered candidates", filtered_candidates);
 
   const selectedCandidates: Candidate[] = candidates.slice(
     0,
@@ -47,6 +42,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   }>({});
 
   useEffect(() => {
+    setPaymentMethod("NPS")
     // Initialize votesPerCandidate only if it's not already initialized
     if (Object.keys(votesPerCandidate).length === 0) {
       const initialVotes: { [candidateId: string]: number } = {};
@@ -81,9 +77,9 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
     <>
       <button
         onClick={handleOpen}
-        className="bg-[var(--btncolor)] py-[1px] px-6 rounded-lg text-white mt-2"
+        className="bg-blue-500 text-white py-2 px-5  border rounded-full hover:bg-blue-600"
       >
-        Buy
+        Pay With Card
       </button>
 
       <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
@@ -108,7 +104,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
 
                   <div className="">
                     <p className="text-lg text-[var(--blue)] font-[500] mb-2">
-                      Select Payment Method
+                      Selected Payment Method
                     </p>
 
                     <div className="flex gap-5">
@@ -138,7 +134,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                                                 }`}
                         />
                       </label>
-
+{/* 
                       <label className="border relative h-fit rounded-lg">
                         <input
                           type="radio"
@@ -157,12 +153,9 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                           className="h-[5rem] w-[9rem] object-contain"
                         />
                         <div
-                          className={`absolute top-0 left-0 right-0 bottom-0 border-[var(--btncolor)] rounded-lg transition-all
-                                                     ${
-                                                       paymentMethod === "ESEWA"
-                                                         ? "border-1"
-                                                         : "border-10"
-                                                     }`}
+                          className={`absolute top-0 left-0 right-0 bottom-0 border-[var(--btncolor)] rounded-lg transition-all ${
+                            paymentMethod === "ESEWA" ? "border-1" : "border-10"
+                          }`}
                         />
                       </label>
 
@@ -184,14 +177,13 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                           className="h-[5rem] w-[9rem] object-contain"
                         />
                         <div
-                          className={`absolute top-0 left-0 right-0 bottom-0 border-[var(--btncolor)] rounded-lg transition-all 
-                                                ${
-                                                  paymentMethod === "STRIPE"
-                                                    ? "border-1"
-                                                    : "border-10"
-                                                }`}
+                          className={`absolute top-0 left-0 right-0 bottom-0 border-[var(--btncolor)] rounded-lg transition-all ${
+                            paymentMethod === "STRIPE"
+                              ? "border-1"
+                              : "border-10"
+                          }`}
                         />
-                      </label>
+                      </label> */}
                     </div>
                   </div>
 
@@ -247,6 +239,58 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                                     <div className="flex items-center gap-1">
                                       <button
                                         className={`pay-counter ${
+                                          remainingVotes === coupon.votes
+                                            ? "disable"
+                                            : ""
+                                        }`}
+                                        onClick={() =>
+                                          setVotesPerCandidate((prevState) => ({
+                                            ...prevState,
+                                            [candidate.candidateId]:
+                                              prevState[candidate.candidateId] -
+                                              1,
+                                          }))
+                                        }
+                                        disabled={
+                                          remainingVotes === coupon.votes
+                                        }
+                                      >
+                                        -
+                                      </button>
+                                      <span className="pay-counter-num">
+                                        {
+                                          votesPerCandidate[
+                                            candidate.candidateId
+                                          ]
+                                        }
+                                      </span>
+                                      <button
+                                        className={`pay-counter ${
+                                          remainingVotes <= 0 ? "disable" : ""
+                                        }`}
+                                        onClick={() =>
+                                          setVotesPerCandidate((prevState) => ({
+                                            ...prevState,
+                                            [candidate.candidateId]:
+                                              prevState[candidate.candidateId] -
+                                              1,
+                                          }))
+                                        }
+                                        disabled={
+                                          remainingVotes === coupon.votes
+                                        }
+                                      >
+                                        -
+                                      </button>
+                                      <span className="pay-counter-num">
+                                        {
+                                          votesPerCandidate[
+                                            candidate.candidateId
+                                          ]
+                                        }
+                                      </span>
+                                      <button
+                                        className={`pay-counter${
                                           remainingVotes === coupon.votes
                                             ? "disable"
                                             : ""

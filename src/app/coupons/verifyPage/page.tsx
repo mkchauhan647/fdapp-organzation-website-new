@@ -9,30 +9,27 @@ const VerifyPage = () => {
   const [query, setQuery] = useState({
     fullName: "",
     email: "",
-    couponName: "",
+    coupon: null,
     candidateId: "",
-    couponPrice: "",
     campaignID: "",
+
   });
 
   useEffect(() => {
     // Retrieve query parameters
     const fullName = params.get("fullName");
     const email = params.get("email");
-    const couponName = params.get("couponName");
-    const couponPrice = params.get("couponPrice");
+    const coupon = params.get("coupon");
     const candidateId = params.get("candidateId");
-    const campaignID = params.get("campaignID")
-
+    const campaignID = params.get("campaignID");
 
     // Update state with query parameters
     setQuery({
       fullName: fullName || "",
       email: email || "",
-      couponName: couponName || "",
       candidateId: candidateId || "",
-      couponPrice: couponPrice || "",
       campaignID: campaignID || "",
+      coupon: coupon ? JSON.parse(decodeURIComponent(coupon)) : null, 
     });
   }, [params]);
 

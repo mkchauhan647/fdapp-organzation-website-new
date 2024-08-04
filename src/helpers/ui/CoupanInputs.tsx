@@ -36,10 +36,9 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
       const queryParams = new URLSearchParams({
         fullName: values.fullName,
         email: values.email,
-        couponPrice: coupon?.pricing.toString() || "",
-        couponName: values.coupan,
-        candidateId: candidateId,
-        campaignID: campaignID,
+        candidateId,
+        campaignID,
+        coupon: encodeURIComponent(JSON.stringify(coupon)), 
       }).toString();
 
       router.push(`/coupons/verifyPage?${queryParams}`);
