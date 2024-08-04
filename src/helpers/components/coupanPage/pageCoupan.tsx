@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import {
   useAppDispatch,
@@ -60,7 +59,6 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
     <div className="flex  gap-2 bg-[#F6F4F9] p-10">
       {/* Left side for Candidate Information */}
       <div className="w-1/2 bg-[#FFFFFF] shadow-sm rounded-lg p-8 flex flex-col items-center ">
-        <h1 className="text-3xl font-bold mb-6">Candidate Information</h1>
         {candidate ? (
           <div className="text-center">
             <Image
@@ -87,12 +85,9 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
         <div className="flex  gap-3 flex-wrap">
           {Coupons.length > 0 ? (
             <div className=" w-full">
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 {Coupons.map((coupon, index) => (
-                  <div
-                  key={index}
-                  onClick={()=>setSelectedCoupon(coupon)}
-                  >
+                  <div  key={index} onClick={() => setSelectedCoupon(coupon)}>
                     <Coupan
                       coupon={coupon}
                       key={index}
@@ -103,6 +98,7 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                 ))}
               </div>
               <CoupanInputs
+                campaignID={campaignID}
                 coupon={selectedCoupon}
                 candidateId={candidateId}
               />

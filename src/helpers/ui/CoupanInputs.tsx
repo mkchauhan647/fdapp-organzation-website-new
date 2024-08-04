@@ -1,33 +1,52 @@
 import React from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { object, string } from "yup";
+import { useRouter } from "next/navigation";
+import Coupan from "./Coupan";
+import Link from "next/link";
 
 interface CoupanInputsProps {
   coupon: any;
   candidateId: string;
+  campaignID: string;
 }
 
-const CoupanInputs: React.FC<CoupanInputsProps> = ({ coupon, candidateId }) => {
+const CoupanInputs: React.FC<CoupanInputsProps> = ({
+  coupon,
+  candidateId,
+  campaignID,
+}) => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       fullName: "",
       email: "",
     },
-    validationSchema: Yup.object({
-    //   numberOfVotes: Yup.number()
-    //     .required("Number of votes is required")
-    //     .min(1, "Number of votes must be at least 1"),
-      fullName: Yup.string()
+    validationSchema: object({
+      //   numberOfVotes: Yup.number()
+      //     .required("Number of votes is required")
+      //     .min(1, "Number of votes must be at least 1"),
+      fullName: string()
         .required("Full name is required")
         .min(2, "Full name must be at least 2 characters"),
-      email: Yup.string()
+      email: string()
         .email("Invalid email address")
         .required("Email address is required"),
     }),
     onSubmit: (values) => {
-      // Handle form submission
+      const queryParams = new URLSearchParams({
+        fullName: values.fullName,
+        email: values.email,
+        couponPrice: coupon.pricing,
+        couponName: coupon.votes,
+        candidateId: candidateId,
+        campaignID: campaignID,
+      }).toString();
+
+      router.push(`/coupons/verifyPage?${queryParams}`);
+
       console.log("Form values:", values);
-      alert("Form submission" + JSON.stringify(values));
+      alert("Form submission" + campaignID);
     },
   });
 
@@ -69,11 +88,15 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({ coupon, candidateId }) => {
             onBlur={formik.handleBlur}
           />
           {formik.touched.fullName && formik.errors.fullName ? (
-            <div className="text-red-500 text-sm mt-2">{formik.errors.fullName}</div>
+            <div className="text-red-500 text-sm mt-2">
+              {formik.errors.fullName}
+            </div>
           ) : null}
         </div>
         <div className="mb-4">
-          <label className="block opacity-100 mb-2">Enter your email address</label>
+          <label className="block opacity-100 mb-2">
+            Enter your email address
+          </label>
           <input
             className="w-full p-2 border border-gray-300 rounded"
             placeholder="Enter your email address"
@@ -85,16 +108,22 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({ coupon, candidateId }) => {
             autoComplete="off"
           />
           {formik.touched.email && formik.errors.email ? (
-            <div className="text-red-500 text-sm mt-2">{formik.errors.email}</div>
+            <div className="text-red-500 text-sm mt-2">
+              {formik.errors.email}
+            </div>
           ) : null}
         </div>
-        <div>
+        <div className="">
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="bg-blue-500 flex-shrink text-white py-2 px-4 rounded"
           >
             Submit
           </button>
+            <span className=" ml-4">Or</span>
+            <Link href={"/login"} className="px-6 py-3 text-lg underline ">
+              Continue with Login
+          </Link>
         </div>
         <input type="hidden" name="csrt" value="4839605274748214208" />
       </form>
