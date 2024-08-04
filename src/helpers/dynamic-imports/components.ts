@@ -167,7 +167,7 @@ export const GetToKnow = dynamic(
 
 //dynamically import couponPage BY pdt
 export const CouponsPage = dynamic(
-  () => import("@/helpers/components/coupanPage/CoupanPage")
+  () => import("@/helpers/components/coupanPage/pageCoupan")
 );
 
 //dynamically import couponPage BY pdt
