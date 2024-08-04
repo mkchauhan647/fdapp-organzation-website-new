@@ -44,9 +44,6 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
       }).toString();
 
       router.push(`/coupons/verifyPage?${queryParams}`);
-
-      console.log("Form values:", values);
-      alert("Form submission" + campaignID);
     },
   });
 
