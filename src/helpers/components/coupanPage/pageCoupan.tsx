@@ -56,9 +56,9 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
   );
 
   return (
-    <div className="flex  gap-2 bg-[#F6F4F9] p-10">
+    <div className="flex gap-2 bg-[#F6F4F9] p-10">
       {/* Left side for Candidate Information */}
-      <div className="w-1/2 bg-[#FFFFFF] shadow-sm rounded-lg p-8 flex flex-col items-center ">
+      <div className="w-1/2 bg-[#FFFFFF] shadow-sm rounded-lg p-8 flex flex-col items-center">
         {candidate ? (
           <div className="text-center">
             <Image
@@ -79,29 +79,30 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
       </div>
 
       {/* Right side for Coupons */}
-      <div className="w-1/2  p-8 bg-[#FFFFFF] shadow-sm rounded-lg  ">
+      <div className="w-1/2 p-8 bg-[#FFFFFF] shadow-sm rounded-lg">
         <h1 className="text-3xl font-bold mb-6">Available Coupons</h1>
         <p className="mb-2 text-base font-medium">Select Number of Votes</p>
-        <div className="flex  gap-3 flex-wrap">
+        <div className="flex gap-3 flex-wrap">
           {Coupons.length > 0 ? (
-            <div className=" w-full">
+            <div className="w-full">
               <div className="flex gap-2 flex-wrap">
                 {Coupons.map((coupon, index) => (
-                  <div  key={index} onClick={() => setSelectedCoupon(coupon)}>
+                  <div key={index} onClick={() => setSelectedCoupon(coupon)}>
                     <Coupan
                       coupon={coupon}
-                      key={index}
                       selectedCoupon={selectedCoupon}
                       candidateId={candidateId}
                     />
                   </div>
                 ))}
               </div>
-              <CoupanInputs
-                campaignID={campaignID}
-                coupon={selectedCoupon}
-                candidateId={candidateId}
-              />
+              {selectedCoupon && (
+                <CoupanInputs
+                  campaignID={campaignID}
+                  coupon={selectedCoupon}
+                  candidateId={candidateId}
+                />
+              )}
             </div>
           ) : (
             <p>No coupons available</p>
