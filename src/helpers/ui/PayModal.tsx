@@ -8,9 +8,8 @@ import {
 } from "@nextui-org/react";
 import Confirm from "./ConfirmModal";
 import Image from "next/image";
-import { Candidate, Coupon } from "@/utils/schema/ApiInterface";
+import { Candidate} from "@/utils/schema/ApiInterface";
 import { RootState, useAppSelector } from "../hooks/useStoreHooks";
-import { WeAcceptPng } from "@/utils/image/image";
 
 export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,18 +22,15 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
   const candidates: Candidate[] =
     candidates_by_voting_stages_data.fulfilledResponse?.data.rows || [];
 
-  const filtered_candidates = candidates?.filter((item: any) => {
-    return item?.id === candidateId;
-  });
+  // const filtered_candidates = candidates?.filter((item: any) => {
+  //   return item?.id === candidateId;
+  // });
 
   const selectedCandidates: Candidate[] = candidates.slice(
     0,
     coupon.eligibleCandidateCounts
   );
 
-  const [selectedCandidateIds, setSelectedCandidateIds] = useState<string[]>(
-    []
-  );
 
   // State to track the votes for each candidate
   const [votesPerCandidate, setVotesPerCandidate] = useState<{
@@ -53,21 +49,6 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
     }
   }, [selectedCandidates, votesPerCandidate]);
 
-  const handleCandidateSelect = (candidateId: string) => {
-    if (selectedCandidateIds.includes(candidateId)) {
-      setSelectedCandidateIds(
-        selectedCandidateIds.filter((id) => id !== candidateId)
-      );
-    } else {
-      if (selectedCandidateIds.length < coupon.eligibleCandidateCounts) {
-        setSelectedCandidateIds([...selectedCandidateIds, candidateId]);
-      }
-    }
-  };
-
-  const remainingVotes =
-    coupon.votes -
-    Object.values(votesPerCandidate).reduce((acc, curr) => acc + curr, 0);
 
   const handleOpen = () => {
     onOpen();
