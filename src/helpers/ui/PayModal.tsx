@@ -89,22 +89,22 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
               <ModalBody className="">
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-col">
-                    <h3 className="text-3xl font-[500] text-[var(--blue)] font-secular">
-                      {coupon.name}
+                    <h3 className="text-2xl font-[500] text-[var(--blue)] font-secular">
+                     Coupon Name:  <span className=" text-2xl text-black">{coupon.name}</span>
                     </h3>
                     <div className="flex gap-3">
                       <span className="px-2 py-1 bg-[var(--c-rose-pink)] text-[--c-secondary] font-[500] rounded-md">
                         {coupon.votes} votes
                       </span>
-                      <span className="px-2 py-1 bg-[var(--c-rose-pink)] text-[--c-secondary] font-[500] rounded-md">
+                      {/* <span className="px-2 py-1 bg-[var(--c-rose-pink)] text-[--c-secondary] font-[500] rounded-md">
                         {coupon.eligibleCandidateCounts} candidates
-                      </span>
+                      </span> */}
                     </div>
                   </div>
 
                   <div className="">
                     <p className="text-lg text-[var(--blue)] font-[500] mb-2">
-                      Selected Payment Method
+                      Selected Payment Method:
                     </p>
 
                     <div className="flex gap-5">
@@ -187,7 +187,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                     </div>
                   </div>
 
-                  <div className="">
+                  {/* <div className="">
                     <p className="text-lg text-[var(--blue)] font-[500] mb-2">
                       Select Votes:
                       <span className="text-lg text-[var(--light)] font-[500] mb-2">
@@ -195,7 +195,7 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                       </span>
                     </p>
 
-                    <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
+                    {/* <div className="flex flex-col gap-2 max-h-48 overflow-y-scroll">
                       {filtered_candidates?.map(
                         (candidate: Candidate, index: number) => {
                           const isSelected = selectedCandidateIds.includes(
@@ -350,8 +350,8 @@ export const PayModal: React.FC<any> = ({ coupon, candidateId }) => {
                           );
                         }
                       )}
-                    </div>
-                  </div>
+                    </div> 
+                  </div> */}
                 </div>
               </ModalBody>
               <ModalFooter className="mt-3">
