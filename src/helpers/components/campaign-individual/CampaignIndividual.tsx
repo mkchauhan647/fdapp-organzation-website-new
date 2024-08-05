@@ -8,8 +8,6 @@ import {
 import { GetCandidatesByVotingStages } from "@/helpers/redux/voting-campaign-stages.ts/_thunks";
 import {
   Candidate,
-  Contestants,
-  Coupon,
   VotingCampaignStage,
 } from "@/utils/schema/ApiInterface";
 import React, { useEffect, useRef, useState } from "react";

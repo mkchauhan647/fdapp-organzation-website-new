@@ -82,3 +82,14 @@ export const GetVotingStagesByVotingCampaignID = createAsyncThunk(
     }
   }
 )
+
+export const GetVotingStageCandidateById = createAsyncThunk(
+  'GetVotingStageCandidateById',
+  async (id: string, thunkAPI) => {
+    try {
+      return await dataService.getData(`/voting-stage-candidates/${id}`);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
+    }
+  }
+);
