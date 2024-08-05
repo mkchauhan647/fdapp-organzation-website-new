@@ -100,6 +100,8 @@ export interface GetClientSecretInterface {
   votingCampaignStageId: string;
   distribution: Distribution[];
   instrumentCode?: string;
+  email?: string;
+  fullName?: string;
 }
 
 export interface Distribution {

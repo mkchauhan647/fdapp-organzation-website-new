@@ -85,15 +85,15 @@ export default function NepalPaymentModal({
   };
 
   const createPendingCouponTransaction = async (instrumentCode: string) => {
-    alert("Hello9 ");
+    // alert("Hello9 ");
     couponTransactionData.instrumentCode = instrumentCode;
     couponTransactionData.idempotentKey = generateRandomHex();
     console.log(couponTransactionData);
     try {
       const response = await dataService.postData(
-        "/coupon-transaction",
+        "/coupon-transaction/guest-user",
         couponTransactionData,
-        token
+        // token
       );
       if (response) {
         console.log("this is data", response);

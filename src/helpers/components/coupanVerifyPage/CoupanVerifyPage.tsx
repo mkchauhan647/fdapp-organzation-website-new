@@ -41,6 +41,12 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
     router.back();
   };
 
+  const userdata = {
+    email:email,
+    fullName: fullName,
+  }
+
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100 p-6">
       <div className="flex flex-col sm:flex-row bg-white shadow-lg rounded-lg p-6 max-w-6xl w-full h-[400px] items-center">
@@ -77,7 +83,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
               </p>
             </div>
             <div className="flex space-x-4 mb-4">
-              <PayModal coupon={coupon} candidateId={candidateId} />
+              <PayModal stageID={candidateId} userdata ={userdata} coupon={coupon} candidateId={candidate?.id} />
               <span
                 className="text-orange-500 cursor-pointer py-2 px-4"
                 onClick={() => cancelBtn()}

@@ -32,16 +32,29 @@ interface ParamsType {
   [key: string]: string | number;
 }
 
+interface UserData {
+  fullname: string;
+  email: string;
+}
+
 export default function Confirm({
   isDisabled,
   paymentMethod,
-  votesPerCandidate,
   coupon,
+  candidateVotes,
+  candidateId,
+  userData,
+  votingCampaignStageId
 }: {
   isDisabled?: boolean;
   paymentMethod: "ESEWA" | "STRIPE" | "NPS";
-  votesPerCandidate: { [candidateId: string]: number };
+  // votesPerCandidate: { [candidateId: string]: number };
   coupon: Coupon;
+  userData: UserData;
+  candidateId: string; 
+  candidateVotes: any;
+  votingCampaignStageId: string;
+
 }) {
   const { x_api_key, token } = useAppSelector((state: RootState) => state.Auth); // Access state.Candidates
   const dispatch = useAppDispatch();
@@ -49,18 +62,25 @@ export default function Confirm({
   const router = useRouter();
   const randomHex = generateRandomHex();
 
-  const distribution = Object.entries(votesPerCandidate).map(
-    ([candidateId, votes]) => ({
-      candidateId,
-      votes,
-    })
-  );
+  // const distribution = Object.entries(votesPerCandidate).map(
+  //   ([candidateId, votes]) => ({
+  //     candidateId,
+  //     votes,
+  //   })
+  // );
+  const distribution =  [{
+    candidateId,
+    votes: candidateVotes
+  }]
+
   const CouponTransactionData: GetClientSecretInterface = {
     couponId: coupon.id,
     idempotentKey: randomHex,
     paymentService: paymentMethod,
-    votingCampaignStageId: searchParams.get("id")!,
+    votingCampaignStageId: votingCampaignStageId,
     distribution,
+    email: userData.email,
+    fullName: userData.fullname,
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
