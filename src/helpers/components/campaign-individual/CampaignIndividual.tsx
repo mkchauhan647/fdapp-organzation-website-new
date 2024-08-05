@@ -81,6 +81,8 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
               <div className="flex-3">
                 <h2 className="font-[500] text-lg md:text-2xl mb-3 md:mb-3">
                   {CampaignStageData?.title}
+               
+               
                 </h2>
 
                 <p className="text-justify text-[12px] md:text-[16px] max-w-[40rem]">

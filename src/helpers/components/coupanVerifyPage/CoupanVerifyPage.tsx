@@ -77,7 +77,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
               </p>
             </div>
             <div className="flex space-x-4 mb-4">
-            <PayModal coupon={coupon} candidateId={candidateId} />
+              <PayModal coupon={coupon} candidateId={candidateId} />
               <span
                 className="text-orange-500 cursor-pointer py-2 px-4"
                 onClick={() => cancelBtn()}
@@ -86,7 +86,8 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
               </span>
             </div>
             <div className="text-red-500 text-xs">
-              Kindly ensure your card is activated for e-commerce transactions.
+              Kindly ensure that your card is activated for e-commerce
+              transactions.{" "}
             </div>
           </div>
         </div>
