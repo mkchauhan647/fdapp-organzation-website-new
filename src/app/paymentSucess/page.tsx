@@ -5,7 +5,7 @@ import PublicLayout from '@/views/layouts/publicLayout';
 import {useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-const page = () => {
+const SuccessPage = () => {
     const searchParams = useSearchParams();
     const [responseData, setResponseData] = useState<any>(null);
   
@@ -25,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SuccessPage;
