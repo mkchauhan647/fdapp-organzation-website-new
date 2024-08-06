@@ -11,6 +11,7 @@ import axios from "axios";
 import crypto from "crypto";
 import { useEffect, useState } from "react";
 import { RootState, useAppSelector } from "../hooks/useStoreHooks";
+import { useRouter } from "next/router";
 
 // export const categorizeResponse = (data: any) => {
 //   let keys: any = [];
@@ -31,6 +32,8 @@ export default function NepalPaymentModal({
   couponTransactionData: GetClientSecretInterface;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter(); // Add the useRouter hook
+
   // const [scrollBehavior, setScrollBehavior] = useState("inside");
   const [loading, setLoading] = useState(true);
   const [nepalPaymentWay, setNepalPaymentWay] = useState([]);
@@ -97,9 +100,15 @@ export default function NepalPaymentModal({
       );
       if (response) {
         console.log("this is data", response);
-        document.open();
-        document.write(response);
-        document.close();
+        router.push({
+          pathname: "/paymentSucess",
+          query: {
+            response: JSON.stringify(response)
+          },
+        })
+        // document.open();
+        // document.write(response);
+        // document.close();
       }
     } catch (err) {
       console.log("errrs", err);
