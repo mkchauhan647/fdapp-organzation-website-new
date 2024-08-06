@@ -8,18 +8,27 @@ import crypto from "crypto";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+
+interface PaymentSolution {
+  InstrumentCode: string;
+  InstitutionName: string;
+  LogoUrl: string;
+  BankType: string;
+}
+
 export default function NepalPaymentModal({
   couponTransactionData,
 }: {
   couponTransactionData: GetClientSecretInterface;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [nepalPaymentWay, setNepalPaymentWay] = useState([]);
+  const [nepalPaymentWay, setNepalPaymentWay] = useState<PaymentSolution[]>([])
   const [content, setContent] = useState([]);
   const [checkout_type, set_checkout_type] = useState("checkoutcard");
-  const [updated_content, set_updated_content] = useState<any>(null);
-  const [nepalPayWay, setNepalPayWay] = useState(null);
+  const [updated_content, set_updated_content] = useState<PaymentSolution[]>([]);
+  const [nepalPayWay, setNepalPayWay] = useState<string | null>(null);
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+
 
   const router = useRouter();
 
@@ -135,7 +144,7 @@ export default function NepalPaymentModal({
     return (
       <div className="grid grid-cols-6 gap-3 px-2 mt-2 max-md:gap-2 md:grid-cols-5 max-md:grid-cols-3 sm:grid-cols-2">
         {updated_content &&
-          updated_content.map((item: any, index: any) => (
+          updated_content.map((item: PaymentSolution, index: any) => (
             <div
               key={index}
               onClick={() =>

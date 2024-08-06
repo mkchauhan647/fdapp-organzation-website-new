@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules";
 import Image from "next/image";
@@ -9,25 +11,69 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import CommonSection from "@/helpers/ui/CommonSection";
-import SkeletonCampaign from "../Skeleton/SkeletonCampaign";
 import Controller from "@/helpers/ui/Controller";
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "@/helpers/hooks/useStoreHooks";
+import { GetAllJudgesUsingCampaignId } from "@/helpers/redux/Judges/_thunks";
+import { Judge } from "@/utils/schema/ApiInterface";
+import { dataService } from "@/utils/data/api/dataServices";
+import { ImageSkeleton } from "@/helpers/dynamic-imports/components";
+import SkeletonBanner from "../Skeleton/SkeletonBanner";
+import { Skeleton } from "antd";
+import SkeletonImage from "../Skeleton/SkeletonImage";
+import { JudgesPopup } from "@/helpers/dynamic-imports/ui";
 
-import judge1 from "../../../../public/image/judges1.jpg";
-import judge2 from "../../../../public/image/judges2.jpg";
-import judge3 from "../../../../public/image/judges3.jpg";
-import judge4 from "../../../../public/image/judges4.jpg";
+interface JudgeSlideProps {
+  campaignId: string;
+}
 
-const judges = [
-  { id: 1, name: "Amila P", image: judge1 },
-  { id: 2, name: "Lily S", image: judge2 },
-  { id: 3, name: "Tina C", image: judge3 },
-  { id: 4, name: "Mica R", image: judge4 },
-];
+const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
+  const { token, x_api_key } = useAppSelector((state: RootState) => state.Auth);
+  const dispatch = useAppDispatch();
 
-const JudgeSlide: React.FC = () => {
-  
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedJudge, setSelectedJudge] = useState<Judge | null>(null);
 
+  const openPopup = (judge: Judge) => {
+    setSelectedJudge(judge);
+    setIsPopupOpen(true);
+  };
 
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedJudge(null);
+  };
+
+  const { Judges_by_campaign_data } = useAppSelector(
+    (state: RootState) => state.Judges
+  );
+
+  useEffect(() => {
+    if (campaignId) {
+      dataService.setApiKey(x_api_key);
+      dispatch(GetAllJudgesUsingCampaignId(campaignId));
+    }
+  }, [dispatch, campaignId, x_api_key]);
+
+  const { isPending, isFulfilled, isRejected, fulfilledResponse } =
+    Judges_by_campaign_data;
+
+  if (isPending) {
+    return (
+      <div>
+        <SkeletonBanner isLoading={isPending} />
+      </div>
+    );
+  }
+
+  if (isRejected) {
+    return <div>Error loading judges.</div>;
+  }
+
+  const judgesList: Judge[] = isFulfilled ? fulfilledResponse : [];
 
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns">
@@ -38,43 +84,74 @@ const JudgeSlide: React.FC = () => {
       </header>
 
       <div className="competition-slider flex justify-between items-baseline relative">
-        <Swiper
-          className="w-full !pb-16"
-          modules={[Navigation, Pagination, A11y, Autoplay]}
-          spaceBetween={25}
-          slidesPerView={4}
-          loop={true}
-          autoplay={{ delay: 3000 }}
-          navigation={{
-            nextEl: ".forward",
-            prevEl: ".back",
-          }}
-          pagination={{ clickable: true }}
-          breakpoints={{
-            0: { slidesPerView: 1.5, spaceBetween: 15 },
-            590: { slidesPerView: 2, spaceBetween: 15 },
-            730: { slidesPerView: 2.5 },
-            980: { slidesPerView: 3 },
-            1080: { slidesPerView: 3.5 },
-            1260: { slidesPerView: 4 },
-          }}
-        >
-          {judges.map((judge) => (
-            <SwiperSlide key={judge.id}>
-
-              <div className='flex flex-col justify-center gap-[5px] contestant-box mx-auto w-full h-full bg-white items-center'>
-                <div className='h-[200px] w-[200px] overflow-hidden rounded-full'>
-                    <Image src={judge.image.src} height={500} width={900} alt={judge.name}
-                    className='h-full w-full object-contain' />
+        {isPending ? (
+          <div className="flex justify-between gap-2 items-baseline w-full">
+            {Array.from({ length: judgesList?.length || 3 }).map((_, index) => (
+              <div key={index} className="flex w-1/4">
+                <SkeletonImage isLoading={isPending} />
+              </div>
+            ))}
+          </div>
+        ) : judgesList.length > 0 ? (
+          <Swiper
+            className="w-full !pb-16"
+            modules={[Navigation, Pagination, A11y, Autoplay]}
+            spaceBetween={25}
+            slidesPerView={4}
+            loop={true}
+            autoplay={{ delay: 3000 }}
+            navigation={{
+              nextEl: ".forward",
+              prevEl: ".back",
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              0: { slidesPerView: 1.5, spaceBetween: 15 },
+              590: { slidesPerView: 2, spaceBetween: 15 },
+              730: { slidesPerView: 2.5 },
+              980: { slidesPerView: 3 },
+              1080: { slidesPerView: 3.5 },
+              1260: { slidesPerView: 4 },
+            }}
+          >
+            {judgesList.map((judge: Judge) => (
+              <SwiperSlide key={judge.id}>
+                <div
+                  onClick={() => openPopup(judge)}
+                  className="flex flex-col justify-center gap-[5px] contestant-box mx-auto w-full h-full bg-white items-center cursor-pointer"
+                >
+                  <div className="h-[200px] w-[200px] overflow-hidden rounded-full">
+                    <Image
+                      src={process.env.NEXT_PUBLIC_AWS_URI + judge.image}
+                      height={500}
+                      width={900}
+                      alt={judge.name}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <h2 className="mt-4 md:text-[18px] text-[14px] font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1">
+                    {judge.name}
+                  </h2>
                 </div>
-                
-                <h2 className='mt-4 md:text-[18px] text-[14px] font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1'> {judge.name}</h2>
-                
-            </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <div className="flex justify-center items-center w-full h-full">
+            <p className="text-[14px] text-[var(--light)]">
+              No judges found for this campaign.
+            </p>
+          </div>
+        )}
 
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {isPopupOpen && selectedJudge && (
+          <JudgesPopup
+            judge={selectedJudge}
+            isOpen={isPopupOpen}
+            onClose={closePopup}
+          />
+        )}
+
         <div className="controller_wrapper">
           <Controller />
         </div>
