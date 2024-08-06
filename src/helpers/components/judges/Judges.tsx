@@ -25,6 +25,10 @@ const judges = [
 ];
 
 const JudgeSlide: React.FC = () => {
+  
+
+
+
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns">
       <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
