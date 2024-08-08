@@ -20,9 +20,7 @@ import {
 import { GetAllJudgesUsingCampaignId } from "@/helpers/redux/Judges/_thunks";
 import { Judge } from "@/utils/schema/ApiInterface";
 import { dataService } from "@/utils/data/api/dataServices";
-import { ImageSkeleton } from "@/helpers/dynamic-imports/components";
 import SkeletonBanner from "../Skeleton/SkeletonBanner";
-import { Skeleton } from "antd";
 import SkeletonImage from "../Skeleton/SkeletonImage";
 import { JudgesPopup } from "@/helpers/dynamic-imports/ui";
 
@@ -61,18 +59,6 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
   const { isPending, isFulfilled, isRejected, fulfilledResponse } =
     Judges_by_campaign_data;
 
-  if (isPending) {
-    return (
-      <div>
-        <SkeletonBanner isLoading={isPending} />
-      </div>
-    );
-  }
-
-  if (isRejected) {
-    return <div>Error loading judges.</div>;
-  }
-
   const judgesList: Judge[] = isFulfilled ? fulfilledResponse : [];
 
   return (
@@ -85,12 +71,16 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
 
       <div className="competition-slider flex justify-between items-baseline relative">
         {isPending ? (
-          <div className="flex justify-between gap-2 items-baseline w-full">
-            {Array.from({ length: judgesList?.length || 3 }).map((_, index) => (
+          <div className="w-full flex justify-between gap-3 items-baseline flex-wrap">
+            {Array.from({ length: judgesList.length || 3 }).map((_, index) => (
               <div key={index} className="flex w-1/4">
                 <SkeletonImage isLoading={isPending} />
               </div>
             ))}
+          </div>
+        ) : isRejected ? (
+          <div className="w-full flex justify-center items-center">
+            <p>Error loading judges.</p>
           </div>
         ) : judgesList.length > 0 ? (
           <Swiper
@@ -126,7 +116,7 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
                       height={500}
                       width={900}
                       alt={judge.name}
-                      className="h-full w-full object-contain"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                   <h2 className="mt-4 md:text-[18px] text-[14px] font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1">
@@ -137,10 +127,8 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
             ))}
           </Swiper>
         ) : (
-          <div className="flex justify-center items-center w-full h-full">
-            <p className="text-[14px] text-[var(--light)]">
-              No judges found for this campaign.
-            </p>
+          <div className="w-full flex justify-center items-center">
+            <p>No judges found for this campaign.</p>
           </div>
         )}
 
