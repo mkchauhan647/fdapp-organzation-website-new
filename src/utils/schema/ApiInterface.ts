@@ -136,3 +136,16 @@ export interface News {
   updated: string;
   inserted: string;
 }
+
+export interface Judge {
+  id: string;
+  organizationID: string;
+  name: string;
+  description: string;
+  image: string;
+  post: string;
+  votingCampaignId: string;
+  inserted: string;
+  updated: string;
+  votingCampaign?: VotingCampaign;
+}

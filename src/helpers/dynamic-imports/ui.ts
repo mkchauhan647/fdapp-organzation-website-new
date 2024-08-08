@@ -1,3 +1,4 @@
+import { image } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 
 export const ContestantStageBox = dynamic(
@@ -40,4 +41,6 @@ export const CampaignLists = dynamic(
 export const CoupanInputs = dynamic(()=>
   import("@/helpers/ui/CoupanInputs"),
   { ssr: false }
+)
+export const JudgesPopup = dynamic(()=>import("@/helpers/ui/JudgesPopup"),
 )

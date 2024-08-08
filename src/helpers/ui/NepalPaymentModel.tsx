@@ -2,11 +2,23 @@
 
 import { dataService } from "@/utils/data/api/dataServices";
 import { GetClientSecretInterface } from "@/utils/schema/ApiInterface";
-import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
+} from "@nextui-org/react";
 import axios from "axios";
 import crypto from "crypto";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
+interface PaymentSolution {
+  InstrumentCode: string;
+  InstitutionName: string;
+  LogoUrl: string;
+  BankType: string;
+}
 
 export default function NepalPaymentModal({
   couponTransactionData,
@@ -14,11 +26,11 @@ export default function NepalPaymentModal({
   couponTransactionData: GetClientSecretInterface;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [nepalPaymentWay, setNepalPaymentWay] = useState([]);
+  const [nepalPaymentWay, setNepalPaymentWay] = useState();
   const [content, setContent] = useState([]);
   const [checkout_type, set_checkout_type] = useState("checkoutcard");
-  const [updated_content, set_updated_content] = useState<any>(null);
-  const [nepalPayWay, setNepalPayWay] = useState(null);
+  const [updated_content, set_updated_content] = useState([]);
+  const [nepalPayWay, setNepalPayWay] = useState<string | null>(null);
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
 
   const router = useRouter();
@@ -30,6 +42,7 @@ export default function NepalPaymentModal({
         if (response.data.success) {
           setNepalPaymentWay(response.data.data);
           setContent(response.data.data);
+          console.log(response);
         }
       })
       .catch((err: any) => {
@@ -71,22 +84,22 @@ export default function NepalPaymentModal({
 
       if (response) {
         // Parse the HTML response to extract form fields
-        const formHTML = response; // Assuming response is HTML content
+        const formHTML = response;
         const parser = new DOMParser();
-        const doc = parser.parseFromString(formHTML, 'text/html');
-        const form = doc.querySelector('form');
+        const doc = parser.parseFromString(formHTML, "text/html");
+        const form = doc.querySelector("form");
 
         if (form) {
-          // Create a form element and submit it
-          const formElement = document.createElement('form');
-          formElement.method = 'post';
+          // form element and submitng it
+          const formElement = document.createElement("form");
+          formElement.method = "post";
           formElement.action = form.action;
-          formElement.id = 'paymentForm';
-          formElement.style.display = 'none';
+          formElement.id = "paymentForm";
+          formElement.style.display = "none";
 
-          // Append form inputs to the form element
-          form.querySelectorAll('input').forEach(input => {
-            const clonedInput = document.createElement('input');
+          // Appending form inputs to the form element
+          form.querySelectorAll("input").forEach((input) => {
+            const clonedInput = document.createElement("input");
             clonedInput.type = input.type;
             clonedInput.name = input.name;
             clonedInput.value = input.value;
@@ -95,9 +108,7 @@ export default function NepalPaymentModal({
 
           document.body.appendChild(formElement);
           formElement.submit();
-          
-          // Poll the payment status after submitting
-          pollPaymentStatus(couponTransactionData.idempotentKey, response.data.GatewayTxnId);
+
         }
       }
     } catch (err) {
@@ -105,27 +116,6 @@ export default function NepalPaymentModal({
     }
   };
 
-  const pollPaymentStatus = (merchantTxnId: string, gatewayTxnId: string) => {
-    const interval = setInterval(async () => {
-      try {
-        const response = await axios.get(
-          `https://api.easyvotingapp.com/v1/nps-response-uri?MerchantTxnld=${merchantTxnId}&GatewayTxnld=${gatewayTxnId}`
-        );
-        if (response.data.success) {
-          // Payment was successful
-          setPaymentStatus('success');
-          clearInterval(interval);
-          router.push(`/paymentSucess?response=${encodeURIComponent(JSON.stringify(response.data))}`);
-        } else {
-          // Payment still pending or failed
-          console.log('Payment status:', response.data.status);
-          alert("Payment Failed")
-        }
-      } catch (err) {
-        console.log("Error fetching payment status:", err);
-      }
-    }, 5000); // Poll every 5 seconds
-  };
 
   const handleBanks = (name: string) => {
     if (!Array.isArray(content) || content.length === 0) {
@@ -135,7 +125,7 @@ export default function NepalPaymentModal({
     return (
       <div className="grid grid-cols-6 gap-3 px-2 mt-2 max-md:gap-2 md:grid-cols-5 max-md:grid-cols-3 sm:grid-cols-2">
         {updated_content &&
-          updated_content.map((item: any, index: any) => (
+          updated_content.map((item: PaymentSolution, index: any) => (
             <div
               key={index}
               onClick={() =>

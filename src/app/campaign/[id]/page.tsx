@@ -15,7 +15,7 @@ const CompetitionTypeListPage: React.FC<{ params: any }> = ({ params }) => {
         <CampaignBanner campaignID={params.id} />
         {/* <CandidateSlideStage params={params} /> */}
         <CategorySlide id={params.id} />
-        <JudgeSlide />
+        <JudgeSlide campaignId={params.id} />
 
       </PublicLayout>
     </>

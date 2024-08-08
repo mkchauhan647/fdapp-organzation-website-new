@@ -103,7 +103,7 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
             <div className="w-full">
               <h3 className="font-[500] text-lg md:text-2xl mb-3"></h3>
               <div className=" grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2  gap-2 content-center justify-center">
-                {CandidateStageData?.length != 0 &&
+                {CandidateStageData?.length != 0 ?
                   CandidateStageData?.map((contestant: Candidate) => {
                     return (
                       <ContestantDetailButton
@@ -111,7 +111,11 @@ const CampaignStageIndividual: React.FC<{ id: string | null }> = ({ id }) => {
                         key={contestant.id}
                       />
                     );
-                  })}
+                  })
+                  : (
+                    <div className="text-center text-gray-600">No candidates found.</div>
+                  )
+                }
                 {CandidateStageData?.length == 0 &&
                   Array.from({ length: 5 }).map((_, index) => {
                     return (
