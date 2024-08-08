@@ -63,7 +63,7 @@ export default function JudgesPopup({ judge, isOpen, onClose }: Props) {
               <div className="descrption flex flex-col gap-8 items-start">
                 <div>
                   <h2 className=" text-2xl font-medium">Description</h2>
-                  <p className="  bg-primary-600 px-3 rounded-full text-white mt-2 ">
+                  <p className="   text-xs rounded-full text-black mt-2 ">
                     {judge.post}
                   </p>
                 </div>
