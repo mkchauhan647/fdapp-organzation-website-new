@@ -19,9 +19,9 @@ export default function JudgesPopup({ judge, isOpen, onClose }: Props) {
     <div
       id="popup-modal"
       tabIndex={-1}
-      className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center w-auto h-full bg-black bg-opacity-50"
     >
-      <div className="relative p-4 w-full max-w-md bg-white rounded-lg shadow dark:bg-gray-700">
+      <div className="relative p-4 w-full max-w-[45rem] bg-white rounded-lg shadow dark:bg-gray-700">
         <button
           type="button"
           className="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -45,13 +45,15 @@ export default function JudgesPopup({ judge, isOpen, onClose }: Props) {
           <span className="sr-only">Close modal</span>
         </button>
         <div className="p-4 md:p-5 text-center">
-          <div className=" flex justify-between w-full gap-5">
+          <div className=" flex justify-between  w-full gap-10">
+
             <div className="image w-1/2 flex flex-col gap-3">
               <Image
-                className="rounded-md object-fit "
+                className="rounded-md object-contain "
                 alt="judge-image"
                 width={300}
-                height={150}
+                height={300}
+                loading="lazy"
                 src={process.env.NEXT_PUBLIC_AWS_URI + judge.image}
               />
               <div>
@@ -59,17 +61,17 @@ export default function JudgesPopup({ judge, isOpen, onClose }: Props) {
               </div>
             </div>
 
-            <div className="w-1/2">
-              <div className="descrption flex flex-col gap-8 items-start">
-                <div>
-                  <h2 className=" text-2xl font-medium">Description</h2>
-                  <p className="   text-xs rounded-full text-black mt-2 ">
+              <div className="w-1/2 descrption flex flex-col gap-4 ">
+                <div className=" text-left">
+                  <h2 className=" text-3xl font-medium">Description</h2>
+                  <p className="   text-base rounded-full text-gray-500 ml-1 ">
                     {judge.post}
                   </p>
                 </div>
-                <p>{judge.description}</p>
-              </div>
+                <p className=" text-left">{judge.description}</p>
             </div>
+
+
           </div>
         </div>
       </div>
