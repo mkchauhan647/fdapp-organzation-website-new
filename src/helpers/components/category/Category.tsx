@@ -115,7 +115,7 @@ const CategorySlide: React.FC<{ id: string }> = ({ id }) => {
                     </SwiperSlide>
                   );
                 })}
-            {VotingCampaignStageData?.length == 0 &&
+            {VotingCampaignStageData?.length === 0 &&
               Array.from({ length: 4 }).map((_, index) => {
                 return (
                   <SwiperSlide key={index}>
@@ -132,6 +132,13 @@ const CategorySlide: React.FC<{ id: string }> = ({ id }) => {
           </Swiper>
         </div>
         )};
+        {
+          isRejected && (
+            <div className="text-center text-sm text-gray-500">
+              There was an error fetching the data. Please try again later.
+            </div>
+          )
+        }
       </CommonSection>
       {/* </div>
             </section> */}

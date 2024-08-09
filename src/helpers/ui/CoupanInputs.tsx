@@ -65,7 +65,7 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
       <form onSubmit={formik.handleSubmit} className="py-6">
         {coupon ? (
           <div className="mb-4">
-            <label className="block mb-2">Amount to pay:</label>
+            <label className="block mb-2 text-sm">Amount to pay:</label>
             <div className="text-gray-500 py-2 text-2xl font-extrabold">
               {coupon.pricing} NPR
             </div>
@@ -77,7 +77,7 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
           </div>
         ) : null}
         <div className="mb-4">
-          <label className="block opacity-100 mb-2">Enter your full name</label>
+          <label className="block opacity-100 mb-2 text-sm">Enter your full name</label>
           <input
             className="w-full p-2 border border-gray-300 rounded"
             placeholder="Enter your full name"
@@ -94,7 +94,7 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
           ) : null}
         </div>
         <div className="mb-4">
-          <label className="block opacity-100 mb-2">
+          <label className="block opacity-100 mb-2 text-sm">
             Enter your email address
           </label>
           <input
