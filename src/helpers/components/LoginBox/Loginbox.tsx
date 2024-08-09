@@ -91,9 +91,16 @@ const LoginBox: React.FC = () => {
     }
   };
 
+  const GoogleLogin = () => {
+    const redirectGoogleUrl = process.env.NEXT_PUBLIC_VOTING_API_GOOGLE_AUTH_URI;
+    window.open(redirectGoogleUrl);
+  };
+
   return (
     <>
-      <form className="px-[20px] md:px-[47px] w-[unset] md:w-[24rem] py-1 box-content mx-auto">
+      <div className="px-[20px] md:px-[47px] w-[unset] md:w-[24rem] py-1 box-content mx-auto">
+        
+        <form>
         <div className="text-center flex flex-col justify-start w-[100%] mx-auto items-center">
           <h2 className="text-[var(--c-secondary)] text-[22px] md:text-[1.4rem] font-bold">
             Welcome To
@@ -224,6 +231,7 @@ const LoginBox: React.FC = () => {
             Login
           </button>
         </div>
+        </form>
 
         <div className="text-center flex flex-col">
           <div className="flex justify-center items-center gap-2 my-4">
@@ -232,7 +240,10 @@ const LoginBox: React.FC = () => {
             <span className="w-full h-[1.5px] bg-slate-200"></span>
           </div>
           <div className="text-center mb-7 mx-auto w-full">
-            <button className=" w-full flex justify-center items-center gap-3 py-2 rounded-md border shadow-sm border-[#a5a5a585] text-black bg-white hover:shadow-md font-medium ">
+            <button
+              onClick={GoogleLogin}
+              className=" w-full flex justify-center items-center gap-3 py-2 rounded-md border shadow-sm border-[#a5a5a585] text-black bg-white hover:shadow-md font-medium "
+            >
               <span>
                 <FcGoogle />
               </span>
@@ -243,7 +254,7 @@ const LoginBox: React.FC = () => {
         {showModal && (
           <ErrorModel errorMessage={errorMessage} onClose={closeModal} />
         )}
-      </form>
+      </div>
     </>
   );
 };

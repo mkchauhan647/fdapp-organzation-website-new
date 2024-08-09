@@ -30,7 +30,7 @@ const LoginSection : React.FC = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='h-full lg:block hidden absolute w-1/2 h-full right-0 object-cover' style={{background:'url("/image/loginimg/login.png")'}}>
+                <div className='h-full lg:block hidden absolute w-1/2 right-0 object-cover' style={{background:'url("/image/loginimg/login.png")'}}>
                     {/* <Image src="/image/loginimg/login.png" height={500} width={963} alt="" className='h-[100%] object-cover' />  */}
                 </div>
 

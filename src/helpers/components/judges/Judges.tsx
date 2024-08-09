@@ -28,7 +28,7 @@ interface JudgeSlideProps {
 }
 
 const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
-  const { token, x_api_key } = useAppSelector((state: RootState) => state.Auth);
+  const {x_api_key } = useAppSelector((state: RootState) => state.Auth);
   const dispatch = useAppDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -106,23 +106,26 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
             }}
           >
             {judgesList.map((judge: Judge) => (
-              <SwiperSlide key={judge.id}>
+              <SwiperSlide key={judge?.id}>
                 <div
                   onClick={() => openPopup(judge)}
                   className="flex flex-col justify-center gap-[5px] contestant-box mx-auto w-full h-full bg-white items-center cursor-pointer"
                 >
                   <div className="h-[200px] w-[200px] overflow-hidden rounded-full">
                     <Image
-                      src={process.env.NEXT_PUBLIC_AWS_URI + judge.image}
+                      src={process.env.NEXT_PUBLIC_AWS_URI + judge?.image}
                       height={500}
                       width={900}
-                      alt={judge.name}
+                      alt={judge?.name}
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <h2 className="mt-4 md:text-[18px] text-[14px] font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1">
+                  <div className=" flex flex-col items-center justify-center gap-2">
+                  <h2 className="mt-4 md:text-[18px] text-base font-[600] text-[var(--blue)] leading-[1.5rem] line-clamp-1">
                     {judge.name}
                   </h2>
+                  <p className=" text-slate-600">{judge?.post}</p>
+                  </div> 
                 </div>
               </SwiperSlide>
             ))}
