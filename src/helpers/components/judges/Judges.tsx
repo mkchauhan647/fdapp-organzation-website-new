@@ -20,7 +20,6 @@ import {
 import { GetAllJudgesUsingCampaignId } from "@/helpers/redux/Judges/_thunks";
 import { Judge } from "@/utils/schema/ApiInterface";
 import { dataService } from "@/utils/data/api/dataServices";
-import SkeletonBanner from "../Skeleton/SkeletonBanner";
 import SkeletonImage from "../Skeleton/SkeletonImage";
 import { JudgesPopup } from "@/helpers/dynamic-imports/ui";
 
@@ -80,7 +79,9 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
           </div>
         ) : isRejected ? (
           <div className="w-full flex justify-center items-center">
-            <p>Error loading judges.</p>
+            <p>
+              There was an error fetching the data. Please try again later. .
+            </p>
           </div>
         ) : judgesList.length > 0 ? (
           <Swiper

@@ -44,3 +44,5 @@ export const CoupanInputs = dynamic(()=>
 )
 export const JudgesPopup = dynamic(()=>import("@/helpers/ui/JudgesPopup"),
 )
+
+export const Transactions = dynamic(()=>import("@/helpers/ui/Transactions"))

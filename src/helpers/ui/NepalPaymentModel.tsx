@@ -2,81 +2,26 @@
 
 import { dataService } from "@/utils/data/api/dataServices";
 import { GetClientSecretInterface } from "@/utils/schema/ApiInterface";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  useDisclosure,
-} from "@nextui-org/react";
-import axios from "axios";
-import crypto from "crypto";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
-interface PaymentSolution {
-  InstrumentCode: string;
-  InstitutionName: string;
-  LogoUrl: string;
-  BankType: string;
-}
+import crypto from "crypto";
+import { useState } from "react";
 
 export default function NepalPaymentModal({
   couponTransactionData,
 }: {
   couponTransactionData: GetClientSecretInterface;
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [nepalPaymentWay, setNepalPaymentWay] = useState();
-  const [content, setContent] = useState([]);
-  const [checkout_type, set_checkout_type] = useState("checkoutcard");
-  const [updated_content, set_updated_content] = useState([]);
-  const [nepalPayWay, setNepalPayWay] = useState<string | null>(null);
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
-
-  const router = useRouter();
-
-  const initNepalPayment = () => {
-    axios
-      .get("https://api.easyvotingapp.com/v1/payment-solutions/instruments")
-      .then(async (response: any) => {
-        if (response.data.success) {
-          setNepalPaymentWay(response.data.data);
-          setContent(response.data.data);
-          console.log(response);
-        }
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    fetchPaymentWay();
-  }, [checkout_type]);
-
-  const fetchPaymentWay = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.easyvotingapp.com/v1/payment-solutions/instruments"
-      );
-      const resData = response?.data?.data;
-      const updated_res_data = resData?.filter((item: any) => {
-        return item?.BankType === checkout_type;
-      });
-      set_updated_content(updated_res_data);
-    } catch (e) {
-      console.log("Error fetching payment ways:", e);
-    }
-  };
+  const [loading, setLoading] = useState<Boolean>(false);
 
   const generateRandomHex = (num: number = 8): string => {
     return crypto.randomBytes(num).toString("hex");
   };
 
-  const createPendingCouponTransaction = async (instrumentCode: string) => {
-    couponTransactionData.instrumentCode = instrumentCode;
+  const createPendingCouponTransaction = async () => {
+    // couponTransactionData.instrumentCode = instrumentCode;
     couponTransactionData.idempotentKey = generateRandomHex();
     try {
+      setLoading(true);
       const response = await dataService.postData(
         "/coupon-transaction/guest-user",
         couponTransactionData
@@ -108,105 +53,26 @@ export default function NepalPaymentModal({
 
           document.body.appendChild(formElement);
           formElement.submit();
-
         }
       }
     } catch (err) {
       console.log("Error creating transaction:", err);
+
+    } finally {
+      setLoading(false);
     }
   };
-
-
-  const handleBanks = (name: string) => {
-    if (!Array.isArray(content) || content.length === 0) {
-      return <div>No Banks Found</div>;
-    }
-
-    return (
-      <div className="grid grid-cols-6 gap-3 px-2 mt-2 max-md:gap-2 md:grid-cols-5 max-md:grid-cols-3 sm:grid-cols-2">
-        {updated_content &&
-          updated_content.map((item: PaymentSolution, index: any) => (
-            <div
-              key={index}
-              onClick={() =>
-                createPendingCouponTransaction(item?.InstrumentCode)
-              }
-              className={`${
-                nepalPayWay === item?.InstitutionName
-                  ? "border border-primary"
-                  : "border border-indigo-100"
-              } px-2 py-2 mb-2 w-full mx-auto rounded-xl flex flex-col justify-center items-center hover:cursor-pointer`}
-            >
-              <img
-                className="md:w-[60px] w-[50px]"
-                src={item?.LogoUrl}
-                alt={item?.InstitutionName}
-              />
-              <p className="text-center whitespace-break-spaces">
-                {item?.InstitutionName}
-              </p>
-            </div>
-          ))}
-      </div>
-    );
-  };
-
-  useEffect(() => initNepalPayment(), []);
 
   return (
     <>
       <button
-        onClick={onOpen}
+        onClick={createPendingCouponTransaction}
         className="px-4 py-2 bg-[var(--btncolor)] text-white rounded-lg font-[700]"
       >
-        Nepal Buy Now
+        {
+          loading? "Redirecting to Payment ..." : "Nepal Buy Now"
+        }
       </button>
-
-      <Modal size="full" backdrop="blur" isOpen={isOpen} onClose={onClose}>
-        <div className="flex items-center justify-center">
-          <ModalContent className="px-3 pb-6 lg:h-[50vh] w-[90vh] overflow-y-scroll">
-            <div className="flex items-center justify-center py-4 gap-8">
-              <div
-                onClick={() => set_checkout_type("checkoutcard")}
-                className={`${
-                  checkout_type === "checkoutcard" && "text-[#FF9F31]"
-                } hover:cursor-pointer`}
-              >
-                Checkoutcard
-              </div>
-              <div
-                onClick={() => set_checkout_type("CheckoutGateway")}
-                className={`${
-                  checkout_type === "CheckoutGateway" && "text-[#FF9F31]"
-                } hover:cursor-pointer`}
-              >
-                CheckoutGateway
-              </div>
-              <div
-                onClick={() => set_checkout_type("EBanking")}
-                className={`${
-                  checkout_type === "EBanking" && "text-[#FF9F31]"
-                } hover:cursor-pointer`}
-              >
-                EBanking
-              </div>
-              <div
-                onClick={() => set_checkout_type("MBanking")}
-                className={`${
-                  checkout_type === "MBanking" && "text-[#FF9F31]"
-                } hover:cursor-pointer`}
-              >
-                MBanking
-              </div>
-            </div>
-            <ModalBody>
-              {Array.isArray(updated_content) &&
-                updated_content.length > 0 &&
-                handleBanks("This is banks")}
-            </ModalBody>
-          </ModalContent>
-        </div>
-      </Modal>
     </>
   );
 }

@@ -175,6 +175,6 @@ export const CouponsVerifyPage = dynamic(
   () => import("@/helpers/components/coupanVerifyPage/CoupanVerifyPage")
 );
 
-export const PaymentSuccessPage = dynamic(
-  () => import("@/helpers/components/success/payment/paymentSucess")
+export const PaymentPage = dynamic(
+  () => import("@/helpers/components/payment/PaymentTrans")
 );

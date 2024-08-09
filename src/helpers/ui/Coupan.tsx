@@ -7,7 +7,6 @@ import path from "path";
 
 const Coupan: React.FC<any> = ({
   coupon,
-  candidateId,
   selectedCoupon,
 }: any) => {
   const [showModal, setShowModal] = useState(false);

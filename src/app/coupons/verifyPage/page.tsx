@@ -12,7 +12,6 @@ const VerifyPage = () => {
     coupon: null,
     candidateId: "",
     campaignID: "",
-
   });
 
   useEffect(() => {
