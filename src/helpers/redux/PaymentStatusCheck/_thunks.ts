@@ -10,7 +10,9 @@ export const GetTransactionDetails = createAsyncThunk(
     'GetUserTransactionDetails',
     async(npsMerchantTxnId :string,thunkAPI) => {
       try{
-        return await dataService.getData(`/check-payment-status?npsMerchantTxnId=${npsMerchantTxnId}`)
+        const res =  await dataService.getData(`/nps/check-payment-status?npsMerchantTxnId=${npsMerchantTxnId}`)
+        return res.data;
+
       }catch(error:any){
         return thunkAPI.rejectWithValue(getReduxErrorMsg(error));
       }
