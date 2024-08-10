@@ -5,7 +5,7 @@ interface paymentProps {
   paymentDetails: {
     TransactionId: string;
     Amount: number;
-    Status: 'pass' | 'fail';
+    Status: 'Success' | 'fail';
     Date: Date;
     BankName: string;
     PaymentType: string;
@@ -18,7 +18,7 @@ interface paymentProps {
 const Transactions = ({paymentDetails}:paymentProps) => {
 
   const paymentStatus =
-    paymentDetails.Status === "pass" ? "bg-green-500" : "bg-red-700";
+    paymentDetails.Status === "Success" ? "bg-green-500" : "bg-red-700";
 
   return (
     <div>
@@ -26,7 +26,7 @@ const Transactions = ({paymentDetails}:paymentProps) => {
       <div
         className={`${paymentStatus} w-full flex items-center justify-center p-4 mb-6 rounded-lg`}
       >
-        {paymentDetails.Status === "pass" ? (
+        {paymentDetails.Status === "Success" ? (
           <div className=" flex items-center flex-col justify-center gap-2 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
