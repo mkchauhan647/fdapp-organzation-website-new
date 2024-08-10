@@ -11,7 +11,6 @@ interface paymentProps {
     PaymentType: string;
     ServiceCharge: number;
     TransactionRemarks: string;
-    npsMerchantTxnId: number;
   };
 
 }
@@ -101,10 +100,7 @@ const Transactions = ({paymentDetails}:paymentProps) => {
         )}
       </div>
     </div>
-    <p className="mb-2">
-      <strong>MerchantTxnId Transaction ID:</strong>{" "}
-      {paymentDetails.npsMerchantTxnId}
-    </p>
+  
     <p className="mb-2">
       <strong>Transaction ID:</strong> {paymentDetails.TransactionId}
     </p>
