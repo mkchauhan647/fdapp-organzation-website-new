@@ -61,23 +61,23 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
   });
 
   return (
-    <div>
+    <div className="w-full md:w-fit">
       <form onSubmit={formik.handleSubmit} className="py-6">
         {coupon ? (
           <div className="mb-4">
-            <label className="block mb-2 text-sm">Amount to pay:</label>
+            <label className="block mb-2 text-base">Amount to pay:</label>
             <div className="text-gray-500 py-2 text-2xl font-extrabold">
               {coupon.pricing} NPR
             </div>
           </div>
         ) : null}
         {formik.touched.coupan && formik.errors.coupan ? (
-          <div className="text-red-500 text-sm mt-2">
+          <div className="text-red-500 text-base  mt-2">
             {formik?.errors?.coupan}
           </div>
         ) : null}
         <div className="mb-4">
-          <label className="block opacity-100 mb-2 text-sm">Enter your full name</label>
+          <label className="block opacity-100 mb-2 text-base">Enter your full name</label>
           <input
             className="w-full p-2 border border-gray-300 rounded"
             placeholder="Enter your full name"
@@ -88,17 +88,17 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
             onBlur={formik.handleBlur}
           />
           {formik.touched.fullName && formik.errors.fullName ? (
-            <div className="text-red-500 text-sm mt-2">
+            <div className="text-red-500 text-base mt-2">
              <>{formik.errors.fullName}</> 
             </div>
           ) : null}
         </div>
         <div className="mb-4">
-          <label className="block opacity-100 mb-2 text-sm">
+          <label className="block opacity-100 mb-2 text-base">
             Enter your email address
           </label>
           <input
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full text-base p-2 border border-gray-300 rounded"
             placeholder="Enter your email address"
             type="text"
             name="email"
@@ -108,7 +108,7 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
             autoComplete="off"
           />
           {formik.touched.email && formik.errors.email ? (
-            <div className="text-red-500 text-sm mt-2">
+            <div className="text-red-500 text-base mt-2">
               <>{formik.errors.email}</>
             </div>
           ) : null}

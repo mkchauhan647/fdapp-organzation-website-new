@@ -10,6 +10,11 @@ import { useDispatch } from "react-redux";
 import { useRouter, useSearchParams } from "next/navigation";
 import { User } from "@/utils/schema/ApiInterface";
 import { successToast } from "@/utils/lib/toastify";
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "../../hooks/useStoreHooks";
 
 const LoginBox: React.FC = () => {
   1;
@@ -17,6 +22,8 @@ const LoginBox: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect_url");
+  const { token, x_api_key } = useAppSelector((state: RootState) => state.Auth);
+  const useAppdispatch = useAppDispatch();
 
   // form fields and error
   const [email, setemail] = useState<string>("");
@@ -91,10 +98,27 @@ const LoginBox: React.FC = () => {
     }
   };
 
-  const GoogleLogin = () => {
-    const redirectGoogleUrl = process.env.NEXT_PUBLIC_VOTING_API_GOOGLE_AUTH_URI;
-    window.open(redirectGoogleUrl);
+  const GoogleLogin = async (): Promise<void> => {
+    try {
+      const googleAuthUrl:any = process.env.NEXT_PUBLIC_VOTING_API_GOOGLE_AUTH_URI;
+      const response = await dataService.getData(googleAuthUrl, x_api_key);
+  
+      if (response.success) {
+        // Redirect to Google's OAuth URL
+        window.location.href = response.redirectUrl;
+      } else {
+        setErrorMessage(response.message);
+        showModel();
+      }
+    } catch (e: any) {
+      setErrorMessage(e.response?.data?.error || e.message);
+      showModel();
+    }
   };
+  
+  
+  
+  
 
   return (
     <>
