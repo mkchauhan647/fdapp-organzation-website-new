@@ -10,11 +10,11 @@ const AboutUS : React.FC = () => {
                 <div className='container mx-auto flex flex-col gap-0 md:gap-6 justify-center'>
                     <div className='w-full text-center flex flex-col gap-4 mt-5'>
                         <h1 className="text-[var(--blue)] text-[24px] font-[700]">
-                            Welcome to FDApp - Your Ultimate Contestant Voting Solution
+                            Welcome to Easy Voting App - Your Ultimate Contestant Voting Solution
                         </h1>
                         <p className="text-[var(--blue)] text-[16px]">
-                            Welcome to FDApp - the premier platform for organizing and managing contestant voting events with ease and efficiency. Whether you're 
-                            running a talent competition, a popularity contest, or an election, FDApp provides you with all the tools you need to engage your 
+                            Welcome to Easy Voting App - the premier platform for organizing and managing contestant voting events with ease and efficiency. Whether you're 
+                            running a talent competition, a popularity contest, or an election, Easy Voting App provides you with all the tools you need to engage your 
                             audience, streamline the voting process, and make your event a resounding success.
                         </p>
                     </div>
@@ -24,7 +24,7 @@ const AboutUS : React.FC = () => {
                             <div className='w-[100%] md:w-[90%] md:w-[65%] flex flex-col gap-3'>
                                 <h1 className="card-title-blue">About Us</h1>
                                 <p className='text-justify'>
-                                    At FDApp, we understand the importance of creating engaging and interactive experiences for your audience. 
+                                    At Easy Voting App, we understand the importance of creating engaging and interactive experiences for your audience. 
                                     With our intuitive and user-friendly platform, you can effortlessly set up and manage contestant voting events 
                                     from start to finish. Our team is dedicated to providing you with top-notch service and support every step of 
                                     the way, ensuring that your voting event runs smoothly and seamlessly.
@@ -32,9 +32,9 @@ const AboutUS : React.FC = () => {
                             </div>
 
                             <div className='w-[100%] md:w-[30%] flex md:justify-end mb-4 md:mb-0'>
-                                <div className='w-[4rem] h-[4rem] md:w-[15rem] md:h-[15rem]'>
+                                {/* <div className='w-[4rem] h-[4rem] md:w-[15rem] md:h-[15rem]'>
                                     <Image src="/image/about/logo.png" alt="img" height={500} width={900} className='h-full w-full object-contain' />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@ const AboutUS : React.FC = () => {
                             <div className='w-[100%] md:w-[65%] flex flex-col gap-3 justify-center'>
                                 <h1 className="card-title-blue">Vision</h1>
                                 <p className='text-justify'>
-                                    At FDApp, our vision is to revolutionize contestant voting events with user-friendly technology. 
+                                    At Easy Voting App, our vision is to revolutionize contestant voting events with user-friendly technology. 
                                     We aim to empower organizers, foster participation, and ensure every voice is heard, driving positive change and community engagement.
                                 </p>
                             </div>
@@ -58,7 +58,7 @@ const AboutUS : React.FC = () => {
                             <div className='w-[100%] md:w-[65%] flex flex-col gap-3'>
                                 <h1 className="card-title-blue">Misson</h1>
                                 <p className='text-justify'>
-                                    Our mission at FDApp is to provide a comprehensive platform for organizing and managing voting
+                                    Our mission at Easy Voting App is to provide a comprehensive platform for organizing and managing voting
                                      events of all sizes. We are committed to delivering exceptional value through intuitive features, 
                                      reliable performance, and top-notch support, redefining the voting experience and empowering 
                                      organizers to connect with their audiences effectively.
@@ -82,7 +82,7 @@ const AboutUS : React.FC = () => {
                             <div className='w-[100%] md:w-[65%] flex flex-col gap-3'>
                                 <h1 className="card-title-blue">Key Features</h1>
                                 <p className='text-justify'>
-                                    FDApp offers a comprehensive suite of features designed to meet the unique needs of your voting event:
+                                    Easy Voting App offers a comprehensive suite of features designed to meet the unique needs of your voting event:
                                 </p>
 
                                 <ol className="mt-3 list-disc pl-5 flex flex-col gap-2">
@@ -92,14 +92,14 @@ const AboutUS : React.FC = () => {
                                     </li>
                                     <li className='text-justify'>Customizable Voting Options: Tailor your voting event to suit your 
                                         specific requirements with customizable voting options. Whether you're voting for contestants, 
-                                        proposals, or ideas, FDApp allows you to create voting scenarios that fit your needs.
+                                        proposals, or ideas, Easy Voting App allows you to create voting scenarios that fit your needs.
                                     </li>
                                     <li className='text-justify'>Real-time Monitoring: Keep track of voting activity in real-time with our 
                                         intuitive monitoring dashboard. Get instant insights into voting trends, participant engagement, and more, 
                                         empowering you to make informed decisions throughout your event.
                                     </li>
                                     <li className='text-justify'>Secure and Reliable: Rest assured that your voting event is safe and secure 
-                                        with FDApp. We employ industry-standard security protocols to protect your data and ensure 
+                                        with Easy Voting App. We employ industry-standard security protocols to protect your data and ensure 
                                         the integrity of the voting process.
                                     </li>
                                 </ol>
@@ -110,7 +110,7 @@ const AboutUS : React.FC = () => {
 
                             <div className='w-[100%] md:w-[65%] flex flex-col gap-5'>
                                 <h1 className="card-title-blue">How It Works</h1>
-                                <h3 className='card-title'>Using FDApp is simple and straightforward:</h3>
+                                <h3 className='card-title'>Using Easy Voting App is simple and straightforward:</h3>
 
                                 <div className=''>
                                     <p><span className='font-semibold mr-1'>Set Up Your Event:</span>Create your voting event in just a few clicks, specifying voting options, 
