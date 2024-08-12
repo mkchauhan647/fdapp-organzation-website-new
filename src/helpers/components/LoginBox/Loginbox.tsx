@@ -15,6 +15,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../hooks/useStoreHooks";
+import axios from "axios";
+import { addCouponToCart } from "@/helpers/redux/coupons/CouponsSlice";
 
 const LoginBox: React.FC = () => {
   1;
@@ -68,24 +70,30 @@ const LoginBox: React.FC = () => {
         password,
       });
       if (response.success) {
+        //get localstoagre token if it going to vote 
+
         const { token, user }: { token: string; user: User } = response.data;
+
         dispatch(AuthSlice.actions.login({ token, user }));
         successToast("Sucessfully logged in");
-        router.push("/");
-        if (user.isVerified) {
-          if (redirectUrl) {
-            location.href = decodeURIComponent(redirectUrl);
-          }
-        } else {
-          console.log("User is not verified");
-          const sendOtpResponse = await dataService.getData(
-            "users/send-verification-token"
-          );
-          if (sendOtpResponse.success) {
-            console.log("Otp sent successfully");
-            router.push("/otp/verify");
-          }
-        }
+
+      
+
+        // router.push("/");
+        // if (user.isVerified) {
+        //   if (redirectUrl) {
+        //     location.href = decodeURIComponent(redirectUrl);
+        //   }
+        // } else {
+        //   console.log("User is not verified");
+        //   const sendOtpResponse = await dataService.getData(
+        //     "users/send-verification-token"
+        //   );
+        //   if (sendOtpResponse.success) {
+        //     console.log("Otp sent successfully");
+        //     router.push("/otp/verify");
+        //   }
+        // }
       } else {
         setError(response.message);
         setErrorMessage(response.message);
@@ -101,15 +109,9 @@ const LoginBox: React.FC = () => {
   const GoogleLogin = async (): Promise<void> => {
     try {
       const googleAuthUrl:any = process.env.NEXT_PUBLIC_VOTING_API_GOOGLE_AUTH_URI;
-      const response = await dataService.getData(googleAuthUrl, x_api_key);
-  
-      if (response.success) {
-        // Redirect to Google's OAuth URL
-        window.location.href = response.redirectUrl;
-      } else {
-        setErrorMessage(response.message);
-        showModel();
-      }
+      window.location.href= googleAuthUrl;
+
+      // }
     } catch (e: any) {
       setErrorMessage(e.response?.data?.error || e.message);
       showModel();

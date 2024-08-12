@@ -25,8 +25,6 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
   );
 
 
-
-
   const candidates: Candidate[] =
     candidates_by_voting_stages_data.fulfilledResponse?.data.rows || [];
 
@@ -57,7 +55,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
       dispatch(GetVotingStageCandidateById(stageID));
     }, [dispatch]);
   
-    const votingCampaignStageId = voting_stage_candidate_by_id_data.fulfilledResponse?.data.votingCampaignStageId || [] ;
+    const votingCampaignStageId = voting_stage_candidate_by_id_data.fulfilledResponse?.data.votingCampaignStageId || '' ;
     console.log("voting"+ votingCampaignStageId)
   const handleOpen = () => {
     onOpen();

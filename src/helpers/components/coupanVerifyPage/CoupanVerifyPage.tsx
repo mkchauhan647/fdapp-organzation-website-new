@@ -1,3 +1,6 @@
+"use client";
+
+
 import React, { useEffect, useState } from "react";
 import {
   useAppDispatch,
@@ -11,10 +14,20 @@ import Image from "next/image";
 import { CouponsVerifyPageProps } from "@/utils/schema/confirmVotingInterface";
 import { useRouter } from "next/navigation";
 import { PayModal } from "@/helpers/ui/PayModal";
+import { removeStorageItem } from "@/utils/constants/localstoarge";
+
+
+interface AuthState {
+  token: string;
+  user: any;
+  x_api_key: string;
+}
 
 const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
-  const { fullName, email, candidateId, campaignID, coupon } = query;
-
+  const {candidateId, campaignID, coupons  } = query;
+  const { user }: AuthState = useAppSelector(
+    (state: RootState) => state.Auth
+  );
   const { all_candidates_by_campaign_id_data } = useAppSelector(
     (state: RootState) => state.Candidates
   );
@@ -38,14 +51,15 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
 
   const router = useRouter();
   const cancelBtn = () => {
+    removeStorageItem("selectedCoupon")
+    removeStorageItem("candidateId")
     router.back();
   };
 
   const userdata = {
-    email:email,
-    fullName: fullName,
+    email:user?.email || "Guest User",
+    fullName: user?.name || null,
   }
-
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100 p-6">
@@ -59,6 +73,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
             alt="Candidate Profile"
             width={150}
             height={150}
+            
             className="w-32 h-32 rounded-full object-cover"
           />
           <div className="mt-4 text-center">
@@ -73,17 +88,17 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
             <h2 className="text-2xl font-bold mb-4">Confirm Voting</h2>
             <div className="text-lg mb-4">
               <p className="">
-                Number of Votes: <span>{coupon?.votes}</span>{" "}
+                Number of Votes: <span>{coupons?.votes}</span>{" "}
               </p>
               <p className="">
-                Amount (NPR): <span> {coupon?.pricing} </span>{" "}
+                Amount (NPR): <span> {coupons?.pricing} </span>{" "}
               </p>
               <p className="">
-                Voter: {fullName}, {email}
+                Voter: {userdata.fullName}, {userdata.email}
               </p>
             </div>
             <div className="flex space-x-4 mb-4">
-              <PayModal stageID={candidateId} userdata ={userdata} coupon={coupon} candidateId={candidate?.id} />
+              <PayModal stageID={candidateId} userdata ={userdata} coupon={coupons} candidateId={candidate?.id} />
               <span
                 className="text-orange-500 cursor-pointer py-2 px-4"
                 onClick={() => cancelBtn()}

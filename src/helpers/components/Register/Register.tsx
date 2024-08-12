@@ -1,6 +1,7 @@
 "use client";
 import { ErrorModel } from "@/helpers/dynamic-imports/components";
 import { AuthSlice } from "@/helpers/redux/Auth/AuthSlice";
+// import { RootState } from "@/helpers/redux/store";
 import PasswordField from "@/helpers/ui/passwordField";
 import { dataService } from "@/utils/data/api/dataServices";
 import { Register } from "@/utils/schema/formSchema";
@@ -9,6 +10,13 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import {
+  useAppDispatch,
+  RootState,
+  useAppSelector,
+} from "@/helpers/hooks/useStoreHooks";
+import { addCouponToCart } from "@/helpers/redux/coupons/CouponsSlice";
+import { getLocalStorageItem, removeStorageItem } from "@/utils/constants/localstoarge";
 const RegisterBox: React.FC = () => {
   const [email, setemail] = useState<string>("");
   const [name, setname] = useState<string>("");
@@ -61,8 +69,28 @@ const RegisterBox: React.FC = () => {
       });
       if (response.success) {
         const { data } = response;
+        console.log(data);
+
         dispatch(AuthSlice.actions.login(data));
-        router.push("/otp/verify");
+
+        // Retrieve coupon and candidateId from localStorage
+        const selectedCoupon = JSON.parse(
+          getLocalStorageItem("selectedCoupon")|| "null"
+        );
+        const candidateId = window.localStorage.getItem("candidateId");
+
+        // Clear localStorage data
+        removeStorageItem("candidateId");
+        removeStorageItem("selectedCoupon");
+
+        if (selectedCoupon && candidateId) {
+          // Perform any actions with the retrieved data
+          dispatch(addCouponToCart({ coupon: selectedCoupon, candidateId }));
+          router.push(`/coupons/verifyPage`);
+        }
+        else{
+          router.push(`/`);
+        }
       }
     } catch (e: any) {
       console.log("errss", e);

@@ -217,6 +217,7 @@ const Navbar = () => {
                   {/* <IoSearch className='text-xl text-[var(--c-grey)] w-[20px] h-[20px] md:w-[25px] md:h-[25px]' /> */}
                   <SearchBar />
                   <Notification isLoggedIn={token ? true : false} />
+                  
 
                   {token ? <PModal {...user} /> : <LoginModal />}
                 </div>
