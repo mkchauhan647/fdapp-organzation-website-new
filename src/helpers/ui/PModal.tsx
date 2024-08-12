@@ -15,10 +15,13 @@ import { ErrorModel } from "../dynamic-imports/components";
 import { ChangePasswordSchema, ChangeProfileSchema } from "@/utils/schema/formSchema";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
 export default function PModal({ email, name, profile }: User) {
+
+    const router= useRouter()
 
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -110,8 +113,13 @@ export default function PModal({ email, name, profile }: User) {
             dispatch(AuthSlice.actions.logout())
             const response = await dataService.getData('/users/logout', token);
             if (response.success) {
+                localStorage.removeItem("candidateId")
+                localStorage.removeItem("selectedCoupon")    
                 setActiveTab(0);
                 onClose();
+                router.push('/')
+                
+
             }
         } catch (e: any) {
             setErrorMessage(e.response.data.error || e.message)

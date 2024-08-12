@@ -79,8 +79,6 @@ export default function Confirm({
     paymentService: paymentMethod,
     votingCampaignStageId: votingCampaignStageId,
     distribution,
-    email: userData.email,
-    fullName: userData.fullname,
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
