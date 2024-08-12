@@ -16,6 +16,7 @@ import {
   useAppSelector,
 } from "@/helpers/hooks/useStoreHooks";
 import { addCouponToCart } from "@/helpers/redux/coupons/CouponsSlice";
+import { getLocalStorageItem, removeStorageItem } from "@/utils/constants/localstoarge";
 const RegisterBox: React.FC = () => {
   const [email, setemail] = useState<string>("");
   const [name, setname] = useState<string>("");
@@ -74,13 +75,13 @@ const RegisterBox: React.FC = () => {
 
         // Retrieve coupon and candidateId from localStorage
         const selectedCoupon = JSON.parse(
-          localStorage.getItem("selectedCoupon") || "null"
+          getLocalStorageItem("selectedCoupon")|| "null"
         );
-        const candidateId = localStorage.getItem("candidateId");
+        const candidateId = window.localStorage.getItem("candidateId");
 
-        // Clear localStorage data 
-        localStorage.removeItem("selectedCoupon");
-        localStorage.removeItem("candidateId");
+        // Clear localStorage data
+        removeStorageItem("candidateId");
+        removeStorageItem("selectedCoupon");
 
         if (selectedCoupon && candidateId) {
           // Perform any actions with the retrieved data

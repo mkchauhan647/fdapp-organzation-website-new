@@ -9,6 +9,7 @@ import {
 } from "@/helpers/hooks/useStoreHooks";
 import crypto from "crypto";
 import { useState } from "react";
+import { removeStorageItem } from "@/utils/constants/localstoarge";
 
 interface AuthState {
   token: string | null;
@@ -66,8 +67,8 @@ export default function NepalPaymentModal({
 
       if (response) {
         handleResponse(response);
-        localStorage.removeItem("selectedCoupon")
-        localStorage.removeItem("candidateId")
+        removeStorageItem("selectedCoupon")
+        removeStorageItem("candidateId")
       }
     } catch (err) {
       console.log("Error creating transaction:", err);

@@ -10,6 +10,7 @@ import {
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { addCouponToCart } from "@/helpers/redux/coupons/CouponsSlice";
+import { getLocalStorageItem, removeStorageItem } from "@/utils/constants/localstoarge";
 
 const LoginSection: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,13 +21,13 @@ const LoginSection: React.FC = () => {
     if (token) {
       // Retrieve coupon and candidateId from localStorage
       const selectedCoupon = JSON.parse(
-        localStorage.getItem("selectedCoupon") || "null"
+        getLocalStorageItem("selectedCoupon")|| "null"
       );
-      const candidateId = localStorage.getItem("candidateId");
+      const candidateId = getLocalStorageItem("candidateId");
 
       // Clear localStorage data
-      localStorage.removeItem("selectedCoupon");
-      localStorage.removeItem("candidateId");
+       removeStorageItem("selectedCoupon");
+       removeStorageItem("candidateId");
 
       if (selectedCoupon && candidateId) {
         console.log("yes coupon existed");

@@ -1,3 +1,6 @@
+"use client";
+
+
 import React, { useEffect, useState } from "react";
 import {
   useAppDispatch,
@@ -11,6 +14,7 @@ import Image from "next/image";
 import { CouponsVerifyPageProps } from "@/utils/schema/confirmVotingInterface";
 import { useRouter } from "next/navigation";
 import { PayModal } from "@/helpers/ui/PayModal";
+import { removeStorageItem } from "@/utils/constants/localstoarge";
 
 
 interface AuthState {
@@ -47,8 +51,8 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
 
   const router = useRouter();
   const cancelBtn = () => {
-    localStorage.removeItem("selectedCoupon")
-    localStorage.removeItem("candidateId")
+    removeStorageItem("selectedCoupon")
+    removeStorageItem("candidateId")
     router.back();
   };
 

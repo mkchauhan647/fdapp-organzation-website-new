@@ -1,6 +1,7 @@
 "use client";
 import { CouponsVerifyPage } from "@/helpers/dynamic-imports/components";
 import { PublicLayout } from "@/helpers/dynamic-imports/views";
+import { getLocalStorageItem } from "@/utils/constants/localstoarge";
 import { Coupon } from "@/utils/schema/ApiInterface";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -19,10 +20,9 @@ const VerifyPage = () => {
 
   useEffect(() => {
     // Retrieve data from localStorage
-    const savedData = localStorage.getItem('selectedCoupon');
-    const candidateId = localStorage.getItem("candidateId");
+    const savedData = getLocalStorageItem('selectedCoupon')
+    const candidateId =  getLocalStorageItem("candidateId")
 
-  
     if (savedData) {
       // Parse the data
       const parsedData = JSON.parse(savedData);
