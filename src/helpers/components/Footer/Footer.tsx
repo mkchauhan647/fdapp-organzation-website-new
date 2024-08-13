@@ -79,6 +79,7 @@ const Footer: React.FC = () => {
                     <span className="">info@easyvotingapp.com</span>
                   </Link>
                 </div>
+
                 <div className="flex gap-[0.6em] text-base text-[white]">
                   <Link
                     className="w-[2.5rem] h-[2.5rem] rounded-full bg-[var(--c-primary)] flex items-center justify-center"
