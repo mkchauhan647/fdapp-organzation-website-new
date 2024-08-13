@@ -94,7 +94,7 @@ const Transactions = ({paymentDetails}:paymentProps) => {
               ></path>
             </svg>
             <p className="text-2xl font-semibold text-white">
-              Payment Fails{" "}
+                 Payment Failed{" "}
             </p>
           </div>
         )}

@@ -173,14 +173,14 @@ const Navbar = () => {
                       Campaign
                     </Link>
                   </li>
-                  <li className="px-[0.6em]">
+                  {/* <li className="px-[0.6em]">
                     <Link
                       href="/contestants"
                       className="text-[var(--c-grey)] hover:text-[#fff] text-[16px] font-[500]"
                     >
                       Contestants
                     </Link>
-                  </li>
+                  </li> */}
                   {/* <li className='px-[0.6em]'>
                                         <Link href="/pricing"className='text-[var(--c-grey)] hover:text-[#fff] text-[16px] font-[500]'>
                                             Pricing
