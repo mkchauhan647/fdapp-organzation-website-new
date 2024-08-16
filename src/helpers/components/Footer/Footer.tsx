@@ -27,6 +27,21 @@ const Footer: React.FC = () => {
   return (
     <footer className="text-[var(--light-text-color2)] bg-[var(--c-l-primary)]">
       <div className="footer-cta -has-footer-links -is-cta  pb-[32px]">
+        <div className=" flex flex-col items-center justify-center mt-6">
+          <p className="footer-title">Subscribe Our NewsLetter </p>
+          <div className="flex gap-2 w-full justify-center items-center">
+            <input
+              type="text"
+              placeholder="Enter Email"
+              className="px-[1.5rem] w-[50%] md:w-auto py-[1rem] rounded-md"
+            />
+            <button className="px-[1.5rem] py-[1rem] rounded-md bg-[var(--c-secondary)] text-white w-[10rem]">
+              Subscribe
+            </button>
+          </div>
+        </div>
+
+
         <div className="container mx-auto">
           <div className="w-full flex flex-col items-start gap-[3rem] md:gap-10 md:flex-row md:justify-between  pt-10">
             <div className="flex flex-col itece md:items-start w-full md:w-[30%] text-center md:text-left gap-[10px] self-center md:self-start">
@@ -178,20 +193,6 @@ const Footer: React.FC = () => {
                   <ul className="list-none flex flex-col gap-[1rem]">
                     <CampaignList />
                   </ul>
-                </div>
-
-                <div className="max-w-[20rem] flex flex-col">
-                  <p className="footer-title">Subscribe Our NewsLetter </p>
-                  <div className="flex md:flex-row flex-col gap-[1rem] w-full">
-                    <input
-                      type="text"
-                      placeholder="Enter Email"
-                      className="px-[1.5rem] py-[1rem] rounded-md"
-                    />
-                    <button className="px-[1.5rem] py-[1rem] rounded-md bg-[var(--c-secondary)] text-white w-[10rem]">
-                      Subscribe
-                    </button>
-                  </div>
                 </div>
               </div>
 
