@@ -14,7 +14,10 @@ const VerifyPage = () => {
     campaignID: string | null;
     candidateId: string | null;
     eligibleCandidateCounts: string | null;
-    coupons: Coupon
+    coupons: Coupon,
+
+
+
   } | null>(null);
 
 
@@ -41,6 +44,9 @@ const VerifyPage = () => {
           currency: parsedData.currency || null,
           organizationID: parsedData.organizationID || null,
           candidateId: parsedData.candidateId || null,
+          fullname: parsedData.fullname || null,
+          email: parsedData.email || null,
+
         },
         votes: parsedData.votes || null,
         pricing: parsedData.pricing || null,
@@ -50,7 +56,7 @@ const VerifyPage = () => {
       });
     }
     else {
-      // Redirect to home page if no data is found
+   
       router.push("/");
     }
   }, []);
@@ -68,21 +74,3 @@ const VerifyPage = () => {
 
 export default VerifyPage;
 
-// fullName: string;
-// email: string;
-// candidateId: string;
-// campaignID: string;
-// coupon?: Coupon | null;
-
-
-// id: string;
-//   name: string;
-//   votingCampaignId: string;
-//   votes: number;
-//   eligibleCandidateCounts: number;
-//   pricing: number;
-//   avaibilityPeriodStart: string;
-//   avaibilityPeriodEnd: string;
-//   currency: string;
-//   organizationID: string;
-//   candidateId: string;

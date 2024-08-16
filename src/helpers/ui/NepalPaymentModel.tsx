@@ -22,8 +22,8 @@ export default function NepalPaymentModal({
 }: {
   couponTransactionData: GetClientSecretInterface;
 }) {
-  const [loading, setLoading,] = useState<Boolean>(false);
-  const { token, user , x_api_key}: AuthState = useAppSelector(
+  const [loading, setLoading] = useState<Boolean>(false);
+  const { token, user, x_api_key }: AuthState = useAppSelector(
     (state: RootState) => state.Auth
   );
 
@@ -56,19 +56,36 @@ export default function NepalPaymentModal({
     }
   };
 
+  let newCouponTransaction = { ...couponTransactionData };
+  if (
+    couponTransactionData.email === null ||
+    couponTransactionData.email === undefined
+  ) {
+    delete newCouponTransaction.email;
+  }
+
+  if (user) {
+    delete newCouponTransaction.email;
+  }
+
   const createPendingCouponTransaction = async () => {
     dataService.setApiKey(x_api_key);
-    couponTransactionData.idempotentKey = generateRandomHex();
+    newCouponTransaction.idempotentKey = generateRandomHex();
     setLoading(true);
 
     try {
-      const endpoint = user ? "/coupon-transaction/" : "/coupon-transaction/guest-user";
-      const response = await dataService.postData(endpoint, couponTransactionData);
+      const endpoint = user
+        ? "/coupon-transaction/"
+        : "/coupon-transaction/guest-user";
+      const response = await dataService.postData(
+        endpoint,
+        newCouponTransaction
+      );
 
       if (response) {
         handleResponse(response);
-        removeStorageItem("selectedCoupon")
-        removeStorageItem("candidateId")
+        removeStorageItem("selectedCoupon");
+        removeStorageItem("candidateId");
       }
     } catch (err) {
       console.log("Error creating transaction:", err);
