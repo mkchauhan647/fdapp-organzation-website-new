@@ -91,6 +91,8 @@ export interface Coupon {
   currency: string;
   organizationID: string;
   candidateId: string;
+  fullname?: string;
+  email?:string
 }
 
 export interface GetClientSecretInterface {

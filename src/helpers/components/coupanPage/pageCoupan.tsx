@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   useAppDispatch,
   useAppSelector,
@@ -39,6 +39,12 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
   const { token, user }: AuthState = useAppSelector(
     (state: RootState) => state.Auth
   );
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
 
   const dispatch = useAppDispatch();
   const { all_coupons_by_campaign_id_data } = useAppSelector(
@@ -113,7 +119,7 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                 ))}
               </div>
               {selectedCoupon && (
-                <div className=" mt-4">
+                <div className=" mt-4 w-full">
                   <h3 className=" text-xl">
                     Price:{" "}
                     <span className=" font-semibold">
@@ -121,8 +127,34 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                     </span>
                   </h3>
 
-                  <div className="mt-10 flex gap-4 w-full items-center">
-                    <Button
+                  <div className="mt-6 flex flex-col gap-4 w-full items-start">
+                    <div className="PaymentVoucher w-full md:w-fit">
+                      <h3 className=" text-lg font-medium">
+                        Do You Need a Payment Voucher?{" "}
+                      </h3>
+                      <div className=" flex gap-3 mt-3">
+                        <input
+                          checked={isChecked}
+                          onChange={handleCheckboxChange}
+                          type="checkbox"
+                          name="checkbox"
+                          id="checkbox"
+                        />
+                        <label className=" text-base " htmlFor="">
+                          Yes Send it to me
+                        </label>
+                      </div>
+
+                      {isChecked && (
+                        <CoupanInputs
+                          campaignID={campaignID}
+                          coupon={selectedCoupon}
+                          candidateId={candidateId}
+                        />
+                      )}
+                    </div>
+
+                    {/* <Button
                       className=" p-7 rounded-md bg-primary text-white flex items-center justify-center w-auto font-medium"
                       onClick={() => {
                         dispatch(
@@ -135,13 +167,12 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                       }}
                     >
                       {user ? "submit" : "Register and Pay"}
-                      {/* Register and Pay */}
-                    </Button>
-                    {!user && <p>Or</p>}
+                      {/* Register and Pay 
+                    </Button> */}
 
-                    {!user && (
-                      <Button
-                        className=" p-7 rounded-md bg-[var(--c-secondary)] text-white flex items-center justify-center w-auto font-medium"
+                    {!isChecked && (
+                      <button
+                        className=" p-3 rounded-md bg-primary-500 text-white flex items-center justify-center w-auto font-medium"
                         onClick={() => {
                           dispatch(
                             addCouponToCart({
@@ -152,17 +183,11 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                           router.push("/coupons/verifyPage");
                         }}
                       >
-                        Guest Checkout
-                      </Button>
+                        Continue to Payment
+                      </button>
                     )}
                   </div>
                 </div>
-
-                // <CoupanInputs
-                //   campaignID={campaignID}
-                //   coupon={selectedCoupon}
-                //   candidateId={candidateId}
-                // />
               )}
             </>
           )}

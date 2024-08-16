@@ -79,6 +79,7 @@ export default function Confirm({
     paymentService: paymentMethod,
     votingCampaignStageId: votingCampaignStageId,
     distribution,
+    email:coupon.email,
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -57,8 +57,8 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
   };
 
   const userdata = {
-    email:user?.email || "Guest User",
-    fullName: user?.name || null,
+    email:user?.email ||coupons?.email || "Guest User",
+    fullName: user?.name ||coupons?.fullname || null,
   }
 
   return (
