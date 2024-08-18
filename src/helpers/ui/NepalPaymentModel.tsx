@@ -10,6 +10,7 @@ import {
 import crypto from "crypto";
 import { useState } from "react";
 import { removeStorageItem } from "@/utils/constants/localstoarge";
+import { errorToast } from "@/utils/lib/toastify";
 
 interface AuthState {
   token: string | null;
@@ -59,15 +60,20 @@ export default function NepalPaymentModal({
   let newCouponTransaction = { ...couponTransactionData };
   if (
     couponTransactionData.email === null ||
-    couponTransactionData.email === undefined
+    couponTransactionData.email === undefined ||
+    couponTransactionData.email === " "
   ) {
-    delete newCouponTransaction.email;
+    newCouponTransaction.email = process.env.NEXT_PUBLIC_GUEST_EMAIL_ID;
+  }
+  if (newCouponTransaction.votingCampaignStageId === "") {
+    errorToast("Network Error: Invalid Voting Campaign ID, Refresh It");
   }
 
   if (user) {
     delete newCouponTransaction.email;
   }
 
+  console.log(process.env.GUEST_EMAIL_ID);
   const createPendingCouponTransaction = async () => {
     dataService.setApiKey(x_api_key);
     newCouponTransaction.idempotentKey = generateRandomHex();
@@ -88,6 +94,7 @@ export default function NepalPaymentModal({
         removeStorageItem("candidateId");
       }
     } catch (err) {
+      errorToast("Error Creating Transaction Try Again" + err);
       console.log("Error creating transaction:", err);
     } finally {
       setLoading(false);
