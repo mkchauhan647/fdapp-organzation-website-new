@@ -84,7 +84,7 @@ svg.profile-icon{
 
 
 :root {
-  --blue:#117cc4;
+  --blue:#19206F;
   --btncolor: #117cc4;
   --black: #117cc4;
   --lightblack: #5A5C5B;
@@ -95,11 +95,11 @@ svg.profile-icon{
   --c-rose-pink:rgba(204, 1, 119,0.1);
   --gray:#117cc4;
   --orange: #FB7C06;
-  --c-primary:#117cc4;
+  --c-primary:#0B005A;
   --light-primary:#F2F9FC;
   --c-secondary:#F58314;
   --light-secondary:#F58314;;
-  --c-l-primary:#117cc4;
+  --c-l-primary:#19206F;
   --c-grey:#FFF;
   --border-color:#CCCDDE;
   --light-text-color2:#CCCDDE;
@@ -734,6 +734,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: -8px;
   border: 3px solid white;
 }
+
 
 input[type=range]::-webkit-slider-runnable-track  {
   height: 13px;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
-import image from "@/utils/image/logo-white.png";
+import image from "@/utils/image/logo-white-new.png";
 import CampaignList from "@/helpers/ui/CampaignLists";
 import {
   RiFacebookFill,
@@ -41,20 +41,19 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-
         <div className="container mx-auto">
           <div className="w-full flex flex-col items-start gap-[3rem] md:gap-10 md:flex-row md:justify-between  pt-10">
             <div className="flex flex-col itece md:items-start w-full md:w-[30%] text-center md:text-left gap-[10px] self-center md:self-start">
               <Link
                 href="/"
-                className="flex flex-col item-center gap-4 title-font font-medium items-center md:justify-start justify-center text-white md:bg-white    p-1 rounded-lg"
+                className="flex flex-col item-center gap-4 title-font font-medium items-center md:justify-start justify-center text-white    p-1 rounded-lg"
               >
                 <Image
                   src={image}
                   height={500}
                   width={900}
                   alt="brand-logo"
-                  className=" h-[50px] w-[120px] bg-white md:bg-inherit  p-1 "
+                  className=" h-[50px] object-contain w-[120px] bg-white md:bg-inherit  p-1 "
                 />
               </Link>
               <div className="text-white">
@@ -75,7 +74,10 @@ const Footer: React.FC = () => {
                       <FaLocationDot className="w-[1.3rem] h-[1.3rem]" />
                     </span>
                     {/* <span className="">{orgSettingData?.location}</span> */}
-                    <span className="">Buddhanagar, Kathmandu, Nepal</span>
+                    <span className="">
+                      Wise House & Pinewood Drive Potters Bar, Hertfordshire,
+                      United Kingdom
+                    </span>
                   </Link>
 
                   {/* <Link href='mailto:contact@fdapp.co.uk' className='flex  items-center gap-[.5rem] md:gap-[0.3em]'>
@@ -85,13 +87,13 @@ const Footer: React.FC = () => {
 
                   <Link
                     href="mailto:contact@fdapp.co.uk"
-                    className="flex  items-center gap-[.5rem] md:gap-[0.3em]"
+                    className="flex  items-center gap-[.5rem] mt-2 md:gap-[0.3em]"
                   >
                     <span>
                       <IoMdMail className="w-[1.3rem] h-[1.3rem]" />
                     </span>
                     {/* <span className="">{orgSettingData?.orgEmail}</span> */}
-                    <span className="">info@easyvotingapp.com</span>
+                    <span className="">contact@fdapp.co.uk                    </span>
                   </Link>
                 </div>
 

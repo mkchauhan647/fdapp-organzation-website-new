@@ -27,7 +27,7 @@ import {
 import { GetAllFAQ } from "@/helpers/redux/faqs/_thunks";
 import { AuthSlice } from "@/helpers/redux/Auth/AuthSlice";
 
-import image from "@/utils/image/logo-white.png";
+import image from "@/utils/image/logo-white-new.png";
 import axios from "axios";
 import { orgID } from "@/utils/constants/constants";
 import { dataService } from "@/utils/data/api/dataServices";
@@ -143,14 +143,14 @@ const Navbar = () => {
         <div className={`${fix ? "nav" : ""} `}>
           <div className={`mx-auto  py-2   sm:px-10 md:px-0`}>
             <div className="container mx-auto flex items-center justify-between">
-              <Link href="/" className="bg-white p-1 rounded-lg">
+              <Link href="/" className=" p-1 rounded-lg">
                 <div className="flex items-center justify-center relative">
                   <Image
                     src={image}
                     alt=""
-                    width={500}
-                    height={500}
-                    className=" h-[50px] w-[120px] "
+                    width={200}
+                    height={300}
+                    className=" h-[50px] object-contain w-[120px] "
                   ></Image>
                 </div>
               </Link>

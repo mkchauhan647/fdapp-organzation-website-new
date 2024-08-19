@@ -28,7 +28,7 @@ const CompetionSlide: React.FC = () => {
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns xl:mt-40">
       <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
-        <h1 className="text-[2rem] font-[600] text-[var(--black)] font-poppins">
+        <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
           Competitions
         </h1>
         <p className="topic-desc text-center">

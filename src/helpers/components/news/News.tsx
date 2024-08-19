@@ -28,7 +28,7 @@ const NewsUpdate: React.FC = () => {
     <>
       <CommonSection name="news">
         <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
-          <h1 className="text-[2rem] font-[600] text-[var(--black)] font-poppins">
+          <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
             Latest News & Updates
           </h1>
           {/* <p className="topic-desc text-center">

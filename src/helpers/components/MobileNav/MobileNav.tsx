@@ -46,7 +46,7 @@ const Topbar: React.FC = () => {
                 </span>
                 <span className="text-[10px] sm:text-[12px] line-clamp-1 md:prose text-[var(--c-grey)]">
                   {/* {orgSettingData?.location} */}
-                  Buddhanagar, Kathmandu, Nepal
+                  Hertfordshire, United Kingdom
                 </span>
               </Link>
               <a
@@ -58,7 +58,7 @@ const Topbar: React.FC = () => {
                 </span>
                 <span className="text-[10px] sm:text-[12px] text-[var(--c-grey)]">
                   {/* {orgSettingData?.orgEmail} */}
-                  info@easyvotingapp.com
+                  contact@fdapp.co.uk{" "}
                 </span>
               </a>
             </div>

@@ -34,7 +34,7 @@ const CompetitionBox = ({
           <div className="flex flex-col gap-[.8rem]">
             <div className="flex items-center gap-[.5rem]">
               <FaClock className="fill-[var(--c-primary)] text-[1rem]" />
-              <p className="md:text-[14px] text-[10px] text-[var(--light)]">
+              <p className="md:text-[14px] text-[10px] text-[var(--blue)]">
                 {
                   getTimeStatus(
                     campaign.startDateTime as string,

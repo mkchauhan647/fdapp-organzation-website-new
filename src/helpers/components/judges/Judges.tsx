@@ -63,7 +63,7 @@ const JudgeSlide: React.FC<JudgeSlideProps> = ({ campaignId }) => {
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns">
       <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
-        <h1 className="text-[2rem] font-[600] text-[var(--black)] font-poppins">
+        <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
           Judges
         </h1>
       </header>
