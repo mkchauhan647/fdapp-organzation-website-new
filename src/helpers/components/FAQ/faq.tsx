@@ -9,7 +9,10 @@ const Question: React.FC = () => {
   const { all_faq_data } = useAppSelector((state: RootState) => state.FAQ);
   const { isPending, isFulfilled, isRejected, fulfilledResponse } =
     all_faq_data;
-  const Faq: FAQ[] = fulfilledResponse?.data;
+  let Faq: FAQ[] = fulfilledResponse?.data;
+  Faq = Faq?.filter((faq, index, self) => {
+    return index === self.findIndex((t) => t.question === faq.question);
+  });
   console.log(all_faq_data);
 
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -33,7 +36,7 @@ const Question: React.FC = () => {
           {!isPending &&
             !isRejected &&
             isFulfilled &&
-            Faq?.map((faq: FAQ, index: number) => (
+           Faq?.map((faq: FAQ, index: number) => (
               <div
                 key={index}
                 className={`mb-3 bg-[var(--light-primary)] hover:shadow-sm ${
