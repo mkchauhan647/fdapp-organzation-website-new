@@ -23,6 +23,7 @@ import { NewsSlice } from './news/NewsSlice';
 import { OrgSettingSlice } from './organization-setting/OrgSettingSlice';
 import {judgesSlice} from './Judges/JudgesSlice';
 import {paymentStatusSlice} from './PaymentStatusCheck/PaymentStatusSlice';
+import { sponsersSlice } from './sponsers/SponsersSlice';
 
 // Define RootState inline
 export type RootState = {
@@ -36,8 +37,10 @@ export type RootState = {
   FAQ : ReturnType<typeof FAQSlice.reducer>
   News : ReturnType<typeof NewsSlice.reducer>
   OrgSetting: ReturnType<typeof OrgSettingSlice.reducer>
+
   Judges: ReturnType<typeof judgesSlice.reducer>
   paymentStatus: ReturnType<typeof paymentStatusSlice.reducer>
+  Sponsers: ReturnType<typeof sponsersSlice.reducer>
 };
 
 const persistConfig = {
@@ -59,7 +62,9 @@ const rootReducer: Reducer<RootState> = combineReducers<RootState>({
   News : NewsSlice.reducer,
   OrgSetting: OrgSettingSlice.reducer,
   Judges: judgesSlice.reducer,
-  paymentStatus: paymentStatusSlice.reducer
+  paymentStatus: paymentStatusSlice.reducer,
+  Sponsers: sponsersSlice.reducer, // Use the reducer function here
+ // other reducers go here...
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

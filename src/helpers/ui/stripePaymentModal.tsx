@@ -14,16 +14,13 @@ import {
 } from "@nextui-org/react";
 import {
   Elements,
-  PaymentElement,
-  useElements,
-  useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GetClientSecretInterface } from "@/utils/schema/ApiInterface";
 import StripeForm from "../components/stripeForm/stripeForm";
-import { AuthSlice } from "../redux/Auth/AuthSlice";
+
 
 const stripeInstance = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string
@@ -72,7 +69,15 @@ export default function PaymentModal({
     console.log(response?.data.data.token);
     return response?.data.data.token;
   }
+  const newCouponTransaction = { ...couponTransactionData}
 
+  if (
+    couponTransactionData.email === null ||
+    couponTransactionData.email === undefined ||
+    couponTransactionData.email === ""
+  ) {
+    newCouponTransaction.email = process.env.NEXT_PUBLIC_GUEST_EMAIL_ID;
+  }
   useEffect(() => {
     async function fetchIntent(): Promise<void> {
       try {
@@ -86,9 +91,9 @@ export default function PaymentModal({
         console.log("Heyss");
         console.log(couponTransactionData);
         const response = await dataService.postData(
-          "/coupon-transaction",
-          couponTransactionData,
-          token
+          "/coupon-transaction/guest-user",
+          newCouponTransaction,
+          // token
         );
         setIntentResponse(response.data);
         setLoading(false);
@@ -110,7 +115,7 @@ export default function PaymentModal({
     <>
       <button
         onClick={() => handleOpen()}
-        className="px-4 py-2 bg-[var(--btncolor)] text-white rounded-lg font-[700]"
+        className="px-4 py-2  bg-[var(--c-l-primary)] text-white rounded-lg font-[700]"
       >
         Buy Now
       </button>

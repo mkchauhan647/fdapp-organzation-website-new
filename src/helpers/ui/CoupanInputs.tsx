@@ -119,7 +119,7 @@ const CoupanInputs: React.FC<CoupanInputsProps> = ({
         <div className=" flex">
           <button
             type="submit"
-            className=" p-3 rounded-md  bg-primary-500 text-white flex items-center justify-center w-auto font-medium "
+            className=" p-3 rounded-md  bg-[var(--c-l-primary)] text-white flex items-center justify-center w-auto font-medium "
             >
             Continue To Payment
           </button>

@@ -1,77 +1,126 @@
-/* eslint-disable react/jsx-key */
-import React from 'react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import React, { useEffect } from "react";
+import { Navigation, Pagination, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import Image from "next/image";
+import { CommonSection } from "@/helpers/dynamic-imports/ui";
+import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
+import { dataService } from "@/utils/data/api/dataServices";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import Image from 'next/image';
-import SectionHeading from '@/helpers/ui/SectionHeading';
-import { CommonSection } from '@/helpers/dynamic-imports/ui';
-import { BsArrowRight } from 'react-icons/bs';
-import Link from 'next/link';
-import { RootState, useAppSelector } from '@/helpers/hooks/useStoreHooks';
-
-
-
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "@/helpers/hooks/useStoreHooks";
+import { GetAllSponsers } from "@/helpers/redux/sponsers/_thunk";
+import SkeletonImage from "../Skeleton/SkeletonImage";
 
 const SponserSlide: React.FC = () => {
-    const { all_org_setting_data } = useAppSelector((state: RootState) => state.OrgSetting);
-    const fulfilledResponseOrg = all_org_setting_data?.fulfilledResponse;
+  const { all_sponsers_data } = useAppSelector(
+    (state: RootState) => state.Sponsers
+  );
 
-    let orgSettingData: any = null;
+  const dispatch = useAppDispatch();
+  const { x_api_key } = useAppSelector((state: RootState) => state.Auth);
 
-    if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
-    [orgSettingData] = fulfilledResponseOrg.data;
-    }
+  const fulfilledResponseOrg = all_sponsers_data?.fulfilledResponse?.data || "";
 
-    return (
-        <>
-            <CommonSection name='sponsore bg-[var(--pagebg1)]'>
-                <section className='flex md:flex-row flex-col w-full gap-[2rem]'>
-                    <div className='md:w-[50%] w-full flex flex-col gap-[1.5rem]'>
+  console.log("sponsor padam", JSON.stringify(all_sponsers_data));
+
+  useEffect(() => {
+    dataService.setApiKey(x_api_key);
+    dispatch(GetAllSponsers());
+  }, [dispatch, x_api_key]);
+
+  console.log("all sponsors", JSON.stringify(all_sponsers_data.isPending));
+
+  return (
+    <>
+      <CommonSection name="sponsore bg-[var(--pagebg1)]">
+        <section className="flex md:flex-row flex-col w-full gap-[2rem]">
+          <div className="md:w-[50%] w-full flex flex-col gap-[1.5rem]">
+            <span>
+              <h1 className="text-[2.5rem] font-[700] text-[var(--blue)] w-full">
+                Supporting Partners:{" "}
+                <span className="text-[2.5rem] font-[700] text-[var(--c-secondary)]">
+                  Empowering
+                </span>{" "}
+                Dreams Together!
+              </h1>
+            </span>
+            <span className="flex flex-col gap-[.5rem] text-justify">
+              <p className="paragraph text-[var(--light-text-color)]">
+                {/* Replace this with actual content if available */}
+                Sponsorship helps us achieve our goals by bringing together
+                like-minded partners.
+              </p>
+            </span>
+
+            <span>
+              <button className="btn-primary">Contact Us</button>
+            </span>
+          </div>
+
+          <div className="md:w-[50%] w-full bg-white rounded-md px-[1rem] py-[1rem] md:px-[2rem] md:py-[2rem] flex flex-col gap-[1.5rem]">
+            <h1 className="text-[24px] text-[var(--c-secondary)] font-[600]">
+              Sponsers
+            </h1>
+
+            {all_sponsers_data.isPending ? (
+          <div className="w-full flex justify-between gap-3 items-baseline flex-wrap">
+            {Array.from({ length: fulfilledResponseOrg.length || 1 }).map((_, index) => (
+              <div key={index} className="flex w-10">
+                <SkeletonImage isLoading={all_sponsers_data.isPending} />
+              </div>
+            ))}
+          </div>
+        ) : all_sponsers_data.isRejected ? (
+          <div className="w-full flex justify-center items-center">
+            <p>
+              There was an error fetching the data. Please try again later. .
+            </p>
+          </div>
+        ) :  
+            fulfilledResponseOrg.length > 0 ? (
+              <div className="competition-slider px-2 sm:px-0 flex flex-wrap justify-start gap-[.5rem] items-baseline">
+                {fulfilledResponseOrg?.map((sponsor: any, index: any) => (
+                  <div key={sponsor.id} className="relative mx-auto md:mx-0">
+                    {index === 6 && (
+                      <Link
+                        href="#"
+                        className="h-[8rem] w-[8rem] flex flex-col items-center justify-center rounded-md bg-[var(--c-primary)] absolute opacity-90 z-10"
+                      >
+                        <span className="paragraph text-[white] !font-[500]">
+                          View All
+                        </span>
                         <span>
-                            <h1 className='text-[2.5rem] font-[700] text-[var(--blue)] w-full'>Supporting Partners: <span className='text-[2.5rem] font-[700] text-[var(--c-secondary)]'>Empowering</span> Dreams Together!</h1>
+                          <BsArrowRight className="text-[white] text-[1.5rem]" />
                         </span>
-                        <span className='flex flex-col gap-[.5rem] text-justify'>
-                            <p className='paragraph text-[var(--light-text-color)]'>{orgSettingData?.sponserBody}</p>
-                        </span>
-
-                        <span>
-                            <button className='btn-primary'>Contact Us</button>
-                        </span>
-                    </div>
-
-                    <div className='md:w-[50%] w-full bg-white rounded-md px-[1rem] py-[1rem] md:px-[2rem] md:py-[2rem] flex flex-col gap-[1.5rem]'>
-                        <h1 className='text-[24px] text-[var(--c-secondary)] font-[600]'>Sponsers</h1>
-                        <div className='competition-slider px-2 sm:px-0 flex flex-wrap justify-start gap-[.5rem] items-baseline'>
-                            {
-                                orgSettingData?.sponserImages.slice(0, 7).map((logo:any, index:any) => {
-                                    return (
-                                        <>
-                                           
-                                        <div className='relative mx-auto md:mx-0' >
-                                        {
-                                            index  === 6 && <Link href="#" className='h-[8rem] w-[8rem] flex flex-col items-center justify-center rounded-md bg-[var(--c-primary)] absolute opacity-90 z-10'><span className='paragraph text-[white] !font-[500]'>View All</span><span><BsArrowRight className='text-[white] text-[1.5rem]' /></span></Link>
-                                        }
-                                        <Image key={index} src={logo} height={500} width={900} alt="img" className={`h-[8rem] w-[8rem] border-2 hover:shadow-md object-cover rounded-md`} />
-                                        </div>
-                                            
-                                        </>
-                                    )
-                                })
-                            }
-                        </div>
-
-                    </div>
-                </section>
-            </CommonSection>
-
-        </>
-    );
-}
+                      </Link>
+                    )}
+                    <Image
+                      src={process.env.NEXT_PUBLIC_AWS_URI + sponsor?.logo}
+                      height={500}
+                      width={900}
+                      alt={sponsor.title}
+                      className="h-[8rem] w-[8rem] border-2 hover:shadow-md object-cover rounded-md"
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-[var(--light-text-color)]">
+                No sponsors available at the moment.
+              </p>
+            )}
+          </div>
+        </section>
+      </CommonSection>
+    </>
+  );
+};
 
 export default SponserSlide;

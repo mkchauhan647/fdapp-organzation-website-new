@@ -123,7 +123,7 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
                   <h3 className=" text-xl">
                     Price:{" "}
                     <span className=" font-semibold">
-                      {selectedCoupon.pricing} Rs
+                      {selectedCoupon.pricing} USD
                     </span>
                   </h3>
 
@@ -172,7 +172,7 @@ const CouponsPage: React.FC<CouponsPageProps> = ({
 
                     {!isChecked && (
                       <button
-                        className=" p-3 rounded-md bg-primary-500 text-white flex items-center justify-center w-auto font-medium"
+                        className=" p-3 rounded-md  bg-[var(--c-l-primary)] text-white flex items-center justify-center w-auto font-medium"
                         onClick={() => {
                           dispatch(
                             addCouponToCart({

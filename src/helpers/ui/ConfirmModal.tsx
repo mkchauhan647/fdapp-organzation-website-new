@@ -111,7 +111,7 @@ export default function Confirm({
     <>
       <button
         onClick={handleOpen}
-        className={`py-2 px-6 bg-[var(--btncolor)] text-white rounded-lg font-[500] openpayment ${
+        className={`py-2 px-6  bg-[var(--c-l-primary)] text-white rounded-lg font-[500] openpayment ${
           isDisabled ? "disable" : true
         }`}
         disabled={isDisabled}

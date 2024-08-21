@@ -19,7 +19,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [paymentMethod, setPaymentMethod] = useState<
     "ESEWA" | "STRIPE" | "NPS"
-  >("NPS");
+  >("STRIPE");
   const { candidates_by_voting_stages_data, voting_stage_candidate_by_id_data } = useAppSelector(
     (state: RootState) => state.VotingCampaignStages
   );
@@ -65,7 +65,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
     <>
       <button
         onClick={handleOpen}
-        className="bg-blue-500 text-white py-2 px-5  border rounded-full hover:bg-blue-600"
+        className=" bg-[var(--c-l-primary)] text-white py-2 px-5  border rounded-full "
       >
         Pay Online
       </button>
@@ -96,7 +96,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
                     </p>
 
                     <div className="flex gap-5">
-                      <label className="border relative h-fit rounded-lg">
+                      {/* <label className="border relative h-fit rounded-lg">
                         <input
                           type="radio"
                           name="paymentMethod"
@@ -145,7 +145,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
                             paymentMethod === "ESEWA" ? "border-1" : "border-10"
                           }`}
                         />
-                      </label>
+                      </label> */}
 
                       <label className="border relative h-fit rounded-lg">
                         <input
@@ -183,7 +183,7 @@ export const PayModal: React.FC<any> = ({ coupon, userdata, candidateId ,stageID
               <ModalFooter className="mt-3">
                 <div className="w-full flex justify-between items-center">
                   <p className="text-3xl font-[500] text-[var(--blue)] font-secular">
-                    NPR {coupon.pricing}
+                    USD {coupon.pricing}
                   </p>
                   <Confirm
                    votingCampaignStageId= {votingCampaignStageId}
