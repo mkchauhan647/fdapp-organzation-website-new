@@ -22,6 +22,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^11.0.23",
     "http-proxy-middleware": "^3.0.0",
+    "js-cookie": "^3.0.5",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
@@ -37,6 +38,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
