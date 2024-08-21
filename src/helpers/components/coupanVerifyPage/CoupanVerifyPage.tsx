@@ -91,7 +91,7 @@ const CouponsVerifyPage: React.FC<CouponsVerifyPageProps> = ({ query }) => {
                 Number of Votes: <span>{coupons?.votes}</span>{" "}
               </p>
               <p className="">
-                Amount (NPR): <span> {coupons?.pricing} </span>{" "}
+                Amount (USD): <span> {coupons?.pricing} </span>{" "}
               </p>
               <p className="">
                 Voter: {userdata.fullName}, {userdata.email}
