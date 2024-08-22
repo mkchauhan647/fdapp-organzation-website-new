@@ -28,7 +28,7 @@ const Question: React.FC = () => {
       <div className="container  xl:px-20 2xl:px-0 mx-auto relative pt-12 pb-12">
         <div className="mb-[1rem] text-center">
           <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
-            Frequently Asked Questionss
+            Frequently Asked Questions
           </h1>
         </div>
 
