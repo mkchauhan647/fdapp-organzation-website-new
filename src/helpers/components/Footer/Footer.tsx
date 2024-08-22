@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
                   height={500}
                   width={900}
                   alt="brand-logo"
-                  className=" h-[50px] object-contain w-[120px] bg-white md:bg-inherit  p-1 "
+                  className=" h-[50px] object-contain w-[120px]  md:bg-inherit  p-1 "
                 />
               </Link>
               <div className="text-white">
