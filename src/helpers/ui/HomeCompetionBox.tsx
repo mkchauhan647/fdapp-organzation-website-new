@@ -7,13 +7,14 @@ import React from "react";
 import { FaClock } from "react-icons/fa";
 import TitleBtn from "./TitleBtn";
 
-const CompetitionBox = ({
+const HomeCompetitionBox = ({
   link,
   ...campaign
 }: Partial<VotingCampaign> & { link: string }) => {
+    console.log("link of campaign", campaign)
   return (
     <Link href={link} className="">
-      <div
+      {/* <div
         className="flex flex-col justify-between gap-[5px] contestant-box shadow hover:shadow-md transition-ease duration-300
              rounded-md px-[3px] py-[5px] md:px-[5px] md:py-[7px] md:h-[18rem]"
       >
@@ -60,13 +61,13 @@ const CompetitionBox = ({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* <div
+      <div
         style={{
-          position: "relative", 
+          position: "relative", // Make the container relative for positioning the pseudo-element
           backgroundImage: `url('${
-            (process.env.NEXT_PUBLIC_AWS_URI as string) + campaign.logo
+            (process.env.NEXT_PUBLIC_AWS_URI as string) + campaign.banner
           }')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -83,7 +84,7 @@ const CompetitionBox = ({
         }}
         className="flex gap-[5px] h-[18rem] w-full items-center"
       >
-     
+        {/* The gradient overlay */}
         <div
           style={{
             position: "absolute",
@@ -99,6 +100,7 @@ const CompetitionBox = ({
           }}
         />
 
+        {/* Content area with adjusted zIndex */}
         <div style={{ position: "relative", zIndex: 2 }} className=" flex justify-between items-center w-full ml-10 mr-10">
           <div className="left flex flex-col gap-6">
             <div>
@@ -140,9 +142,9 @@ const CompetitionBox = ({
         </div>
 
 
-      </div> */}
+      </div>
     </Link>
   );
 };
 
-export default CompetitionBox;
+export default HomeCompetitionBox;

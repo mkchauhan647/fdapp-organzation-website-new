@@ -126,7 +126,7 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
                           <Image
                             src={
                               (process.env.NEXT_PUBLIC_AWS_URI as string) +
-                              bannerdata.logo
+                              bannerdata.banner
                             }
                             height={1000}
                             width={3000}

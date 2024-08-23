@@ -16,6 +16,7 @@ import { RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 import { VotingCampaign } from "@/utils/schema/ApiInterface";
 import { CommonSection, Heading } from "@/helpers/dynamic-imports/ui";
 import SkeletonCampaign from "../Skeleton/SkeletonCampaign";
+import HomeCompetitionBox from "@/helpers/ui/HomeCompetionBox";
 
 const CompetionSlide: React.FC = () => {
   const { all_campaign_data } = useAppSelector(
@@ -23,23 +24,28 @@ const CompetionSlide: React.FC = () => {
   ); // Access state.VotingCampaign
   const { isPending, isRejected, fulfilledResponse } = all_campaign_data;
   const CampaignData = fulfilledResponse?.data.rows;
-  console.log(CampaignData);
+  console.log("campaign data " + JSON.stringify(CampaignData));
+
+  const dataCampaign = {
+    title: "Campaigns",
+    description:
+      "  Welcome to FDAPPA where your voice matters. With FDApp, our official voting platform, you can securely and easily cast your vote via SMS or email, ensuring that your opinion is heard. FDApp makes participation effortless, no matter where you are. Join us in making a difference—your vote is just a click away with FDApp",
+  };
 
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns xl:mt-40">
       <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
         <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
-          Competitions
+          {dataCampaign.title}
         </h1>
         <p className="topic-desc text-center">
-          Nulla viverra at senectus commodo. Adipiscing ac habitasse nec quis
-          libero facilisis. Vulputate blandit suspendisse id lorem et porta
+          {dataCampaign.description}
         </p>
       </header>
 
-      <div className="competition-slider flex justify-between items-baseline relative">
+      <div className="competition-slider flex  items-baseline  w-full relative">
         <Swiper
-          className="w-full !pb-16 "
+          className="w-full  "
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={25}
           slidesPerView={4}
@@ -51,25 +57,25 @@ const CompetionSlide: React.FC = () => {
           pagination={{ clickable: true }}
           breakpoints={{
             0: {
-              slidesPerView: 1.5,
+              slidesPerView: 1,
               spaceBetween: 15,
             },
             590: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 15,
             },
             730: {
-              slidesPerView: 2.5,
+              slidesPerView: 1,
             },
             980: {
-              slidesPerView: 3,
+              slidesPerView: 1,
             },
             1080: {
-              slidesPerView: 3.5,
+              slidesPerView: 1,
             },
 
             1260: {
-              slidesPerView: 4,
+              slidesPerView: 1,
             },
           }}
         >
@@ -78,11 +84,12 @@ const CompetionSlide: React.FC = () => {
                 (competition: VotingCampaign, index: number) => {
                   return (
                     <SwiperSlide key={index}>
-                      <CompetitionBox
+                      <HomeCompetitionBox
                         link={`campaign/${competition.id}`}
                         // link={`/campaign/category/details?id=${competition.logo}&campaignId=${competition.id}`}
                         title={competition.title}
                         logo={competition.logo}
+                        banner={competition.banner}
                         startDateTime={competition.startDateTime}
                         endDateTime={competition.endDateTime}
                         candidateCount={competition.candidateCount}

@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
 
         <div className="container mx-auto">
           <div className="w-full flex flex-col items-start gap-[3rem] md:gap-10 md:flex-row md:justify-between  pt-10">
-            <div className="flex flex-col itece md:items-start w-full md:w-[30%] text-center md:text-left gap-[10px] self-center md:self-start">
+            <div className="flex flex-col itece md:items-start w-full md:w-[33%] text-center md:text-left gap-[10px] self-center md:self-start">
               <Link
                 href="/"
                 className="flex flex-col item-center gap-4 title-font font-medium items-center md:justify-start justify-center text-white    p-1 rounded-lg"
@@ -123,8 +123,8 @@ const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-[100%] md:w-[70%] flex flex-wrap flex-row items-start justify-center md:justify-between font-[500] gap-[0em] md:gap-[10px]">
-              <div className="lg:w-1/4 w-1/2  px-0 md:px-4 flex flex-col items-center md:items-start">
+            <div className="w-[100%] md:w-[66%] flex flex-wrap flex-row item-center justify-center md:justify-center font-[500] gap-[0em] md:gap-[10px]">
+              <div className="lg:w-1/4 w-1/2 md:w-[33%]  px-0 md:px-4 flex flex-col items-center md:items-start">
                 <h2 className="footer-title">Quick Links</h2>
                 <ul className="list-disc flex flex-col gap-[0.3em] ml-[1rem] text-white">
                   <li>
@@ -189,16 +189,16 @@ const Footer: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="lg:w-1/4 w-1/2  px-0 md:px-4 flex flex-col items-center md:items-start gap-[2rem]">
+              {/* <div className="lg:w-1/4 w-1/2  px-0 md:px-4 flex flex-col items-center md:items-start gap-[2rem]">
                 <div className="flex flex-col">
                   <h2 className="footer-title">Campaigns</h2>
                   <ul className="list-none flex flex-col gap-[1rem]">
                     <CampaignList />
                   </ul>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="flex flex-col md:items-start items-center gap-2 px-0 md:px-4 mt-[3rem] md:mt-0 ml-[5em]">
+              <div className="flex  md:w-[33%] flex-col md:items-start items-center gap-2 px-0 md:px-4 mt-[3rem] md:mt-0 ml-[5em]">
                 <h2 className="footer-title">Download</h2>
                 <div>
                   <Link href="#">
