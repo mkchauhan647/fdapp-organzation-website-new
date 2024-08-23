@@ -16,11 +16,11 @@ function StripeForm() {
       elements,
       confirmParams : {
         // return_url:'http://127.0.0.1:3000/success'
-        return_url:'https://votingweb.vercel.app/success'
+        return_url:'https://user.fdapp.co.uk/success'
       }
     })
     if(result.error){
-      router.push('/error')
+      // router.push('/error')
     }
   }
 
