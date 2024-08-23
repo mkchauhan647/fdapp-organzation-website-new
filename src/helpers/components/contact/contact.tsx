@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
 
 const Contact: React.FC = () => {
   const router = useRouter();
@@ -69,42 +70,45 @@ const Contact: React.FC = () => {
         <div className="flex items-stretch justify-center">
           <div className="grid md:grid-cols-2">
             <div className="h-full pr-6">
-              <ul className="mb-6 md:mb-0">
+              <ul className="mb-6 md:mb-0 flex flex-col gap-3">
                 <li className="flex">
                   <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
                     <FaLocationDot className="h-6 w-6" fill="var(--c-grey)" />
                   </div>
                   <div className="ml-4 ">
-                    <p className="text-gray-600 dark:text-slate-400">
-                      Budhhanagar-10, Kathmandu, Nepal
-                    </p>
+                    <Link
+                      href="https://www.google.com/maps/place/Wise+House,+38+Pinewood+Dr,
+                                        +Potters+Bar+EN6+2BD,+UK/@51.7011527,-0.1975736,17z/data=!3m1!4b1!4m6!3m5!1s0x48763d490510c6b1:
+                                        0xf06768e86d0d6172!8m2!3d51.
+                                        7011527!4d-0.1975736!16s%2Fg%2F11b8zhlv8d?entry=ttu"
+                      target="_blank"
+                      className="flex gap-[.5rem] md:gap-[0.3em] items-center"
+                    >
+                      {/* <span style={{ alignSelf: "baseline" }}>
+                      <FaLocationDot className="w-[1.3rem] h-[1.3rem]" />
+                    </span> */}
+                      {/* <span className="">{orgSettingData?.location}</span> */}
+                      <span className="">
+                        Wise House & Pinewood Drive <br></br> Potters Bar,
+                        Hertfordshire<br></br>
+                        United Kingdom
+                      </span>
+                    </Link>
                   </div>
                 </li>
-                {/* <li className="flex">
-                              <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                      fill="#0b005a" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                      strokeLinejoin="round" className="h-6 w-6">
-                                      <path
-                                          d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2">
-                                      </path>
-                                      <path d="M15 7a2 2 0 0 1 2 2"></path>
-                                      <path d="M15 3a6 6 0 0 1 6 6"></path>
-                                  </svg>
-                              </div>
-                              <div className="ml-4 mb-4">
-                                  <p className="text-gray-600 dark:text-slate-400">Mobile: +xxxxxxxxx</p>
-                                  <Link href ="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJNrcrslPbPvltcwqTDGpjCgQffVLqVxRdqRRsQJDVhgFdQTFhHWlmBLXRthrWzmpLBFjVB" className="text-gray-600 dark:text-slate-400">Mail: contact@fdapp.co.uk</Link>
-                              </div>
-                          </li> */}
-                <li>
-                  <div style={{ width: "100%" }}>
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3533.152123188686!2d85.328735!3d27.6816928!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1926c1d4d661%3A0xe3c17d8c607a5e8d!2sEasy%20Digital%20Service%20Pvt.Ltd.!5e0!3m2!1sen!2snp!4v1721123519805!5m2!1sen!2snp"
-                      allowFullScreen
-                    ></iframe>
+                <li className=" flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                    <IoMdMail className="h-6 w-6" fill="var(--c-grey)" />
+                  </div>
+                  <div className=" ml-4">
+                    <Link
+                      href="mailto:contact@fdapp.co.uk"
+                      className="flex  items-center gap-[.5rem] mt-2 md:gap-[0.3em]"
+                    >
+                   
+                      {/* <span className="">{orgSettingData?.orgEmail}</span> */}
+                      <span className="">contact@fdapp.co.uk </span>
+                    </Link>
                   </div>
                 </li>
               </ul>
