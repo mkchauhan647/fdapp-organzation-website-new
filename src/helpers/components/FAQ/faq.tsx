@@ -38,7 +38,7 @@ const Question: React.FC = () => {
            Faq?.map((faq: FAQ, index: number) => (
               <div
                 key={index}
-                className={`mb-3 bg-[var(--light-primary)] hover:shadow-sm ${
+                className={`mb-3 bg-[var(--c-l-primary)] hover:shadow-sm ${
                   expandedIndex === index
                     ? "border-l-[var(--c-secondary)]"
                     : "border-l-[var(--light-secondary)]"
@@ -50,11 +50,11 @@ const Question: React.FC = () => {
                 >
                   <button className="w-full flex items-center focus:outline-none">
                     <svg
-                      className={`flex-shrink-0 w-[10px] h-[10px] sm:w-4 sm:h-6 text-blue-500 ${
+                      className={`flex-shrink-0 w-[10px] h-[10px] sm:w-4 sm:h-6 text-white ${
                         expandedIndex === index ? "transform rotate-90" : ""
                       }`}
                       fill="none"
-                      stroke="var(--c-grey)"
+                      stroke="#ffffff"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -66,17 +66,17 @@ const Question: React.FC = () => {
                       />
                     </svg>
                     <div className="w-full flex justify-between items-center ">
-                      <h3 className="px-2 text-[14px] sm:text-[16px] text-bold text-[var(--c-primary)] FAQtext text-left">
+                      <h3 className="px-2 text-[14px] sm:text-[16px] text-bold text-white FAQtext text-left">
                         {faq.question}
                       </h3>
                       <span>
-                        <FaChevronDown className="md:text-[12px] text-[8px] font-[700] cursor-pointer text-[var(--c-primary)] " />
+                        <FaChevronDown className="md:text-[12px] text-[8px] font-[700] cursor-pointer text-white" />
                       </span>
                     </div>
                   </button>
                   {expandedIndex === index && (
                     <div className="mt-4 border-t-[1px] border-[var(--c-grey)] pt-4">
-                      <p className="max-w-full text-[12px] sm:text-[14px] text-[var(--c-primary)] a-faqstext text-left">
+                      <p className="max-w-full text-[12px] sm:text-[14px] text-white a-faqstext text-left">
                         {faq.answer}
                       </p>
                     </div>
