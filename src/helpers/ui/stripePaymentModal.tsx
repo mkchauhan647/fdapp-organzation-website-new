@@ -69,15 +69,9 @@ export default function PaymentModal({
     console.log(response?.data.data.token);
     return response?.data.data.token;
   }
-  const newCouponTransaction = { ...couponTransactionData}
+  const newCouponTransaction = { ...couponTransactionData };
+  delete newCouponTransaction.email;
 
-  if (
-    couponTransactionData.email === null ||
-    couponTransactionData.email === undefined ||
-    couponTransactionData.email === ""
-  ) {
-    newCouponTransaction.email = process.env.NEXT_PUBLIC_GUEST_EMAIL_ID;
-  }
   useEffect(() => {
     async function fetchIntent(): Promise<void> {
       try {

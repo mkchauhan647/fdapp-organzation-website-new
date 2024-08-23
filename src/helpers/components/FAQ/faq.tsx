@@ -1,5 +1,4 @@
 import { RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
-import SectionHeading from "@/helpers/ui/SectionHeading";
 import { FAQ } from "@/utils/schema/ApiInterface";
 import { Skeleton } from "@nextui-org/react";
 import React, { useState } from "react";
