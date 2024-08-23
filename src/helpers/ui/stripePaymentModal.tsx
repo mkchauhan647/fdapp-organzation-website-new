@@ -17,6 +17,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { GetClientSecretInterface } from "@/utils/schema/ApiInterface";
 import StripeForm from "../components/stripeForm/stripeForm";
+import { toast } from "react-toastify";
 
 const stripeInstance = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string
@@ -41,12 +42,6 @@ type intentResponse = {
   uniqno: number;
 };
 
-interface AuthState {
-  token: string | null;
-  user: string;
-  x_api_key: any;
-}
-
 export default function PaymentModal({
   couponTransactionData,
 }: {
@@ -56,15 +51,11 @@ export default function PaymentModal({
   const { token, user, x_api_key } = useAppSelector(
     (state: RootState) => state.Auth
   );
-  const { current_coupon_transaction_data } = useAppSelector(
-    (state: RootState) => state.Coupons
-  );
+
   const [loading, setLoading] = useState(true);
   const [responseIntent, setIntentResponse] = useState<intentResponse | null>(
     null
   );
-
-  const dispatch = useAppDispatch();
 
   async function getXApiKey() {
     const response = await axios.get(
@@ -93,8 +84,9 @@ export default function PaymentModal({
         );
 
         setIntentResponse(response.data);
-      } catch (error) {
-        // Handle error appropriately
+      } catch (error:any) {
+        console.log(error.message);
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }

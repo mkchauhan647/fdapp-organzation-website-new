@@ -1,37 +1,57 @@
-import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useRouter } from 'next/navigation';
-import React from 'react'
+"use client";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 function StripeForm() {
-  const stripe = useStripe()
+  const stripe = useStripe();
   const elements = useElements();
-  const router = useRouter()
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [Error, setError] = useState("");
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if(!stripe || !elements){
-      return
+    if (!stripe || !elements) {
+      return;
     }
+    setLoading(true);
     const result = await stripe.confirmPayment({
       elements,
-      confirmParams : {
+      confirmParams: {
         // return_url:'http://127.0.0.1:3000/success'
-        return_url:'https://user.fdapp.co.uk/success'
-      }
-    })
-    if(result.error){
+        return_url: "https://user.fdapp.co.uk/success",
+      },
+    });
+    if (result.error) {
+      console.log(result.error.message);
+      setLoading(false);
+      setError(result?.error?.message || "");
       // router.push('/error')
     }
-  }
+  };
 
   return (
-    <form id='stripe-payment-form' onSubmit={handleSubmit}>
+    <form id="stripe-payment-form" onSubmit={handleSubmit}>
+      <p className="text-red-700 mb-5">
+        {Error && <span> Error: {Error}</span>}
+      </p>
+    
       <PaymentElement />
       <div className="w-1/3">
-        <button className="bg-[var(--c-primary)] text-white rounded mt-4 py-2 px-4 w-fit" disabled={!stripe}>Submit</button>
+        <button
+          className="bg-[var(--c-primary)] text-white rounded mt-4 py-2 px-4 w-fit"
+          disabled={!stripe}
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </button>
       </div>
-  </form>
-  )
+    </form>
+  );
 }
 
-export default StripeForm
+export default StripeForm;
