@@ -121,20 +121,22 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
               {!isPending && !isRejected && CampaignData?.length > 0
                 ? CampaignData.map(
                     (bannerdata: VotingCampaign, index: number) => (
-                      <SwiperSlide key={bannerdata.id}>
-                        <Link href={`/campaign/${bannerdata.id}`}>
+                      <SwiperSlide key={bannerdata.id} className="relative">
+                      <Link href={`/campaign/${bannerdata.id}`}>
+                        <div className="relative flex items-center text-center justify-center">
                           <Image
-                            src={
-                              (process.env.NEXT_PUBLIC_AWS_URI as string) +
-                              bannerdata.banner
-                            }
+                            src={(process.env.NEXT_PUBLIC_AWS_URI as string) + bannerdata.banner}
                             height={1000}
                             width={3000}
                             alt="Banner"
-                            className="h-full w-full  object-cover"
+                            className="h-full w-full object-cover"
                           />
-                        </Link>
-                      </SwiperSlide>
+                          <h3 className="absolute flex text-center items-center justify-center z-20 text-white text-xl md:text-5xl font-bold leading-8 ">
+                            FDApp: Your Voice, Your Vote.  <br></br>  Secure easy, and just a click away
+                          </h3>
+                        </div>
+                      </Link>
+                    </SwiperSlide>
                     )
                   )
                 : Array.from({ length: 3 }).map((_, index: number) => {
