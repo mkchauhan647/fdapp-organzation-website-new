@@ -122,8 +122,8 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
                 ? CampaignData.map(
                     (bannerdata: VotingCampaign, index: number) => (
                       <SwiperSlide key={bannerdata.id} className="relative">
-                      <Link href={`/campaign/${bannerdata.id}`}>
-                        <div className="relative flex items-center text-center justify-center">
+                      <Link href={`/campaign/${bannerdata.id}`} className=" text-center align-middle">
+                        <div className="relative flex items-center align-middle text-center justify-center">
                           <Image
                             src={(process.env.NEXT_PUBLIC_AWS_URI as string) + bannerdata.banner}
                             height={1000}
