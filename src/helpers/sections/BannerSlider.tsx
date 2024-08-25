@@ -109,7 +109,7 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
               slidesPerView={1}
               loop={true}
               autoplay={{
-                delay: 3000, // 3 seconds delay between slides
+                delay: 3000,
                 disableOnInteraction: false,
               }}
               navigation={{
@@ -121,47 +121,45 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
               {!isPending && !isRejected && CampaignData?.length > 0
                 ? CampaignData.map(
                     (bannerdata: VotingCampaign, index: number) => (
-                      <SwiperSlide key={bannerdata.id} className="relative">
-                      <Link href={`/campaign/${bannerdata.id}`} className=" text-center align-middle">
-                        <div className="relative flex items-center align-middle text-center justify-center">
-                          <Image
-                            src={(process.env.NEXT_PUBLIC_AWS_URI as string) + bannerdata.banner}
-                            height={1000}
-                            width={3000}
-                            alt="Banner"
-                            className="h-full w-full object-cover"
-                          />
-                          <h3 className="absolute flex text-center items-center justify-center z-20 text-white text-xl md:text-5xl font-bold leading-8 ">
-                            FDApp: Your Voice, Your Vote.  <br></br>  Secure easy, and just a click away
-                          </h3>
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                    )
-                  )
-                : Array.from({ length: 3 }).map((_, index: number) => {
-                    return (
-                      <SwiperSlide key={index}>
-                        {/* <SkeletonBanner
-                          isloading={
-                            isPending ||
-                            isRejected ||
-                            BannerData?.length == 0 ||
-                            !BannerData
-                          }
-                        /> */}
-                        <Link href={`/campaign`} key={index}>
-                          <Image
-                            src={banner}
-                            height={1800}
-                            width={1800}
-                            alt="Banner"
-                            className="h-full w-full object-cover"
-                          />
+                      <SwiperSlide key={bannerdata.id} className="relative ">
+                        <Link
+                          href={`/campaign/${bannerdata.id}`}
+                          className="text-center"
+                        >
+                          <div className="relative flex items-center justify-center h-full">
+                            <Image
+                              src={`${process.env.NEXT_PUBLIC_AWS_URI}${bannerdata.banner}`}
+                              height={1000}
+                              width={3000}
+                              alt="Banner"
+                              className="h-full w-full object-cover"
+                            />
+                            <h3
+                              style={{ lineHeight: "4rem" }}
+                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white text-xl md:text-5xl font-bold text-center"
+                            >
+                              FDApp: Your Voice, <br />
+                              Your Vote. Secure, easy, <br />
+                              and just a click away
+                            </h3>
+                          </div>
                         </Link>
                       </SwiperSlide>
-                    );
-                  })}
+                    )
+                  )
+                : Array.from({ length: 3 }).map((_, index: number) => (
+                    <SwiperSlide key={index}>
+                      <Link href={`/campaign`} key={index}>
+                        <Image
+                          src={banner}
+                          height={1800}
+                          width={1800}
+                          alt="Banner"
+                          className="h-full w-full object-cover"
+                        />
+                      </Link>
+                    </SwiperSlide>
+                  ))}
               <div className="controller_wrapper">
                 <div className="absolute top-[40%] translate-y-[-50%] left-0 z-10 flex w-full justify-between items-center py-[1rem] px-[1rem]">
                   <div className="back-btn b-back">
