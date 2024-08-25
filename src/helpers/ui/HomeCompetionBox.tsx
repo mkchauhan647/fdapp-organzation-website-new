@@ -86,9 +86,9 @@ const HomeCompetitionBox = ({
               />
             </div>
           </div>
-          <div className="right cursor-pointer">
+          <div className="right cursor-pointer ">
             <Link className="cursor-pointer z-10" href={link}>
-              <span className="bg-[#F58314] px-3 py-2 rounded-full font-normal cursor-pointer">
+              <span className="bg-[#F58314] hover:bg-[#F58313] px-3 py-2 rounded-full font-normal cursor-pointer">
                 Vote Now
               </span>
             </Link>
