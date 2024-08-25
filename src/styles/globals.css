@@ -760,3 +760,39 @@ input[type=range]::-webkit-slider-runnable-track  {
   background: rgb(150, 150, 150);
   border-radius: 20px;
 }
+
+
+@media  (max-width:1700px) {
+  .Competition-section {
+    margin-top: 20rem;
+  }
+}
+
+@media (max-width: 1500px) {
+  .Competition-section {
+    margin-top: 12rem;
+  }
+}
+
+@media (max-width: 1290px) {
+  .Competition-section {
+    margin-top: 20rem;
+  }
+}
+@media (max-width: 1024px) {
+  .Competition-section {
+    margin-top: 10rem;
+  }
+}
+@media (max-width: 940px) {
+  .Competition-section {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .Competition-section {
+    margin-top: 1rem;
+  }
+}
+
