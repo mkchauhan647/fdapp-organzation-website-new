@@ -35,24 +35,10 @@ const HomeCompetitionBox = ({
         }}
         className="flex gap-[5px] h-[18rem] w-full items-center"
       >
-        {/* Gradient overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(to bottom, rgba(0.4, 0.4, 0.5, 0.9), rgba(20, 240, 230, 0))",
-            borderRadius: "10px",
-          }}
-        />
+       
 
         {/* Content area */}
-        <div
-          style={{ position: "relative", zIndex: 2 }}
-          className="flex justify-between items-center w-full ml-10 mr-10"
+        <div          className="flex justify-between items-center w-full ml-10 mr-10"
         >
           <div className="left flex flex-col gap-6">
             <div>
@@ -79,19 +65,20 @@ const HomeCompetitionBox = ({
               </div>
             </div>
             <div className="flex gap-[.5rem] flex-col">
-              <TitleBtn title={campaign?.description ?? ""} type="color" />
+              <Link className="cursor-pointer" href={link}>
+              <span className="bg-[#F58314] hover:bg-[#F58313] px-4 py-1 rounded-full font-normal cursor-pointer">
+                Vote Now
+              </span>
+            </Link>
+            </div>
+          </div>
+          <div className="right cursor-pointer flex flex-col gap-2 ">
+           
+             <TitleBtn title={campaign?.description ?? ""} type="color" />
               <TitleBtn
                 title={`${campaign?.candidateCount} Contestants`}
                 type="light"
               />
-            </div>
-          </div>
-          <div className="right cursor-pointer ">
-            <Link className="cursor-pointer z-10" href={link}>
-              <span className="bg-[#F58314] hover:bg-[#F58313] px-3 py-2 rounded-full font-normal cursor-pointer">
-                Vote Now
-              </span>
-            </Link>
           </div>
         </div>
       </div>
