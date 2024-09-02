@@ -58,6 +58,7 @@ export default function PaymentModal({
   );
 
   async function getXApiKey() {
+    console.log("ok");
     const response = await axios.get(
       ` ${process.env.NEXT_PUBLIC_VOTING_IDENTITY_URI}/x-api-key/${orgID}`
     );
@@ -70,6 +71,7 @@ export default function PaymentModal({
   useEffect(() => {
     const fetchIntent = async (): Promise<void> => {
       try {
+        console.log(await getXApiKey())
         const apiKey = x_api_key || (await getXApiKey());
         dataService.setApiKey(apiKey);
 
@@ -95,6 +97,7 @@ export default function PaymentModal({
     fetchIntent();
   }, []);
   const handleOpen = () => {
+    console.log("ok");
     onOpen();
   };
 
