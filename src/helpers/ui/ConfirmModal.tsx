@@ -97,7 +97,7 @@ export default function Confirm({
 
   const handleOpen = () => {
     !isDisabled && onOpen();
-  };
+  }; 
 
   function handleSubmit(e: any) {
     dispatch(CouponsSlice.actions.addCoupnTransaction(CouponTransactionData));
