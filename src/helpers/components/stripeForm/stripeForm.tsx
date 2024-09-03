@@ -1,5 +1,7 @@
 "use client";
 import { setPaymentData, setPaymentStatus } from "@/helpers/redux/PaymentStatusCheck/paymentSlice";
+import { PaymentIntent, StripeError } from '@stripe/stripe-js'
+
 import {
   PaymentElement,
   useElements,
@@ -15,7 +17,6 @@ function StripeForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [Error, setError] = useState("");
-  const dispatch = useDispatch();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements) {
@@ -29,18 +30,19 @@ function StripeForm() {
         return_url: "https://user.fdapp.co.uk/success",
       },
     });
-    
+    console.log(result)
     if (result.error) {
       console.log(result.error.message);
       setLoading(false);
       setError(result?.error?.message || "");
-      // router.push('/error')
+      // router.push('/error') // Handle error appropriately
     } else {
-      // Assuming result.paymentIntent is the data you want
-      dispatch(setPaymentStatus('succeeded'));
-      // dispatch(setPaymentData(result.paymentIntent));
-      // Redirect to success page
-      router.push('/success');
+    router.push('/success');
+
+       // Access paymentIntent only if no error
+    
+        // Redirect to success page
+      
     }
   };
 
