@@ -1,6 +1,6 @@
 "use client";
 import { setPaymentData, setPaymentStatus } from "@/helpers/redux/PaymentStatusCheck/paymentSlice";
-import { PaymentIntent } from '@stripe/stripe-js'
+import { PaymentIntent, StripeError } from '@stripe/stripe-js'
 
 import {
   PaymentElement,
@@ -10,7 +10,10 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
+interface PaymentResult {
+  error: StripeError | null;
+  paymentIntent: PaymentIntent | null;
+}
 function StripeForm() {
   const stripe = useStripe();
   const elements = useElements();
@@ -39,12 +42,12 @@ function StripeForm() {
       setError(result?.error?.message || "");
       // router.push('/error') // Handle error appropriately
     } else {
-      const { paymentIntent } = result; // Access paymentIntent only if no error
-      if (paymentIntent) {
+       // Access paymentIntent only if no error
+    
         dispatch(setPaymentStatus("success")); // Update payment status
-        dispatch(setPaymentData(paymentIntent));
+        dispatch(setPaymentData(result));
         router.push('/success'); // Redirect to success page
-      }
+      
     }
   };
 
