@@ -34,23 +34,23 @@ const Success : React.FC = () => {
       {/* Transaction Details */}
       <div className="text-start space-y-2 w-full">
         <p className="text-gray-600 font-bold">
-          Transaction ID: <span className="font-medium">{paymentData?.paymentData.data.transactionId}</span>
+          Transaction ID: <span className="font-medium">{paymentData?.dataValues?.id}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Amount: <span className="font-medium">{paymentData?.paymentData.data.totalTransactionAmount}</span>
+          Amount: <span className="font-medium">{paymentData?.totalTransactionAmount}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Service Charge: <span className="font-medium">{paymentData?.paymentData.data.transactionCharge}</span>
+          Service Charge: <span className="font-medium">{paymentData?.transactionCharge}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Payment Service: <span className="font-medium">{paymentData?.paymentData.data.paymentService}</span>
+          Payment Service: <span className="font-medium">Stripe</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Status: <span className={`font-medium ${paymentData?.paymentData.data.paymentStatus==="FAILED"?"text-red-600":"text-green-600"} `}>{paymentData?.paymentData.data.paymentStatus}</span>
+          Status: <span className={`font-medium text-green-600 `}>{paymentStatus}</span>
         </p>
         
         <p className="text-gray-600 font-bold">
-          Currency: <span className="font-medium">{paymentData?.paymentData.data.currency}</span>
+          Currency: <span className="font-medium">{paymentData?.dataValues?.currency}</span>
         </p>
       </div>
                 </div>

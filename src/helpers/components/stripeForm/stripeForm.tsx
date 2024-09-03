@@ -10,17 +10,13 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-interface PaymentResult {
-  error: StripeError | null;
-  paymentIntent: PaymentIntent | null;
-}
+
 function StripeForm() {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [Error, setError] = useState("");
-  const dispatch = useDispatch();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements) {
@@ -34,7 +30,6 @@ function StripeForm() {
         return_url: "https://user.fdapp.co.uk/success",
       },
     });
-  
     console.log(result)
     if (result.error) {
       console.log(result.error.message);
@@ -42,11 +37,11 @@ function StripeForm() {
       setError(result?.error?.message || "");
       // router.push('/error') // Handle error appropriately
     } else {
+    router.push('/success');
+
        // Access paymentIntent only if no error
     
-        dispatch(setPaymentStatus("success")); // Update payment status
-        dispatch(setPaymentData(result));
-        router.push('/success'); // Redirect to success page
+        // Redirect to success page
       
     }
   };

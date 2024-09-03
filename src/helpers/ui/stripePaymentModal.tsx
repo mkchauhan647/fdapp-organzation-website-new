@@ -18,6 +18,8 @@ import { useEffect, useState } from "react";
 import { GetClientSecretInterface } from "@/utils/schema/ApiInterface";
 import StripeForm from "../components/stripeForm/stripeForm";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setPaymentData, setPaymentStatus } from "../redux/PaymentStatusCheck/paymentSlice";
 
 const stripeInstance = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string
@@ -51,6 +53,7 @@ export default function PaymentModal({
   const { token, user, x_api_key } = useAppSelector(
     (state: RootState) => state.Auth
   );
+  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
   const [responseIntent, setIntentResponse] = useState<intentResponse | null>(
@@ -86,6 +89,9 @@ export default function PaymentModal({
         );
 
         setIntentResponse(response.data);
+
+        dispatch(setPaymentStatus("success")); // Update payment status
+        dispatch(setPaymentData(response.data));
       } catch (error:any) {
         console.log(error.message);
         toast.error(error.message);
