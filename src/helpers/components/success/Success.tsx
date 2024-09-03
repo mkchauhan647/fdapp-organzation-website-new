@@ -8,6 +8,7 @@ import { MdCheckCircle } from "react-icons/md";
 const Success : React.FC = () => {
     const paymentStatus = useSelector((state: RootState) => state.Payment.paymentStatus);
   const paymentData = useSelector((state: RootState) => state.Payment.paymentData);
+  console.log(paymentData)
     return (
         <>
             <div className="flex justify-center items-center py-10">
@@ -33,23 +34,23 @@ const Success : React.FC = () => {
       {/* Transaction Details */}
       <div className="text-start space-y-2 w-full">
         <p className="text-gray-600 font-bold">
-          Transaction ID: <span className="font-medium">{paymentData?.transactionId}</span>
+          Transaction ID: <span className="font-medium">{paymentData?.paymentData.data.transactionId}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Amount: <span className="font-medium">{paymentData?.totalTransactionAmount}</span>
+          Amount: <span className="font-medium">{paymentData?.paymentData.data.totalTransactionAmount}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Service Charge: <span className="font-medium">{paymentData?.transactionCharge}</span>
+          Service Charge: <span className="font-medium">{paymentData?.paymentData.data.transactionCharge}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Payment Service: <span className="font-medium">{paymentData?.paymentService}</span>
+          Payment Service: <span className="font-medium">{paymentData?.paymentData.data.paymentService}</span>
         </p>
         <p className="text-gray-600 font-bold">
-          Status: <span className={`font-medium ${paymentData?.paymentStatus==="FAILED"?"text-red-600":"text-green-600"} `}>{paymentData?.paymentStatus}</span>
+          Status: <span className={`font-medium ${paymentData?.paymentData.data.paymentStatus==="FAILED"?"text-red-600":"text-green-600"} `}>{paymentData?.paymentData.data.paymentStatus}</span>
         </p>
         
         <p className="text-gray-600 font-bold">
-          Currency: <span className="font-medium">{paymentData?.currency}</span>
+          Currency: <span className="font-medium">{paymentData?.paymentData.data.currency}</span>
         </p>
       </div>
                 </div>
