@@ -18,10 +18,54 @@ import {
 import { GetAllSponsers } from "@/helpers/redux/sponsers/_thunk";
 import SkeletonImage from "../Skeleton/SkeletonImage";
 
+declare global {
+  interface Window {
+    Calendly: any;
+  }
+}
+
+
 const SponserSlide: React.FC = () => {
   const { all_sponsers_data } = useAppSelector(
     (state: RootState) => state.Sponsers
   );
+
+  const [calendlyLoaded, setCalendlyLoaded] = React.useState(false);
+
+  useEffect(() => {
+
+    // Dynamically load the Calendly CSS
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+
+    // Dynamically load the Calendly script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = () => {
+      setCalendlyLoaded(true); // Set state to true when script is loaded
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleClick = () => {
+    // Check if Calendly is available before using it
+    if (calendlyLoaded && window.Calendly) {
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/fdapponline/30min' });
+    } else {
+      console.error('Calendly widget not loaded yet');
+    }
+    return false;
+  };
+
 
   const dispatch = useAppDispatch();
   const { x_api_key } = useAppSelector((state: RootState) => state.Auth);
@@ -60,7 +104,7 @@ const SponserSlide: React.FC = () => {
             </span>
 
             <span>
-              <button className="btn-primary">Contact Us</button>
+              <button onClick={handleClick} className="btn-primary">Contact Us</button>
             </span>
           </div>
 
