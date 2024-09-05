@@ -18,10 +18,51 @@ import {
 import { GetAllSponsers } from "@/helpers/redux/sponsers/_thunk";
 import SkeletonImage from "../Skeleton/SkeletonImage";
 
+declare global {
+  interface Window {
+    Calendly: any;
+  }
+}
+
+
 const SponserSlide: React.FC = () => {
   const { all_sponsers_data } = useAppSelector(
     (state: RootState) => state.Sponsers
   );
+
+  const [calendlyLoaded, setCalendlyLoaded] = React.useState(false);
+
+  useEffect(() => {
+
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = () => {
+      setCalendlyLoaded(true); 
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (calendlyLoaded && window.Calendly) {
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/fdapponline/30min' });
+    } else {
+      console.error('Calendly widget not loaded yet');
+    }
+    return false;
+  };
+
 
   const dispatch = useAppDispatch();
   const { x_api_key } = useAppSelector((state: RootState) => state.Auth);
@@ -53,14 +94,13 @@ const SponserSlide: React.FC = () => {
             </span>
             <span className="flex flex-col gap-[.5rem] text-justify">
               <p className="paragraph text-[var(--light-text-color)]">
-                {/* Replace this with actual content if available */}
                 Sponsorship helps us achieve our goals by bringing together
                 like-minded partners.
               </p>
             </span>
 
             <span>
-              <button className="btn-primary">Contact Us</button>
+              <button onClick={handleClick} className="btn-primary">Contact Us</button>
             </span>
           </div>
 
