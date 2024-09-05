@@ -34,19 +34,17 @@ const SponserSlide: React.FC = () => {
 
   useEffect(() => {
 
-    // Dynamically load the Calendly CSS
     const link = document.createElement('link');
     link.href = 'https://assets.calendly.com/assets/external/widget.css';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 
 
-    // Dynamically load the Calendly script
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     script.onload = () => {
-      setCalendlyLoaded(true); // Set state to true when script is loaded
+      setCalendlyLoaded(true); 
     };
     document.body.appendChild(script);
 
@@ -57,7 +55,6 @@ const SponserSlide: React.FC = () => {
   }, []);
 
   const handleClick = () => {
-    // Check if Calendly is available before using it
     if (calendlyLoaded && window.Calendly) {
       window.Calendly.initPopupWidget({ url: 'https://calendly.com/fdapponline/30min' });
     } else {
@@ -97,7 +94,6 @@ const SponserSlide: React.FC = () => {
             </span>
             <span className="flex flex-col gap-[.5rem] text-justify">
               <p className="paragraph text-[var(--light-text-color)]">
-                {/* Replace this with actual content if available */}
                 Sponsorship helps us achieve our goals by bringing together
                 like-minded partners.
               </p>
