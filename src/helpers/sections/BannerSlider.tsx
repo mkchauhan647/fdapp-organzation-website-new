@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { DynamicCountDown } from "@/helpers/dynamic-imports/components";
+import Title from "../components/Title/Title";
 import {
   RootState,
   useAppDispatch,
@@ -18,7 +19,6 @@ import { orgID } from "@/utils/constants/constants";
 import { AuthSlice } from "../redux/Auth/AuthSlice";
 import axios from "axios";
 import { dataService } from "@/utils/data/api/dataServices";
-
 import {
   Navigation,
   Pagination,
@@ -94,7 +94,7 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
   return (
     <>
       <section className="Hero-section -has-dynamic-timer -is-hero">
-        <div className="h-fit">
+        <div className="h-fit relative">
           <div
             className={`sliderbanner w-full ${
               campaignID
@@ -134,14 +134,6 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
                               alt="Banner"
                               className="h-full w-full object-cover"
                             />
-                            <h3
-                              style={{ lineHeight: "4rem" }}
-                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white text-xl md:text-5xl font-bold text-center"
-                            >
-                              FDApp: Your Voice, <br />
-                              Your Vote. Secure, easy, <br />
-                              and just a click away
-                            </h3>
                           </div>
                         </Link>
                       </SwiperSlide>
@@ -171,6 +163,33 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
                 </div>
               </div>
             </Swiper>
+          </div>
+          <div
+            style={{ lineHeight: "4rem" }}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white text-xl md:text-4xl font-light text-center"
+          >
+            <Title
+              title="Welcome to FDAPP"
+              className={"text-white border-white"}
+            />
+            <span className="font-bold text-xl md:text-4xl">Your</span> Voice,
+            <span className="font-bold text-xl md:text-4xl">
+              Your
+            </span> Vote.{" "}
+            <span className="font-bold text-xl md:text-4xl">Secure, Easy</span>
+            <br />
+            <span className="font-bold text-xl md:text-4xl">
+              And Just A
+            </span>{" "}
+            Click Away
+            <div className="flex justify-center gap-10 text-base">
+              <div className="bg-orange-500 text-white px-4 py-2  ">
+                Get Started
+              </div>
+              <div className=" text-white px-4 py-2 border border-white ">
+                Learn More
+              </div>
+            </div>
           </div>
         </div>
       </section>

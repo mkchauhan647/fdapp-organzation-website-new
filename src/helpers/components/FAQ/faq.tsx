@@ -3,6 +3,7 @@ import { FAQ } from "@/utils/schema/ApiInterface";
 import { Skeleton } from "@nextui-org/react";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
+import Title from "../Title/Title";
 
 const Question: React.FC = () => {
   const { all_faq_data } = useAppSelector((state: RootState) => state.FAQ);
@@ -24,29 +25,29 @@ const Question: React.FC = () => {
 
   return (
     <section className="bg-white dark:bg-gray-900" id="faq">
-      <div className="container  xl:px-20 2xl:px-0 mx-auto relative pt-12 pb-12">
+      <div className="container xl:px-20 2xl:px-0 mx-auto relative pt-12 pb-12">
         <div className="mb-[1rem] text-center">
-          <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
-            Frequently Asked Questions
+          <Title title={"FAQS"} className="text-secondary border-secondary" />
+          <h1 className="text-[2rem] font-[600] text-primary font-poppins">
+            Find Your{" "}
+            <span className="text-secondary text-[2rem]">Solution</span> Here
           </h1>
         </div>
 
-        <div className="w-full sm:w-4/5  lg:w-4/5 mx-auto flex flex-col gap-2">
+        <div className="w-full sm:w-4/5 lg:w-4/5 mx-auto flex flex-col gap-2">
           {!isPending &&
             !isRejected &&
             isFulfilled &&
-           Faq?.map((faq: FAQ, index: number) => (
+            Faq?.map((faq: FAQ, index: number) => (
               <div
                 key={index}
-                className={`mb-3 bg-[var(--c-l-primary)] hover:shadow-sm ${
-                  expandedIndex === index
-                    ? "border-l-[var(--c-secondary)]"
-                    : "border-l-[var(--light-secondary)]"
-                } border-l-3 rounded-lg`}
+                className={`mb-3 bg-white rounded-lg ${
+                  expandedIndex === index ? "shadow-lg" : "shadow-sm "
+                }`}
               >
                 <div
                   onClick={() => toggleExpansion(index)}
-                  className="p-4 sm:p-4"
+                  className="p-4 sm:p-4 cursor-pointer"
                 >
                   <button className="w-full flex items-center focus:outline-none">
                     <svg
@@ -66,17 +67,14 @@ const Question: React.FC = () => {
                       />
                     </svg>
                     <div className="w-full flex justify-between items-center ">
-                      <h3 className="px-2 text-[14px] sm:text-[16px] text-bold text-white FAQtext text-left">
+                      <h3 className="px-2 text-[14px] sm:text-[16px] font-bold text-primary text-left">
                         {faq.question}
                       </h3>
-                      <span>
-                        <FaChevronDown className="md:text-[12px] text-[8px] font-[700] cursor-pointer text-white" />
-                      </span>
                     </div>
                   </button>
                   {expandedIndex === index && (
-                    <div className="mt-4 border-t-[1px] border-[var(--c-grey)] pt-4">
-                      <p className="max-w-full text-[12px] sm:text-[14px] text-white a-faqstext text-left">
+                    <div className="mt-4 bg-white p-4 ">
+                      <p className="max-w-full text-[12px] sm:text-[14px] text-primary text-left">
                         {faq.answer}
                       </p>
                     </div>
@@ -84,14 +82,12 @@ const Question: React.FC = () => {
                 </div>
               </div>
             ))}
-          {(Faq?.length == 0 || isPending || isRejected) &&
-            Array.from({ length: 4 }).map((_, index) => {
-              return (
-                <Skeleton isLoaded={false} key={index}>
-                  <div className="w-full h-6 mb-3"></div>
-                </Skeleton>
-              );
-            })}
+          {(Faq?.length === 0 || isPending || isRejected) &&
+            Array.from({ length: 4 }).map((_, index) => (
+              <Skeleton isLoaded={false} key={index}>
+                <div className="w-full h-6 mb-3"></div>
+              </Skeleton>
+            ))}
         </div>
       </div>
     </section>

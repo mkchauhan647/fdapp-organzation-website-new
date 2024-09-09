@@ -27,7 +27,7 @@ const Home: React.FC = () => {
         <FaqSection />
         <Sponser />
         <NewsUpdate />
-        <CookieConsent/>
+        <CookieConsent />
       </PublicLayout>
     </>
   );

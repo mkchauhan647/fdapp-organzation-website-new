@@ -17,6 +17,7 @@ import { VotingCampaign } from "@/utils/schema/ApiInterface";
 import { CommonSection, Heading } from "@/helpers/dynamic-imports/ui";
 import SkeletonCampaign from "../Skeleton/SkeletonCampaign";
 import HomeCompetitionBox from "@/helpers/ui/HomeCompetionBox";
+import Title from "../Title/Title";
 
 const CompetionSlide: React.FC = () => {
   const { all_campaign_data } = useAppSelector(
@@ -27,20 +28,22 @@ const CompetionSlide: React.FC = () => {
   console.log("campaign data " + JSON.stringify(CampaignData));
 
   const dataCampaign = {
-    title: "Campaigns",
+    title: "Our Campaigns",
     description:
       "  Welcome to FDAPPA where your voice matters. With FDApp, our official voting platform, you can securely and easily cast your vote via SMS or email, ensuring that your opinion is heard. FDApp makes participation effortless, no matter where you are. Join us in making a difference—your vote is just a click away with FDApp",
   };
 
   return (
     <CommonSection name="Competition-section -has-slider -has-campaigns p-0">
-      <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
+      <header className="w-full flex flex-col items-center  relative">
+        <Title
+          title={dataCampaign.title}
+          className="text-secondary border-secondary"
+        />
         <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
           {dataCampaign.title}
         </h1>
-        <p className="topic-desc text-center">
-          {dataCampaign.description}
-        </p>
+        <p className="w-[70%] text-center">{dataCampaign.description}</p>
       </header>
 
       <div className="competition-slider flex  items-baseline  w-full relative">

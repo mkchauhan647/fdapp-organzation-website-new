@@ -24,7 +24,6 @@ declare global {
   }
 }
 
-
 const SponserSlide: React.FC = () => {
   const { all_sponsers_data } = useAppSelector(
     (state: RootState) => state.Sponsers
@@ -33,18 +32,16 @@ const SponserSlide: React.FC = () => {
   const [calendlyLoaded, setCalendlyLoaded] = React.useState(false);
 
   useEffect(() => {
-
-    const link = document.createElement('link');
-    link.href = 'https://assets.calendly.com/assets/external/widget.css';
-    link.rel = 'stylesheet';
+    const link = document.createElement("link");
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    link.rel = "stylesheet";
     document.head.appendChild(link);
 
-
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     script.onload = () => {
-      setCalendlyLoaded(true); 
+      setCalendlyLoaded(true);
     };
     document.body.appendChild(script);
 
@@ -56,13 +53,14 @@ const SponserSlide: React.FC = () => {
 
   const handleClick = () => {
     if (calendlyLoaded && window.Calendly) {
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/fdapponline/30min' });
+      window.Calendly.initPopupWidget({
+        url: "https://calendly.com/fdapponline/30min",
+      });
     } else {
-      console.error('Calendly widget not loaded yet');
+      console.error("Calendly widget not loaded yet");
     }
     return false;
   };
-
 
   const dispatch = useAppDispatch();
   const { x_api_key } = useAppSelector((state: RootState) => state.Auth);
@@ -82,11 +80,17 @@ const SponserSlide: React.FC = () => {
     <>
       <CommonSection name="sponsore bg-[var(--pagebg1)]">
         <section className="flex md:flex-row flex-col w-full gap-[2rem]">
-          <div className="md:w-[50%] w-full flex flex-col gap-[1.5rem]">
+          <div className="md:w-[50%] w-full flex flex-col justify-center gap-[1.5rem]">
+            <div className="flex items-center gap-4">
+              <p className="paragraph text-secondary font-bold uppercase">
+                Our Sponsors
+              </p>
+              <div className="border-1 w-6 border-secondary"></div>
+            </div>
             <span>
-              <h1 className="text-[2.5rem] font-[700] text-[var(--blue)] w-full">
+              <h1 className="text-[1.5rem] font-[700] text-[var(--blue)] w-full">
                 Supporting Partners:{" "}
-                <span className="text-[2.5rem] font-[700] text-[var(--c-secondary)]">
+                <span className="text-[1.5rem] font-[700] text-[var(--c-secondary)]">
                   Empowering
                 </span>{" "}
                 Dreams Together!
@@ -100,31 +104,31 @@ const SponserSlide: React.FC = () => {
             </span>
 
             <span>
-              <button onClick={handleClick} className="btn-primary">Contact Us</button>
+              <button onClick={handleClick} className="btn-primary">
+                Contact Us
+              </button>
             </span>
           </div>
 
           <div className="md:w-[50%] w-full bg-white rounded-md px-[1rem] py-[1rem] md:px-[2rem] md:py-[2rem] flex flex-col gap-[1.5rem]">
-            <h1 className="text-[24px] text-[var(--c-secondary)] font-[600]">
-              Sponsers
-            </h1>
-
             {all_sponsers_data.isPending ? (
-          <div className="w-full flex justify-between gap-3 items-baseline flex-wrap">
-            {Array.from({ length: fulfilledResponseOrg.length || 1 }).map((_, index) => (
-              <div key={index} className="flex w-10">
-                <SkeletonImage isLoading={all_sponsers_data.isPending} />
+              <div className="w-full flex justify-between gap-3 items-baseline flex-wrap">
+                {Array.from({ length: fulfilledResponseOrg.length || 1 }).map(
+                  (_, index) => (
+                    <div key={index} className="flex w-10">
+                      <SkeletonImage isLoading={all_sponsers_data.isPending} />
+                    </div>
+                  )
+                )}
               </div>
-            ))}
-          </div>
-        ) : all_sponsers_data.isRejected ? (
-          <div className="w-full flex justify-center items-center">
-            <p>
-              There was an error fetching the data. Please try again later. .
-            </p>
-          </div>
-        ) :  
-            fulfilledResponseOrg.length > 0 ? (
+            ) : all_sponsers_data.isRejected ? (
+              <div className="w-full flex justify-center items-center">
+                <p>
+                  There was an error fetching the data. Please try again later.
+                  .
+                </p>
+              </div>
+            ) : fulfilledResponseOrg.length > 0 ? (
               <div className="competition-slider px-2 sm:px-0 flex flex-wrap justify-start gap-[.5rem] items-baseline">
                 {fulfilledResponseOrg?.map((sponsor: any, index: any) => (
                   <div key={sponsor.id} className="relative mx-auto md:mx-0">
