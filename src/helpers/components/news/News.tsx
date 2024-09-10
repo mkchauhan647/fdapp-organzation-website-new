@@ -16,6 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { A11y, Navigation, Pagination } from "swiper/modules";
 import Controller from "@/helpers/ui/Controller";
+import Title from "../Title/Title";
 
 const NewsUpdate: React.FC = () => {
   const { all_news_data } = useAppSelector((state: RootState) => state.News);
@@ -28,8 +29,13 @@ const NewsUpdate: React.FC = () => {
     <>
       <CommonSection name="news">
         <header className="w-full flex flex-col items-center mb-[20px] sm:mb-[30px] relative">
-          <h1 className="text-[2rem] font-[600] text-[var(--blue)] font-poppins">
-            Latest News & Updates
+          <Title
+            title={"News & Articles"}
+            className="text-secondary border-secondary"
+          />
+          <h1 className="text-[2rem] font-[600] text-primary font-poppins">
+            Get Latest <span className="text-secondary text-[2rem]">News</span>{" "}
+            & <span className="text-secondary text-[2rem]">Updates</span>
           </h1>
           {/* <p className="topic-desc text-center">
             {orgSettingData?.latestNewsUpdates}
@@ -65,11 +71,11 @@ const NewsUpdate: React.FC = () => {
               },
 
               1200: {
-                slidesPerView: 3.5,
+                slidesPerView: 3,
               },
 
               1300: {
-                slidesPerView: 4,
+                slidesPerView: 3,
               },
             }}
           >

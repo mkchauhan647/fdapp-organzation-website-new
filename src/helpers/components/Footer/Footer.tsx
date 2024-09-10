@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
                       <IoMdMail className="w-[1.3rem] h-[1.3rem]" />
                     </span>
                     {/* <span className="">{orgSettingData?.orgEmail}</span> */}
-                    <span className="">contact@fdapp.co.uk                    </span>
+                    <span className="">contact@fdapp.co.uk </span>
                   </Link>
                 </div>
 
@@ -151,9 +151,7 @@ const Footer: React.FC = () => {
                       Contestants
                     </Link>
                   </li>
-                  {/* <li className='w-fit'>
-                                        <Link href='/pricing' className="hover:opacity-[0.8] text-[12px] md:text-[14px]">Pricing</Link>
-                                    </li> */}
+
                   <li>
                     <Link
                       href="/about"

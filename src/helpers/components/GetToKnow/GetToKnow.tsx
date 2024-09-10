@@ -1,6 +1,7 @@
 import { RootState, useAppSelector } from "@/helpers/hooks/useStoreHooks";
 import CommonSection from "@/helpers/ui/CommonSection";
-import { GTKBanner } from "@/utils/image/image";
+import about1 from "/public/image/about/about.jpg";
+import about2 from "/public/image/about/about1.jpg";
 import Image from "next/image";
 import * as React from "react";
 
@@ -15,31 +16,19 @@ const GetToKnow: React.FC = () => {
   if (fulfilledResponseOrg?.data && Array.isArray(fulfilledResponseOrg.data)) {
     [orgSettingData] = fulfilledResponseOrg.data;
   }
+  <div className="border-1 w-6"></div>;
+
   return (
     <>
-      <section className="gettoknow pb-8 sm:pb-12">
+      <section className="gettoknow pb-8 sm:pb-12 bg-bgColor">
         <div className="container mx-auto">
           <div className="flex md:flex-row flex-col gap-[4rem] md:gap-[1rem] w-full py-[3rem] border-t-2">
-            <div className="md:w-[50%] w-full relative">
-              <div className="w-[90%] h-[15rem] md:h-[20rem] bg-[var(--c-secondary)] rounded-md "></div>
-
-              {/* <video autoPlay className='w-[90%] h-[15rem] md:h-[20rem] rounded-md absolute top-[2rem] left-[2rem] z-10 shadow-md bg-[white]'>
-                                <source src="/video/video1.mp4" type="video/mp4" className='rounded-md'/>
-                            </video> */}
-              <Image
-                src={GTKBanner}
-                width={800}
-                height={800}
-                alt="gtk-banner"
-                className="w-[90%] h-[15rem] md:h-[20rem] rounded-md absolute top-[2rem] left-[2rem] z-10 shadow-md bg-[white]"
-              />
-            </div>
-
             <div className="md:w-[50%] w-full flex flex-col items-start gap-[1rem]">
               <div className="flex flex-col gap-[.5rem]">
-                <span>
-                  <p className="paragraph text-[var(--blue)]">Get To Know Us</p>
-                </span>
+                <div className="flex items-center gap-4">
+                  <p className="paragraph text-secondary font-bold">About Us</p>
+                  <div className="border-1 w-6 border-secondary"></div>
+                </div>
                 <span>
                   <h1 className="text-[2rem] font-[700] text-[var(--blue)] w-[80%]">
                     Your{" "}
@@ -52,19 +41,36 @@ const GetToKnow: React.FC = () => {
 
                 <span>
                   {/* <p className='paragraph text-[var(--light-text-color)]'>{orgSettingData?.knowUsBody}</p> */}
-                  <p className="paragraph text-[var(--light-text-color)]">
+                  <p className="paragraph text-textColor">
                     Discover EasyVotingApp, the ultimate solution for managing
                     SMS and email-based voting contests with ease. Whether
-                    you’re hosting a talent show, a community poll, or any other
-                    voting event, EasyVotingApp simplifies the process and
+                    you&apos;re hosting a talent show, a community poll, or any
+                    other voting event, EasyVotingApp simplifies the process and
                     ensures a seamless experience for both participants and
                     voters.
                   </p>
                 </span>
               </div>
-
               <div>
                 <button className="btn-primary">Read More</button>
+              </div>
+            </div>
+            <div className="md:w-[50%] w-full  gap-10 relative">
+              <div className="flex gap-10">
+                <Image
+                  src={about1}
+                  width={400}
+                  height={300}
+                  alt="gtk-banner"
+                  className="w-[45%] h-[25rem] md:h-[20rem] rounded-md shadow-md"
+                />
+                <Image
+                  src={about2}
+                  width={400}
+                  height={300}
+                  alt="gtk-banner"
+                  className="w-[45%] h-[25rem] md:h-[20rem] rounded-md shadow-md"
+                />
               </div>
             </div>
           </div>

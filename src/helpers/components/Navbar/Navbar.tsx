@@ -203,21 +203,20 @@ const Navbar = () => {
                     </Link>
                   </li>
                 </ul>
-                <div className="flex items-center gap-[0.8em]">
-                  <SearchBar />
-
-                  <Notification isLoggedIn={token ? true : false} />
-
-                  {token ? <PModal {...user} /> : <LoginModal />}
-                </div>
               </nav>
+              <div className="flex items-center gap-[0.8em]">
+                <SearchBar />
+
+                <Notification isLoggedIn={token ? true : false} />
+
+                {token ? <PModal {...user} /> : <LoginModal />}
+              </div>
 
               <div className="lg:hidden  flex items-center gap-[9px] justify-center">
                 <div className="flex items-center gap-4 md:gap-7 mt-0  w-fit mx-auto mr-4 lg:mr-0">
                   {/* <IoSearch className='text-xl text-[var(--c-grey)] w-[20px] h-[20px] md:w-[25px] md:h-[25px]' /> */}
                   <SearchBar />
                   <Notification isLoggedIn={token ? true : false} />
-                  
 
                   {token ? <PModal {...user} /> : <LoginModal />}
                 </div>
@@ -255,7 +254,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         href="/"
-                        className="text-[var(--c-grey)] text-[20px] text-[600]"
+                        className="text-[var(--c-grey)] text-[20px]"
                       >
                         Home
                       </Link>
@@ -264,7 +263,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         href="/campaign"
-                        className="text-[var(--c-grey)] text-[20px] text-[600]"
+                        className="text-[var(--c-grey)] text-[20px] "
                       >
                         Campaign
                       </Link>
@@ -272,7 +271,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         href="/contestants"
-                        className="text-[var(--c-grey)] text-[20px] text-[600]"
+                        className="text-[var(--c-grey)] text-[20px]"
                       >
                         Contestants
                       </Link>
