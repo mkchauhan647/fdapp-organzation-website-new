@@ -172,20 +172,28 @@ const BannerSlider: React.FC<{ campaignID?: string }> = ({ campaignID }) => {
               title="Welcome to FDAPP"
               className={"text-white border-white"}
             />
-            <span className="font-bold text-xl md:text-4xl">Your</span> Voice,
-            <span className="font-bold text-xl md:text-4xl">
-              Your
-            </span> Vote.{" "}
-            <span className="font-bold text-xl md:text-4xl">Secure, Easy</span>
-            <br />
-            <span className="font-bold text-xl md:text-4xl">
-              And Just A
-            </span>{" "}
-            Click Away
+            <div className="text-2xl md:text-4xl">
+              <span className="font-bold text-2xl md:text-4xl">Your</span>{" "}
+              Voice,
+              <span className="font-bold text-2xl md:text-4xl">
+                Your
+              </span> Vote.{" "}
+              <span className="font-bold text-2xl md:text-4xl">
+                Secure, Easy
+              </span>
+              <br />
+              <span className="font-bold text-2xl md:text-4xl">
+                And Just A
+              </span>{" "}
+              Click Away
+            </div>
             <div className="flex justify-center gap-10 text-base">
-              <div className="bg-orange-500 text-white px-4 py-2  ">
+              <Link
+                href="/campaign"
+                className="bg-orange-500 text-white px-4 py-2  cursor-pointer"
+              >
                 Get Started
-              </div>
+              </Link>
               <div className=" text-white px-4 py-2 border border-white ">
                 Learn More
               </div>
