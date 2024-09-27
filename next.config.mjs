@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "supreme-test.s3.amazonaws.com",
+        hostname: "voiting-app-1234.s3.amazonaws.com",
         port: "",
         pathname: "**",
       },
